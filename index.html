@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>قوائم الناخبين – بر الياس</title>
+<meta name="description" content="ابحث عن اسمك في القائمة الانتخابية الأولية لبلدة بر الياس – قضاء زحلة – محافظة البقاع.">
+<meta name="theme-color" content="#3A2A78">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ناخبين بر الياس">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3A2A78; --ink-deep:#241A52; --ink-mid:#4B3B9A; --ink-tint:#ECE8F7; --ink-soft:#C9C2E6;
+    --paper:#FFFFFF; --bg:#F3F2F8; --line:#E3E0EE;
+    --text:#1E1B2E; --muted:#67637F;
+    --amber:#8A5A00; --amber-tint:#FFF1D0;
+    --green:#1D6B3A; --green-tint:#E1F3E7;
+    --blue:#0F5C8C; --blue-tint:#DDEEF9;
+    --teal:#0E7C7B;
+    --radius:18px; --shadow:0 12px 34px rgba(36,26,82,.08);
+    --font:'Cairo','Segoe UI',Tahoma,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.75;padding-bottom:env(safe-area-inset-bottom)}
+  a{color:var(--ink)}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  [hidden]{display:none!important}
+
+  /* ===== hero band ===== */
+  .band{background:linear-gradient(160deg,#211850 0%,#2E2270 55%,#3E2F8C 100%);color:#fff;padding:18px 0 78px;position:relative;overflow:hidden}
+  .band::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(600px 260px at 12% 0%,rgba(255,255,255,.10),transparent 60%),
+     radial-gradient(500px 220px at 100% 100%,rgba(255,255,255,.07),transparent 60%);pointer-events:none}
+  .band .wrap{position:relative}
+  .topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+  .brand svg{width:34px;height:34px;flex:none}
+  .brand span span{font-weight:600;color:rgba(255,255,255,.7);font-size:13px;display:block;line-height:1.2}
+  .edition{font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:4px 14px;border-radius:999px;white-space:nowrap}
+  h1{font-size:clamp(24px,4.6vw,36px);font-weight:800;line-height:1.35;margin:26px 0 4px;color:#fff}
+  .lead{margin:0 0 18px;color:rgba(255,255,255,.72);font-size:15px}
+  .search{position:relative;max-width:760px}
+  .search input{width:100%;font:inherit;font-size:19px;font-weight:600;padding:16px 54px 16px 48px;border:2px solid transparent;border-radius:16px;background:#fff;color:var(--text);outline:none;box-shadow:0 14px 40px rgba(0,0,0,.25)}
+  .search input::placeholder{color:#9A96B4;font-weight:400}
+  .search input:focus{border-color:#FFD166}
+  .search input::-webkit-search-cancel-button{-webkit-appearance:none}
+  .search .glass{position:absolute;right:18px;top:50%;transform:translateY(-50%);width:22px;height:22px;color:var(--ink);pointer-events:none}
+  .search .clear{position:absolute;left:10px;top:50%;transform:translateY(-50%);border:0;background:transparent;width:36px;height:36px;border-radius:50%;cursor:pointer;color:var(--muted);display:none;align-items:center;justify-content:center}
+  .search .clear.show{display:flex}
+  .search .clear:hover{background:var(--ink-tint);color:var(--ink)}
+  .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0 0}
+  .seg{display:inline-flex;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:3px}
+  .seg button{border:0;background:transparent;padding:6px 16px;border-radius:999px;cursor:pointer;font-weight:600;color:rgba(255,255,255,.8)}
+  .seg button[aria-pressed="true"]{background:#fff;color:var(--ink-deep)}
+  .sel{position:relative}
+  .sel select{font:inherit;font-weight:600;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 16px 8px 36px;appearance:none;-webkit-appearance:none;cursor:pointer;max-width:240px}
+  .sel select option{color:var(--text)}
+  .sel::after{content:"";position:absolute;left:14px;top:50%;width:8px;height:8px;border-left:2px solid rgba(255,255,255,.8);border-bottom:2px solid rgba(255,255,255,.8);transform:translateY(-70%) rotate(-45deg);pointer-events:none}
+  .status{font-size:14px;color:rgba(255,255,255,.78);min-height:26px;margin:12px 2px 0}
+  .status b{color:#FFD166;font-weight:800}
+
+  /* ===== cards ===== */
+  main.wrap{margin-top:-52px;position:relative}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px}
+  .card-h{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+  .card-h .ic{width:36px;height:36px;border-radius:12px;background:var(--ink-tint);color:var(--ink);display:flex;align-items:center;justify-content:center;flex:none}
+  .card-h .ic svg{width:19px;height:19px}
+  .card-h h2{margin:0;font-size:16px;font-weight:800;color:var(--ink-deep);line-height:1.3}
+  .card-h p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.3}
+  .card-h .grow{flex:1;min-width:0}
+
+  /* keyed search card (surname + register) */
+  .keyed{margin-bottom:16px}
+  .keyed .row2{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .pill{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 14px 4px 8px;flex:1 1 200px;max-width:320px}
+  .pill label{font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .pill input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-weight:700;font-size:16px;color:var(--text);padding:6px 0}
+  .pill input::placeholder{color:#B0ACC6;font-weight:400}
+  .pill input::-webkit-search-cancel-button{-webkit-appearance:none}
+  .pill:focus-within{border-color:var(--ink);background:#fff;box-shadow:0 0 0 3px var(--ink-tint)}
+  .keyed .plus{font-weight:800;color:var(--ink-soft);font-size:20px;line-height:1}
+  .keyed .hint{margin:8px 0 0;font-size:13px;color:var(--muted)}
+  .btn{border:1px solid var(--line);background:var(--paper);padding:8px 18px;border-radius:999px;cursor:pointer;font-weight:700;color:var(--ink)}
+  .btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+  .btn:hover{background:var(--ink-tint)}
+  .btn.primary:hover{background:var(--ink-deep)}
+  .btn.small{padding:6px 14px;font-size:14px}
+
+  /* dashboard grid */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin:16px 0 24px}
+  .grid > .card{grid-column:span 12}
+  @media (min-width:760px){
+    .c6{grid-column:span 6!important}
+    .c4{grid-column:span 4!important}
+    .c8{grid-column:span 8!important}
+  }
+
+  /* totals card */
+  .tot{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .donut{position:relative;width:132px;height:132px;flex:none}
+  .donut svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .donut .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+  .donut .c b{font-size:22px;font-weight:800;color:var(--ink-deep)}
+  .donut .c span{font-size:11px;color:var(--muted);font-weight:600}
+  .legend{display:grid;gap:8px;flex:1;min-width:150px}
+  .legend div{display:flex;align-items:center;gap:8px;font-size:14px}
+  .legend .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .legend .meta{color:var(--muted);font-size:13px}
+  .legend .meta .dot{background:none!important;border:2px solid var(--ink-soft);width:8px;height:8px}
+  .legend .meta b{color:var(--muted)}
+  .legend b{margin-right:auto;font-weight:800;color:var(--ink-deep);font-variant-numeric:tabular-nums}
+  .legend small{color:var(--muted);font-size:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--ink-tint);color:var(--ink);border:0;cursor:pointer;font-family:inherit}
+  .chip:hover{filter:brightness(.95)}
+  .chip b{font-weight:800}
+  .chip.blue{background:var(--blue-tint);color:var(--blue)}
+  .chip.amber{background:var(--amber-tint);color:var(--amber)}
+  .chip.green{background:var(--green-tint);color:var(--green)}
+
+  /* sect card */
+  .stack{display:flex;height:14px;border-radius:999px;overflow:hidden;background:var(--bg);margin:2px 0 12px}
+  .stack i{display:block;height:100%;min-width:3px}
+  .srow{display:grid;grid-template-columns:14px 1fr auto auto;gap:10px;align-items:center;width:100%;padding:7px 6px;border-radius:10px;text-align:right;font-size:14.5px}
+  .srow .dot{width:12px;height:12px;border-radius:4px}
+  .srow .nm{font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .srow .pct{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+  .srow .n{font-weight:800;color:var(--ink-deep);font-variant-numeric:tabular-nums;min-width:52px;text-align:left}
+  .srow[aria-pressed="true"]{background:var(--ink);color:#fff}
+  .srow[aria-pressed="true"] .nm,.srow[aria-pressed="true"] .n,.srow[aria-pressed="true"] .pct{color:#fff}
+
+  /* families card */
+  .frow{display:grid;grid-template-columns:26px minmax(0,1fr) 1fr auto;gap:10px;align-items:center;width:100%;border:0;background:transparent;padding:6px 6px;border-radius:10px;cursor:pointer;text-align:right;font-size:14.5px}
+  .frow:hover{background:var(--ink-tint)}
+  .frow .rank{width:24px;height:24px;border-radius:50%;background:var(--bg);color:var(--muted);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .frow:nth-child(-n+3) .rank{background:var(--ink);color:#fff}
+  .frow .nm{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .frow .trk{height:8px;border-radius:999px;background:var(--bg);overflow:hidden}
+  .frow .trk i{display:block;height:100%;background:linear-gradient(90deg,var(--ink-mid),var(--ink));border-radius:999px}
+  .frow .n{font-weight:800;color:var(--ink-deep);font-variant-numeric:tabular-nums;min-width:44px;text-align:left}
+  .card .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  .link{border:0;background:transparent;color:var(--ink);font-weight:700;cursor:pointer;padding:4px 6px;border-radius:8px}
+  .link:hover{background:var(--ink-tint)}
+
+  /* registers card */
+  .bignum{font-size:36px;font-weight:800;color:var(--ink-deep);line-height:1.1}
+  .bignum small{display:block;font-size:13px;color:var(--muted);font-weight:600}
+  .rrow{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;padding:7px 6px;border-radius:10px;cursor:pointer;text-align:right;font-size:14.5px}
+  .rrow:hover{background:var(--ink-tint)}
+  .rrow .st{flex:none;min-width:54px;border:2px solid var(--ink);color:var(--ink);border-radius:9px;text-align:center;font-weight:800;font-size:16px;line-height:1.5;padding:0 6px}
+  .rrow .nm{flex:1;font-weight:600;color:var(--muted);font-size:13.5px}
+  .rrow .n{font-weight:800;color:var(--ink-deep);font-variant-numeric:tabular-nums}
+
+  /* ages card (columns) */
+  .cols{display:flex;align-items:flex-end;gap:6px;height:150px;padding-top:18px}
+  .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+  .col i{display:block;width:100%;max-width:38px;background:linear-gradient(180deg,var(--ink-mid),var(--ink));border-radius:8px 8px 3px 3px;position:relative}
+  .col i::after{content:attr(data-v);position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;font-style:normal;color:var(--muted);white-space:nowrap}
+  .col span{font-size:10.5px;color:var(--muted);margin-top:6px;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  /* guide card */
+  .guide p{margin:0 0 8px;font-size:15px}
+  .guide ol{margin:0;padding-right:20px;font-size:15px}
+  .guide li{margin-bottom:4px}
+  .guide .note{font-size:13px;color:var(--muted);margin-top:10px}
+
+  /* family panel (votes per register) */
+  .panel.fam{margin-bottom:16px}
+  .panel.fam h2{margin:0 0 4px;font-size:18px;font-weight:800;color:var(--ink-deep)}
+  .panel.fam .sub{margin:0 0 12px;font-size:14px;color:var(--muted)}
+  .panel.fam .sub b{color:var(--ink)}
+  .panel.fam h3{margin:12px 0 8px;font-size:14px;font-weight:700;color:var(--muted)}
+  .bars{display:grid;gap:8px}
+  .bar{display:grid;grid-template-columns:minmax(0,170px) 1fr auto;gap:10px;align-items:center;font-size:14px}
+  .bar .lbl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar .trk{height:10px;background:var(--bg);border-radius:999px;overflow:hidden}
+  .bar .fil{display:block;height:100%;background:var(--ink);border-radius:999px;min-width:2px}
+  .bar .num{color:var(--muted);font-variant-numeric:tabular-nums;min-width:48px;text-align:left}
+  .bars.fam .bar{cursor:pointer;border-radius:8px;padding:2px 4px;margin:0 -4px}
+  .bars.fam .bar:hover{background:var(--ink-tint)}
+  .bars.fam .bar .lbl{color:var(--ink-deep);font-weight:600}
+  .bars.fam .bar.hi{background:var(--ink-tint)}
+
+  /* ===== results ===== */
+  .tools{display:flex;gap:8px;margin:0 0 10px}
+  .list{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
+  .row{display:flex;align-items:center;gap:12px;padding:13px 12px 13px 10px;border-bottom:1px solid var(--line);cursor:pointer}
+  .row:last-child{border-bottom:0}
+  .row:hover{background:#F7F5FC}
+  .row:focus-visible{outline-offset:-3px}
+  .row .who{flex:1;min-width:0}
+  .row .name{font-weight:700;font-size:18px;line-height:1.4;color:var(--text)}
+  .row .kin{font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 18px}
+  .row .kin i{font-style:normal;color:#8E8AA6}
+  .row .meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+  .stamp{flex:none;min-width:66px;border:2px solid var(--ink);color:var(--ink);border-radius:10px;text-align:center;padding:5px 8px 3px;line-height:1.05}
+  .stamp b{display:block;font-size:22px;font-weight:800;letter-spacing:.5px}
+  .stamp small{display:block;font-size:11px;font-weight:600;margin-top:2px;white-space:nowrap}
+  .stamp.dup b{font-size:16px}
+  .copy{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+  .copy:hover{background:var(--ink-tint);color:var(--ink);border-color:var(--ink-soft)}
+  .copy.done{background:var(--green-tint);color:var(--green);border-color:var(--green-tint)}
+  .copy svg{width:18px;height:18px}
+  .tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 9px;border-radius:999px;background:var(--ink-tint);color:var(--ink)}
+  .tag.amber{background:var(--amber-tint);color:var(--amber)}
+  .tag.green{background:var(--green-tint);color:var(--green)}
+  .tag.blue{background:var(--blue-tint);color:var(--blue)}
+  .more{display:block;width:100%;border:0;border-top:1px solid var(--line);background:var(--paper);padding:12px;font-weight:700;color:var(--ink);cursor:pointer}
+  .more:hover{background:var(--ink-tint)}
+  .empty{background:var(--paper);border:1px dashed var(--ink-soft);border-radius:var(--radius);padding:22px 20px;margin-bottom:20px}
+  .empty h3{margin:0 0 6px;font-size:17px;color:var(--ink-deep)}
+  .empty p{margin:0;color:var(--muted);font-size:14px}
+  .empty ul{margin:8px 0 0;padding-right:20px;color:var(--muted);font-size:14px}
+
+  footer{padding:10px 0 40px;color:var(--muted);font-size:13px;line-height:1.7}
+  footer p{margin:0 0 6px}
+  footer .credit{font-weight:700;color:var(--ink-deep)}
+
+  /* ===== register sheet ===== */
+  .overlay{position:fixed;inset:0;background:rgba(30,27,46,.45);display:none;z-index:40}
+  .overlay.open{display:block}
+  .sheet{position:fixed;inset:auto 0 0 0;max-height:92vh;background:var(--paper);border-radius:18px 18px 0 0;z-index:50;display:none;flex-direction:column;box-shadow:0 -10px 40px rgba(30,27,46,.25);padding-bottom:env(safe-area-inset-bottom)}
+  .sheet.open{display:flex;animation:up .22s ease-out}
+  @keyframes up{from{transform:translateY(30px);opacity:.6}to{transform:none;opacity:1}}
+  @media (prefers-reduced-motion:reduce){.sheet.open{animation:none}}
+  .sheet header{padding:16px 20px 12px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:12px}
+  .sheet header .stamp{min-width:76px}
+  .sheet header .stamp b{font-size:26px}
+  .sheet header h2{margin:0;font-size:19px;font-weight:800;color:var(--ink-deep);line-height:1.3}
+  .sheet header p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+  .sheet header .grow{flex:1;min-width:0}
+  .x{flex:none;border:0;background:var(--bg);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:22px;line-height:1;color:var(--muted)}
+  .x:hover{background:var(--ink-tint);color:var(--ink)}
+  .sheet .body{overflow:auto;padding:0 12px 12px}
+  .sheet table{width:100%;border-collapse:collapse;font-size:14px}
+  .sheet th{text-align:right;font-weight:700;color:var(--muted);font-size:13px;padding:10px 8px 6px;border-bottom:2px solid var(--line);position:sticky;top:0;background:var(--paper)}
+  .sheet td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+  .sheet tr.hi td{background:var(--ink-tint)}
+  .sheet td.nm{font-weight:700;white-space:nowrap}
+  .sheet td.nm small{display:none;font-weight:400;color:var(--muted);font-size:12px;white-space:normal}
+  .sheet td.nm .tag{display:none;margin-top:2px}
+  .sheet td.dob{font-variant-numeric:tabular-nums;white-space:nowrap;direction:ltr;text-align:right}
+  .sheet .actions{display:flex;gap:10px;padding:12px 20px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .sheet .sec-hint{font-size:12px;color:var(--muted);margin:10px 8px 0}
+  @media (min-width:700px){
+    .sheet{inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(880px,94vw);max-height:88vh;border-radius:18px}
+    @keyframes up{from{transform:translate(-50%,-48%);opacity:.6}to{transform:translate(-50%,-50%);opacity:1}}
+    .row .name{font-size:19px}
+  }
+  @media (max-width:560px){
+    .sheet .hide-sm{display:none}
+    .sheet td.nm{white-space:normal}
+    .sheet td.nm small{display:block}
+    .sheet td.nm .tag{display:inline-block}
+    .band{padding-bottom:70px}
+    .pill{max-width:none}
+  }
+  /* ===== drill cards ===== */
+  .card.drill{display:block;width:100%;text-align:right;cursor:pointer;font:inherit;color:inherit;transition:transform .12s ease,box-shadow .12s ease}
+  .card.drill:hover{box-shadow:0 16px 40px rgba(36,26,82,.14);transform:translateY(-2px)}
+  .card.drill:active{transform:none}
+  .card.drill .go{color:var(--ink);font-weight:800;white-space:nowrap}
+  .card.drill .card-h .ic{background:linear-gradient(140deg,var(--ink),var(--ink-mid));color:#fff}
+  .mini{display:grid;gap:9px}
+  .mini .m{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;font-size:14.5px}
+  .mini .m .nm{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mini .m .n{font-weight:800;color:var(--ink-deep);font-variant-numeric:tabular-nums}
+  .mini .m .trk{grid-column:1 / -1;height:7px;border-radius:999px;background:var(--bg);overflow:hidden;margin-top:-4px}
+  .mini .m .trk i{display:block;height:100%;background:linear-gradient(90deg,var(--ink-mid),var(--ink));border-radius:999px}
+  /* dual (m/f) bar */
+  .dual{display:flex;height:9px;border-radius:999px;overflow:hidden;background:var(--bg)}
+  .dual i{display:block;height:100%}
+  .dual .fm{background:#3A2A78}
+  .dual .ml{background:#0E7C7B}
+  .fmline{font-size:12.5px;color:var(--muted);display:flex;gap:12px;margin-top:4px}
+  .fmline b{color:var(--text);font-weight:700}
+  .fmline .sw{display:inline-block;width:8px;height:8px;border-radius:2px;margin-left:5px;vertical-align:1px}
+
+  /* ===== explorer rows inside the sheet ===== */
+  .exq{display:flex;align-items:center;gap:8px;padding:10px 20px;border-bottom:1px solid var(--line);color:var(--muted)}
+  .exq svg{width:18px;height:18px;flex:none}
+  .exq input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-weight:600;font-size:15px;color:var(--text);padding:4px 0}
+  .exq input::-webkit-search-cancel-button{-webkit-appearance:none}
+  .x.back svg{width:20px;height:20px}
+  .exlist{padding:4px 8px 0}
+  .exrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px;align-items:center;width:100%;border:0;background:transparent;
+         padding:11px 8px;border-radius:12px;cursor:pointer;text-align:right;font:inherit;border-bottom:1px solid var(--line)}
+  .exrow:last-child{border-bottom:0}
+  .exrow:hover{background:var(--ink-tint)}
+  .exrow .rank{width:26px;height:26px;border-radius:50%;background:var(--bg);color:var(--muted);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+  .exrow:nth-child(-n+3) .rank{background:var(--ink);color:#fff}
+  .exrow .main{min-width:0}
+  .exrow .t{display:block;font-weight:700;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .exrow .s{display:block;font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:1px}
+  .exrow .cnt{text-align:left;line-height:1.15;align-self:start}
+  .exrow .cnt b{display:block;font-size:19px;font-weight:800;color:var(--ink-deep);font-variant-numeric:tabular-nums}
+  .exrow .cnt small{font-size:11px;color:var(--muted)}
+  .exrow .chev{width:8px;height:8px;border-left:2px solid var(--ink-soft);border-bottom:2px solid var(--ink-soft);transform:rotate(45deg);flex:none;margin-left:4px}
+  .exrow .bars{grid-column:1 / -1;margin-top:2px}
+  .exrow.person{grid-template-columns:minmax(0,1fr) auto auto}
+  .exrow.person .t{font-size:15.5px}
+  .exmeta{padding:12px 16px 4px;font-size:13px;color:var(--muted)}
+  .exmeta b{color:var(--ink-deep)}
+  .exbtns{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px 0}
+  .exempty{padding:26px 18px;text-align:center;color:var(--muted)}
+  .sheet .body{scroll-behavior:smooth}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink-deep);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
+  .toast.show{opacity:1}
+  .print-head{display:none}
+
+  @media print{
+    body{background:#fff}
+    .band,.keyed,.grid,footer,.more,.sheet .actions,.x,.toast,.tools,.copy,#familyPanel{display:none!important}
+    main.wrap{margin-top:0}
+    body.sheet-open .wrap{display:none}
+    .overlay{display:none!important}
+    .sheet{position:static;display:flex;max-height:none;box-shadow:none;border-radius:0;transform:none;width:auto}
+    .sheet .body{overflow:visible}
+    .sheet th{position:static}
+    .list{border:0;box-shadow:none}
+    .row{break-inside:avoid;padding:6px 4px;gap:10px}
+    .row .name{font-size:15px}
+    .row .kin,.row .meta{font-size:12px}
+    .stamp{min-width:52px;padding:2px 6px}
+    .stamp b{font-size:16px}
+    .print-head{display:block;font-weight:700;font-size:15px;margin:0 0 10px;padding-bottom:8px;border-bottom:2px solid #000}
+    .exq,.exbtns,.exrow .chev{display:none!important}
+    .exrow{break-inside:avoid;padding:6px 4px}
+    .exrow .t{font-size:14px}
+    .print-head small{display:block;font-weight:400;font-size:12px;color:#444}
+  }
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <div class="topline">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="14" width="26" height="15" rx="3" fill="#fff" opacity=".95"/><rect x="8" y="12" width="16" height="3" rx="1" fill="#3A2A78"/><path d="M10 6h12l-1.5 8h-9z" fill="#FFD166" stroke="#fff" stroke-width="1.2"/><path d="M13 9.5l2 2 3.5-4" fill="none" stroke="#3A2A78" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>قوائم الناخبين<span>بر الياس – قضاء زحلة – البقاع</span></span>
+      </div>
+      <div class="edition" id="edition">القائمة الأولية</div>
+    </div>
+    <h1>دوّر على اسمك بالقائمة الانتخابية</h1>
+    <p class="lead">اكتب الاسم والشهرة، أو إسم الأب أو الأم، أو رقم القيد. الهمزات والتاء المربوطة ما بتفرّق بالبحث.</p>
+    <form class="search" role="search" onsubmit="return false">
+      <svg class="glass" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <label class="sr" for="q">البحث في قائمة الناخبين</label>
+      <input id="q" type="search" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="مثلاً: فاطمه الحدري، أو ٢٧٣">
+      <button type="button" class="clear" id="clear" aria-label="مسح البحث">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+    <div class="filters">
+      <div class="seg" role="group" aria-label="القائمة">
+        <button type="button" data-sex="all" aria-pressed="true">الكل</button>
+        <button type="button" data-sex="0" aria-pressed="false">إناث</button>
+        <button type="button" data-sex="1" aria-pressed="false">ذكور</button>
+      </div>
+      <div class="sel">
+        <label class="sr" for="sect">المذهب</label>
+        <select id="sect"><option value="all">كل المذاهب</option></select>
+      </div>
+    </div>
+    <div class="status" id="status" aria-live="polite"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card keyed" aria-label="بحث بالشهرة والسجل">
+    <div class="card-h">
+      <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="18" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20.5 18.5L23 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="grow"><h2>بحث بالشهرة والسجل</h2><p>العائلة لوحدها، أو السجل لوحدو، أو الاتنين مع بعض</p></div>
+      <button type="button" class="btn small" id="resetKeyed" hidden>مسح</button>
+    </div>
+    <div class="row2">
+      <div class="pill">
+        <label for="family">الشهرة</label>
+        <input id="family" type="search" list="famList" autocomplete="off" placeholder="مثلاً الميس" enterkeyhint="search">
+        <datalist id="famList"></datalist>
+      </div>
+      <span class="plus" aria-hidden="true">+</span>
+      <div class="pill">
+        <label for="regf">رقم السجل</label>
+        <input id="regf" type="search" inputmode="numeric" autocomplete="off" placeholder="مثلاً ٤٥" enterkeyhint="search">
+      </div>
+    </div>
+    <p class="hint">النتيجة بتطلع تحت مع زرّي «نسخ النتائج كجدول» و«طباعة النتائج».</p>
+  </section>
+
+  <section id="familyPanel" class="card panel fam" aria-label="ملخص العائلة" hidden></section>
+  <div class="tools" id="tools" hidden>
+    <button type="button" class="btn small" id="copyResults">نسخ النتائج كجدول</button>
+    <button type="button" class="btn small" id="printResults">طباعة النتائج</button>
+    <button type="button" class="btn small" id="csvResults">تنزيل CSV</button>
+  </div>
+  <div id="printHead" class="print-head"></div>
+  <section id="results" aria-label="نتائج البحث"></section>
+
+  <section class="grid" id="overview" aria-label="نظرة عامة على القائمة">
+    <div class="card c6">
+      <div class="card-h">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 19c0-3.5 3-5.5 6.5-5.5s6.5 2 6.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 14.5c3 0 5.5 1.8 5.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="grow"><h2>الناخبون</h2><p>إناث وذكور، والملاحظات الرسمية</p></div>
+      </div>
+      <div class="tot" id="totals"></div>
+      <div class="chips" id="notesStats"></div>
+    </div>
+    <button type="button" class="card drill c6" data-open="fams">
+      <div class="card-h">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v10h14V10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 20v-6h4v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <div class="grow"><h2>العائلات</h2><p id="famSub">كل عائلات البلدة مرتّبة من الأكبر</p></div>
+      </div>
+      <div class="mini" id="famPreview"></div>
+      <div class="foot"><span id="famCount"></span><span class="go">تصفّح الكل ←</span></div>
+    </button>
+
+    <button type="button" class="card drill c6" data-open="sects">
+      <div class="card-h">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3 13l9 5 9-5M3 17l9 5 9-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <div class="grow"><h2>المذاهب</h2><p id="sectSub">التوزّع حسب سجل الأحوال الشخصية</p></div>
+      </div>
+      <div id="sectPreview"></div>
+      <div class="foot"><span id="sectCount"></span><span class="go">تصفّح الكل ←</span></div>
+    </button>
+
+    <button type="button" class="card drill c6" data-open="ages">
+      <div class="card-h">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5.5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="grow"><h2>الأعمار</h2><p id="ageSub">فئات عمرية — إناث وذكور</p></div>
+      </div>
+      <div class="mini" id="agePreview"></div>
+      <div class="foot"><span id="ageCount"></span><span class="go">تصفّح الكل ←</span></div>
+    </button>
+
+    <button type="button" class="card drill c6" data-open="regs">
+      <div class="card-h">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="grow"><h2>السجلات العائلية</h2><p id="regSub">أرقام القيد وعدد الأصوات بكل سجل</p></div>
+      </div>
+      <div class="mini" id="regPreview"></div>
+      <div class="foot"><span id="regCount"></span><span class="go">تصفّح الكل ←</span></div>
+    </button>
+
+    <div class="card guide">
+      <div class="card-h">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M12 16h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <div class="grow"><h2>ما لقيت اسمك، أو في خطأ بقيدك؟</h2></div>
+      </div>
+      <p>القائمة الأولية بتُعرض كل سنة لمهلة اعتراض من ١ شباط لغاية ١ آذار. خلال هالمهلة فيك تصحّح أي خلل:</p>
+      <ol>
+        <li>تأكّد أولاً من اسمك على الموقع الرسمي للمديرية العامة للأحوال الشخصية <a href="https://www.dgcs.gov.lb" target="_blank" rel="noopener">dgcs.gov.lb</a>.</li>
+        <li>راجع المختار أو قلم النفوس مع الهوية أو إخراج القيد لتعبئة نموذج طلب التصحيح.</li>
+        <li>الطلب بيُقدَّم إلى لجنة القيد المختصة ضمن المهلة، وبعدها بتصدر القوائم النهائية.</li>
+      </ol>
+      <p class="note">الأسماء المسجّلة بملاحظة «بلوغ السن» هي الناخبون الجدد اللي بيحقّ لهم الاقتراع لأول مرة، والأسماء المعلّمة «إختار الإقتراع في…» مسجّلة للاقتراع من الخارج.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p id="sourceLine">المصدر: وزارة الداخلية والبلديات – المديرية العامة للأحوال الشخصية.</p>
+    <p>هذه الصفحة للاطلاع والمساعدة فقط ولا تُغني عن القوائم الرسمية؛ أي اعتراض أو تصحيح بيمرّ عبر المديرية العامة للأحوال الشخصية.</p>
+    <p class="credit">مكتب مختار بر الياس – فاروق الميس</p>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <header>
+    <button type="button" class="x back" id="exBack" aria-label="رجوع" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="stamp" id="sheetStamp" hidden><b></b><small></small></div>
+    <div class="grow">
+      <h2 id="sheetTitle"></h2>
+      <p id="sheetSub"></p>
+    </div>
+    <button type="button" class="x" id="closeSheet" aria-label="إغلاق">×</button>
+  </header>
+  <div class="exq" id="exq" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <label class="sr" for="exSearch">فتّش ضمن القائمة</label>
+    <input id="exSearch" type="search" autocomplete="off" spellcheck="false" placeholder="فتّش…">
+  </div>
+  <div class="body" id="sheetBody"></div>
+  <div class="actions">
+    <button type="button" class="btn primary" id="printSheet">طباعة</button>
+    <button type="button" class="btn" id="copySheet">نسخ كجدول</button>
+    <button type="button" class="btn" id="csvSheet">تنزيل CSV</button>
+    <button type="button" class="btn" id="shareSheet">نسخ الرابط</button>
+  </div>
+</section>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="./data.js"></script>
+<script>
+(function(){
+  'use strict';
+  var META = window.VOTERS_META || {}, DATA = window.VOTERS || [];
+  var SECTS = META.sects || [];
+  var F_NAME=0,F_FATHER=1,F_MOTHER=2,F_DOB=3,F_SECT=4,F_REG=5,F_NOTES=6,F_LIST=7,F_SECTION=8,F_PAGE=9;
+
+  /*@core*/
+  var AD='٠١٢٣٤٥٦٧٨٩';
+  function toWestern(s){ return String(s).replace(/[٠-٩]/g,function(d){return String(AD.indexOf(d));}); }
+  function toArabic(s){ return String(s).replace(/[0-9]/g,function(d){return AD.charAt(+d);}); }
+  function fmtNum(n){ return toArabic(String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'٬')); }
+  function norm(s){
+    return toWestern(s||'')
+      .replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g,'')
+      .replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ئ/g,'ي').replace(/ؤ/g,'و')
+      .replace(/[^\u0621-\u064A0-9a-zA-Z ]+/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+  function stripAl(t){ return (t.length>3 && t.slice(0,2)==='ال') ? t.slice(2) : t; }
+  function tokens(s){ var n=norm(s); if(!n) return []; return n.split(' ').map(function(t){return [t,stripAl(t)];}); }
+  function regKey(reg){ var m=/^\d+/.exec(toWestern(reg)); return m?m[0]:''; }
+  /*@endcore*/
+
+  // ---------- index ----------
+  var IDX = new Array(DATA.length);
+  for (var i=0;i<DATA.length;i++){
+    var r=DATA[i];
+    IDX[i]={
+      n:tokens(r[F_NAME]), f:tokens(r[F_FATHER]), m:tokens(r[F_MOTHER]),
+      all:norm(r[F_NAME]+' '+r[F_FATHER]+' '+r[F_MOTHER]).replace(/ /g,''),
+      reg:regKey(r[F_REG])
+    };
+  }
+  // ---------- families (الشهرة) ----------
+  var SUR_TAIL={'الدين':1,'الله':1,'العابدين':1,'الحق':1,'الرحمن':1,'الرحيم':1,'الغني':1,'الكريم':1,'الجليل':1,'اللطيف':1,'النور':1,'الهدى':1,'السلام':1,'الرزاق':1,'الوهاب':1,'العزيز':1,'المجيد':1,'الحميد':1,'الفتاح':1,'القادر':1,'الرؤوف':1,'الناصر':1,'الرحمان':1};
+  var SUR_HEAD={'ابو':1,'أبو':1,'ابي':1,'أبي':1,'بو':1,'الحاج':1,'حاج':1,'عبد':1,'آل':1,'بن':1,'ابن':1,'بيت':1,'دي':1,'ديل':1,'دو':1,'فان':1,'سان':1,'ماك':1,'الشيخ':1,'شيخ':1,'السيد':1};
+  function surname(name){
+    var t=String(name||'').trim().split(/\s+/), n=t.length;
+    if (n<=1) return t[0]||'';
+    var last=t[n-1], prev=t[n-2];
+    if (n>=3 && (SUR_TAIL[last] || SUR_HEAD[prev])) return prev+' '+last;
+    if (n===2 && SUR_TAIL[last] && !SUR_HEAD[prev]) return name.trim();   // e.g. a two-word compound name
+    return last;
+  }
+  function famKey(sur){ var k=norm(sur).split(' ').map(stripAl).join(' ').trim(); return k; }
+  var FAM={};
+  for (var fi=0; fi<DATA.length; fi++){
+    var sur=surname(DATA[fi][F_NAME]), fk=famKey(sur);
+    IDX[fi].fam=fk;
+    var fo=FAM[fk]||(FAM[fk]={key:fk,count:0,f:0,m:0,labels:{},members:[]});
+    fo.count++; if (DATA[fi][F_LIST]===0) fo.f++; else fo.m++;
+    fo.labels[sur]=(fo.labels[sur]||0)+1; fo.members.push(fi);
+  }
+  Object.keys(FAM).forEach(function(k){ var fo=FAM[k], best='',bc=0; Object.keys(fo.labels).forEach(function(l){ if(fo.labels[l]>bc){bc=fo.labels[l];best=l;} }); fo.label=best; });
+  var FAM_ALPHA=Object.keys(FAM).sort(function(a,b){ return a<b?-1:a>b?1:0; });
+  var FAM_TOP=Object.keys(FAM).sort(function(a,b){ return FAM[b].count-FAM[a].count || (a<b?-1:1); });
+
+  // register groups: key = section|reg
+  var GROUPS={};
+  for (var g=0; g<DATA.length; g++){
+    var k=DATA[g][F_SECTION]+'|'+DATA[g][F_REG];
+    (GROUPS[k]||(GROUPS[k]=[])).push(g);
+  }
+  function groupKey(idx){ return DATA[idx][F_SECTION]+'|'+DATA[idx][F_REG]; }
+
+  // returns 0 = no match, 1 = prefix match, 2 = whole-token match
+  function matchField(toks,q,qa,hasAl){
+    var best=0;
+    for (var i=0;i<toks.length;i++){
+      var t=toks[i][0], ta=toks[i][1];
+      if (t===q) return 2;
+      if (t.indexOf(q)===0) best=1;
+      else if (hasAl){ if (t===ta && ta===qa) return 2; }      // query "الحدري" also finds "حدري"
+      else if (ta.indexOf(q)===0) best=Math.max(best, ta===q?2:1); // query "حدري" also finds "الحدري"
+    }
+    return best;
+  }
+  function score(idx,words,regs,dup){
+    var ix=IDX[idx];
+    if (regs.length){ var ok=false; for (var j=0;j<regs.length;j++){ if(ix.reg===regs[j]){ok=true;break;} } if(!ok) return 0; }
+    if (dup && !/مكرر/.test(DATA[idx][F_REG])) return 0;
+    var s=1, r;
+    for (var w=0;w<words.length;w++){
+      var q=words[w], qa=stripAl(q), hasAl=(qa!==q);
+      if ((r=matchField(ix.n,q,qa,hasAl))) s+=3+r;
+      else if ((r=matchField(ix.f,q,qa,hasAl))) s+=2+r;
+      else if ((r=matchField(ix.m,q,qa,hasAl))) s+=1+r;
+      else if (q.length>=4 && ix.all.indexOf(q)>=0) s+=1;
+      else return 0;
+    }
+    return s;
+  }
+
+  // ---------- state ----------
+  var state={q:'',sex:'all',sect:'all',family:'',reg:'',limit:100};
+  var $=function(id){return document.getElementById(id);};
+  var qInput=$('q'), clearBtn=$('clear'), statusEl=$('status'), resultsEl=$('results'), overviewEl=$('overview');
+  var sectSel=$('sect'), famInput=$('family'), regInput=$('regf'), famPanel=$('familyPanel'), toolsEl=$('tools');
+
+  // sect options ordered by size
+  var sectCounts={}; for (var c=0;c<DATA.length;c++){ var sn=SECTS[DATA[c][F_SECTION]]; sectCounts[sn]=(sectCounts[sn]||0)+1; }
+  Object.keys(sectCounts).sort(function(a,b){return sectCounts[b]-sectCounts[a];}).forEach(function(sn){
+    var o=document.createElement('option'); o.value=sn; o.textContent=sn+' ('+fmtNum(sectCounts[sn])+')'; sectSel.appendChild(o);
+  });
+
+  // surname suggestions (datalist)
+  var dl=$('famList');
+  FAM_ALPHA.forEach(function(k){ var o=document.createElement('option'); o.value=FAM[k].label; o.label=fmtNum(FAM[k].count)+' صوت'; dl.appendChild(o); });
+  // which family keys does the typed surname select? exact key first, else prefix matches
+  function familyKeys(){
+    var k=famKey(state.family); if(!k) return null;
+    if (FAM[k]) return [k];
+    var pref=FAM_ALPHA.filter(function(x){ return x.indexOf(k)===0 || x.split(' ').some(function(t){return t.indexOf(k)===0;}); });
+    return pref;
+  }
+  var famKeysSel=null, famSet=null, lastSig=null, famExpand=false;
+  function applyKeyed(){
+    var sig=famInput.value+'|'+regInput.value;
+    if (sig===lastSig) return;               // nothing changed (e.g. a blur/change after typing) -> don't re-render
+    lastSig=sig; famExpand=false;
+    state.family=famInput.value; state.reg=toWestern(regInput.value).replace(/\D/g,'');
+    famKeysSel=familyKeys();
+    famSet=null; if (famKeysSel){ famSet={}; famKeysSel.forEach(function(k){famSet[k]=1;}); }
+    state.limit=100; render();
+    history.replaceState(null,'',hashFromState());
+    $('resetKeyed').hidden=!(state.family||state.reg);
+  }
+  function setFamily(label){ famInput.value=label; applyKeyed(); }
+  function setReg(v){ regInput.value=v; applyKeyed(); }
+  function hashFromState(){
+    var parts=[];
+    if (state.q.trim()) parts.push('q='+encodeURIComponent(state.q.trim()));
+    if (state.family.trim()) parts.push('f='+encodeURIComponent(state.family.trim()));
+    if (state.reg) parts.push('g='+state.reg);
+    return parts.length ? '#'+parts.join('&') : location.pathname;
+  }
+  function passesFilters(idx){
+    var r=DATA[idx];
+    if (state.sex!=='all' && String(r[F_LIST])!==state.sex) return false;
+    if (state.sect!=='all' && SECTS[r[F_SECTION]]!==state.sect) return false;
+    if (famSet && !famSet[IDX[idx].fam]) return false;
+    if (state.reg && IDX[idx].reg!==state.reg) return false;
+    return true;
+  }
+  function famTitle(){
+    if (!famKeysSel || !famKeysSel.length) return '';
+    return famKeysSel.length===1 ? 'عائلة '+FAM[famKeysSel[0]].label : 'عائلات '+famKeysSel.slice(0,4).map(function(k){return FAM[k].label;}).join('، ')+(famKeysSel.length>4?'…':'');
+  }
+  function renderFamilyPanel(){
+    if (!famKeysSel || !famKeysSel.length){ famPanel.hidden=true; famPanel.innerHTML=''; return; }
+    // votes per register for the selected family (sex/sect filters apply; the register filter is only highlighted)
+    var regs={}, f=0, m=0, tot=0;
+    famKeysSel.forEach(function(k){ FAM[k].members.forEach(function(i){
+      var r=DATA[i];
+      if (state.sex!=='all' && String(r[F_LIST])!==state.sex) return;
+      if (state.sect!=='all' && SECTS[r[F_SECTION]]!==state.sect) return;
+      tot++; if (r[F_LIST]===0) f++; else m++;
+      var key=groupKey(i); var g=regs[key]||(regs[key]={key:key,n:0,reg:IDX[i].reg,label:'سجل '+SECTS[r[F_SECTION]]+' رقم '+toArabic(r[F_REG])}); g.n++;
+    }); });
+    var list=Object.keys(regs).map(function(k){return regs[k];}).sort(function(a,b){return b.n-a.n;});
+    var max=list.length?list[0].n:1, LIM=12, shown=list;
+    if (!famExpand && list.length>LIM){
+      shown=list.slice(0,LIM);
+      if (state.reg && !shown.some(function(g){return g.reg===state.reg;})){          // keep the selected register visible
+        var sel=list.filter(function(g){return g.reg===state.reg;}); if(sel.length) shown=shown.slice(0,LIM-1).concat(sel);
+      }
+    }
+    famPanel.innerHTML='<h2>'+esc(famTitle())+'</h2>'+
+      '<p class="sub"><b>'+fmtNum(tot)+'</b> ناخباً وناخبة ('+fmtNum(f)+' إناث، '+fmtNum(m)+' ذكور) موزّعين على <b>'+fmtNum(list.length)+'</b> '+(list.length===1?'سجل':'سجلات')+
+      (state.sex!=='all'||state.sect!=='all'?' — ضمن الفلتر الحالي':'')+'</p>'+
+      '<h3>الأصوات حسب السجل — اضغط على سجل لعرض أفراد العائلة فيه'+(state.reg?'، أو <a href="#" data-clearreg="1">شيل فلتر السجل</a>':'')+'</h3><div class="bars fam">'+
+      shown.map(function(g){ return '<div class="bar'+(state.reg && g.reg===state.reg?' hi':'')+'" role="button" tabindex="0" data-regn="'+esc(g.reg)+'"><span class="lbl">'+esc(g.label)+'</span><span class="trk"><span class="fil" style="width:'+Math.max(1,Math.round(g.n/max*100))+'%"></span></span><span class="num">'+fmtNum(g.n)+'</span></div>'; }).join('')+
+      '</div>'+
+      (list.length>shown.length || famExpand&&list.length>LIM
+        ? '<div class="foot"><span>معروض '+fmtNum(shown.length)+' من '+fmtNum(list.length)+' سجل</span><button type="button" class="link" data-expand="1">'+(famExpand?'عرض أقل':'عرض كل السجلات')+'</button></div>'
+        : '');
+    famPanel.hidden=false;
+  }
+  famPanel.addEventListener('click',function(e){
+    var x=e.target.closest('[data-expand]'); if(x){ famExpand=!famExpand; renderFamilyPanel(); return; }
+    var c=e.target.closest('[data-clearreg]'); if(c){ e.preventDefault(); setReg(''); return; }
+    var b=e.target.closest('[data-regn]'); if(b) setReg(b.getAttribute('data-regn')===state.reg ? '' : toArabic(b.getAttribute('data-regn')));
+  });
+  famPanel.addEventListener('keydown',function(e){ if(e.key!=='Enter'&&e.key!==' ') return; var b=e.target.closest('[data-regn]'); if(b){ e.preventDefault(); setReg(toArabic(b.getAttribute('data-regn'))); } });
+  var kdeb;
+  function keyedLater(){ clearTimeout(kdeb); kdeb=setTimeout(applyKeyed,150); }
+  famInput.addEventListener('input',keyedLater);
+  famInput.addEventListener('change',function(){ clearTimeout(kdeb); applyKeyed(); });
+  regInput.addEventListener('input',keyedLater);
+  $('resetKeyed').addEventListener('click',function(){ famInput.value=''; regInput.value=''; applyKeyed(); famInput.focus(); });
+
+  function search(){
+    var nq=norm(state.q);
+    var parts=nq?nq.split(' '):[];
+    var words=[],regs=[],dup=false;
+    parts.forEach(function(p){ if(/^\d+$/.test(p)) regs.push(p); else if(p==='مكرر') dup=true; else words.push(p); });
+    if (!words.length && !regs.length && !dup && state.sex==='all' && state.sect==='all' && !famSet && !state.reg){ return null; }
+    var hits=[];
+    for (var i=0;i<DATA.length;i++){
+      if (!passesFilters(i)) continue;
+      if (!words.length && !regs.length && !dup){ hits.push([1,i]); continue; }
+      var s=score(i,words,regs,dup);
+      if (s) hits.push([s,i]);
+    }
+    hits.sort(function(a,b){ return b[0]-a[0] || a[1]-b[1]; });
+    return hits;
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];}); }
+  function noteKind(n){
+    if (!n) return '';
+    var t=n.replace(/^[\s\[\]{}]+|[\s\[\]{}]+$/g,'');
+    if (t.indexOf('بلوغ')===0) return 'new';
+    if (t.indexOf('نقل')===0) return 'moved';
+    if (t.indexOf('إختار الإقتراع')===0 || t.indexOf('اختار الاقتراع')===0) return 'abroad';
+    return 'other';
+  }
+  function noteTag(n){
+    if(!n) return '';
+    var k=noteKind(n), t=n.replace(/^[\s\[\]{}]+|[\s\[\]{}]+$/g,'');
+    var cls = k==='new' ? '' : k==='moved' ? ' amber' : k==='abroad' ? ' blue' : ' green';
+    return '<span class="tag'+cls+'">'+esc(t)+'</span>';
+  }
+  function dobText(d){ return d ? toArabic(d) : '—'; }
+  function isDup(reg){ return /مكرر/.test(reg); }
+  function regDisplay(reg){ var k=regKey(reg); return toArabic(k)+(isDup(reg)?'<small style="font-size:11px;display:block">مكرر</small>':''); }
+
+  var COPY_ICON='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+  function voterText(idx){
+    var r=DATA[idx];
+    var lines=[r[F_NAME], 'الأب: '+(r[F_FATHER]||'—'), 'الأم: '+(r[F_MOTHER]||'—'), 'تاريخ الولادة: '+(r[F_DOB]||'—'),
+               'المذهب: '+SECTS[r[F_SECT]], 'رقم القيد: '+r[F_REG]+' – سجل '+SECTS[r[F_SECTION]]+' – '+(META.town||'بر الياس')];
+    if (r[F_NOTES]) lines.push('ملاحظات: '+r[F_NOTES].replace(/^[\s\[\]{}]+|[\s\[\]{}]+$/g,''));
+    return lines.join('\n');
+  }
+  function csvCell(v){ v=String(v==null?'':v); return /[",\n\r\t]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }
+  function downloadCSV(name, head, rows){
+    try{
+      var csv='\ufeff'+[head.map(csvCell).join(',')].concat(rows.map(function(r){ return r.map(csvCell).join(','); })).join('\r\n');
+      var a=document.createElement('a');
+      a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+      a.download=(name||'قائمة').replace(/[\\/:*?"<>|]/g,'-')+'.csv';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },1500);
+      toast('نزّلنا '+fmtNum(rows.length)+' سطر — افتحو بـ Excel');
+    }catch(e){ toast('ما قدرنا ننزّل الملف على هالمتصفح'); }
+  }
+  function copyText(text, cb){
+    function legacy(){
+      var ta=document.createElement('textarea'); ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.top='-999px';
+      document.body.appendChild(ta); ta.select(); var ok=false; try{ ok=document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); cb(ok);
+    }
+    if (navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).then(function(){cb(true);}, legacy); }
+    else legacy();
+  }
+  function rowHTML(idx){
+    var r=DATA[idx];
+    var sect=SECTS[r[F_SECT]], section=SECTS[r[F_SECTION]];
+    return '<div class="row" role="button" tabindex="0" data-i="'+idx+'" aria-label="عرض سجل '+esc(r[F_NAME])+'">'+
+      '<div class="who">'+
+        '<div class="name">'+esc(r[F_NAME])+'</div>'+
+        '<div class="kin"><span><i>الأب</i> '+esc(r[F_FATHER]||'—')+'</span><span><i>الأم</i> '+esc(r[F_MOTHER]||'—')+'</span></div>'+
+        '<div class="meta"><span>مواليد '+dobText(r[F_DOB])+'</span><span>'+esc(sect)+'</span>'+noteTag(r[F_NOTES])+'</div>'+
+      '</div>'+
+      '<div class="stamp'+(isDup(r[F_REG])?' dup':'')+'" aria-label="رقم القيد"><b>'+regDisplay(r[F_REG])+'</b><small>سجل '+esc(section)+'</small></div>'+
+      '<button type="button" class="copy" data-copy="'+idx+'" title="نسخ بيانات الناخب" aria-label="نسخ بيانات '+esc(r[F_NAME])+'">'+COPY_ICON+'</button>'+
+    '</div>';
+  }
+
+  var lastHits=[];
+  function filterDesc(){
+    var parts=[];
+    if (famKeysSel && famKeysSel.length) parts.push(famTitle());
+    else if (state.family.trim()) parts.push('شهرة «'+state.family.trim()+'» (غير موجودة)');
+    if (state.reg) parts.push('سجل رقم '+toArabic(state.reg));
+    return parts.join(' – ');
+  }
+  function resultsTSV(){
+    var head=['الاسم والشهرة','إسم الأب','إسم الأم وشهرتها','تاريخ الولادة','المذهب','رقم القيد','السجل','ملاحظات'].join('\t');
+    var lines=lastHits.map(function(h){ var r=DATA[h[1]]; return [r[F_NAME],r[F_FATHER],r[F_MOTHER],r[F_DOB],SECTS[r[F_SECT]],r[F_REG],SECTS[r[F_SECTION]],r[F_NOTES].replace(/^[\s\[\]{}]+|[\s\[\]{}]+$/g,'')].join('\t'); });
+    return (filterDesc()||(state.q?'بحث: '+state.q:''))+'\n'+head+'\n'+lines.join('\n');
+  }
+  $('copyResults').addEventListener('click',function(){
+    if(!lastHits.length) return;
+    copyText(resultsTSV(), function(ok){ toast(ok?'تم نسخ '+fmtNum(lastHits.length)+' سطر — الصقها بـ Excel أو Word':'ما قدرت أنسخ'); });
+  });
+  $('csvResults').addEventListener('click',function(){
+    if(!lastHits.length) return;
+    downloadCSV((filterDesc()||('بحث '+state.q)||'نتائج')+' – '+(META.town||''),
+      ['الاسم والشهرة','إسم الأب','إسم الأم وشهرتها','تاريخ الولادة','المذهب','رقم القيد','السجل','ملاحظات'],
+      lastHits.map(function(h){ var r=DATA[h[1]]; return [r[F_NAME],r[F_FATHER],r[F_MOTHER],r[F_DOB],SECTS[r[F_SECT]],r[F_REG],SECTS[r[F_SECTION]],r[F_NOTES].replace(/^[\s\[\]{}]+|[\s\[\]{}]+$/g,'')]; }));
+  });
+  $('printResults').addEventListener('click',function(){
+    if(!lastHits.length) return;
+    var old=state.limit; state.limit=1e9; render(); window.print(); state.limit=old; render();
+  });
+  function render(){
+    var hits=search();
+    clearBtn.classList.toggle('show', !!state.q);
+    renderFamilyPanel();
+    lastHits=hits||[];
+    toolsEl.hidden=!(hits && hits.length);
+    if (hits===null){
+      resultsEl.innerHTML='';
+      statusEl.innerHTML='<b>'+fmtNum(DATA.length)+'</b> ناخباً وناخبة مسجّلين في '+(META.edition||'القائمة')+' لبلدة '+(META.town||'بر الياس')+'.';
+      return;
+    }
+    if (!hits.length){
+      statusEl.innerHTML='ما في نتائج.';
+      resultsEl.innerHTML='<div class="empty"><h3>ما لقينا هالاسم بالقائمة</h3><p>جرّب:</p><ul>'+
+        '<li>الاسم الأول مع الشهرة بس، بدون إسم الأب.</li>'+
+        '<li>إسم الأب أو الأم لوحده.</li>'+
+        '<li>رقم القيد إذا بتعرفه، وبتطلع كل العيلة.</li>'+
+        '<li>إلغاء فلتر الإناث/الذكور أو المذهب أو العائلة.</li></ul></div>';
+      return;
+    }
+    var shown=hits.slice(0,state.limit);
+    var html='<div class="list">'+shown.map(function(h){return rowHTML(h[1]);}).join('');
+    if (hits.length>shown.length) html+='<button type="button" class="more" id="more">عرض المزيد ('+fmtNum(hits.length-shown.length)+' باقيين)</button>';
+    html+='</div>';
+    resultsEl.innerHTML=html;
+    var desc=filterDesc();
+    var label = state.q ? 'نتيجة لـ «'+esc(state.q.trim())+'»'+(desc?' ضمن '+esc(desc):'') : (desc ? 'ناخباً — '+esc(desc) : 'ناخباً ضمن الفلتر');
+    statusEl.innerHTML='<b>'+fmtNum(hits.length)+'</b> '+label+(hits.length>shown.length?'، معروض أول '+fmtNum(shown.length):'')+'. اضغط على أي اسم لعرض السجل كامل.';
+    $('printHead').innerHTML='قوائم الناخبين – '+esc(META.town||'بر الياس')+' – '+esc(META.edition||'')+'<small>'+esc(desc||(state.q?'بحث: '+state.q:'كل الناخبين'))+(state.q&&desc?' — بحث: '+esc(state.q):'')+' — '+fmtNum(hits.length)+' ناخباً'+(state.sex!=='all'?' — '+(state.sex==='0'?'إناث':'ذكور'):'')+(state.sect!=='all'?' — '+esc(state.sect):'')+'</small>';
+    var moreBtn=$('more'); if(moreBtn) moreBtn.addEventListener('click',function(){ state.limit+=200; render(); });
+  }
+
+  // ---------- aggregates for the explorer ----------
+  var REGS={};
+  Object.keys(GROUPS).forEach(function(k){
+    var ms=GROUPS[k], f=0, m=0;
+    ms.forEach(function(i){ if(DATA[i][F_LIST]===0) f++; else m++; });
+    var r0=DATA[ms[0]];
+    REGS[k]={key:k,reg:r0[F_REG],regn:IDX[ms[0]].reg,sect:r0[F_SECTION],n:ms.length,f:f,m:m,members:ms};
+  });
+  var REGS_TOP=Object.keys(REGS).sort(function(a,b){ return REGS[b].n-REGS[a].n || (+REGS[a].regn)-(+REGS[b].regn); });
+
+  var SECTG={};
+  for (var si=0; si<DATA.length; si++){
+    var sk=DATA[si][F_SECTION], so=SECTG[sk]||(SECTG[sk]={n:0,f:0,m:0,fams:{},regs:{}});
+    so.n++; if (DATA[si][F_LIST]===0) so.f++; else so.m++;
+    so.fams[IDX[si].fam]=(so.fams[IDX[si].fam]||0)+1; so.regs[groupKey(si)]=1;
+  }
+  var SECT_ORDER=Object.keys(SECTG).map(Number).sort(function(a,b){ return SECTG[b].n-SECTG[a].n; });
+
+  Object.keys(FAM).forEach(function(k){
+    var o=FAM[k], rg={};
+    o.members.forEach(function(i){ var g=groupKey(i); rg[g]=(rg[g]||0)+1; });
+    o.regs=rg; o.regList=Object.keys(rg).sort(function(a,b){ return rg[b]-rg[a] || (+REGS[a].regn)-(+REGS[b].regn); });
+  });
+
+  var YEAR=parseInt(META.year||'0',10)||(new Date().getFullYear());
+  var AGE=[[21,24],[25,29],[30,39],[40,49],[50,59],[60,69],[70,79],[80,999]].map(function(b){ return {a:b[0],b:b[1],n:0,f:0,m:0,members:[]}; });
+  var AGE_UNKNOWN=0;
+  for (var ai=0; ai<DATA.length; ai++){
+    var y=parseInt(DATA[ai][F_DOB].slice(0,4),10);
+    if(!y){ AGE_UNKNOWN++; continue; }
+    var age=YEAR-y;
+    for (var aj=0; aj<AGE.length; aj++){
+      if (age>=AGE[aj].a && age<=AGE[aj].b){ var ao=AGE[aj]; ao.n++; if(DATA[ai][F_LIST]===0) ao.f++; else ao.m++; ao.members.push(ai);
+        if(!ao.y0||y<ao.y0) ao.y0=y; if(!ao.y1||y>ao.y1) ao.y1=y; break; }
+    }
+  }
+  AGE=AGE.filter(function(o){ return o.n; });
+  function ageLabel(o){ return o.b>=999 ? toArabic(o.a)+' سنة وأكثر' : 'من '+toArabic(o.a)+' إلى '+toArabic(o.b)+' سنة'; }
+  function bornLabel(o){ return 'مواليد '+toArabic(o.y0)+'–'+toArabic(o.y1); }
+
+  function fmSplit(f,m){
+    var t=(f+m)||1;
+    return '<div class="dual" aria-hidden="true"><i class="fm" style="width:'+(f/t*100)+'%"></i><i class="ml" style="width:'+(m/t*100)+'%"></i></div>'+
+      '<div class="fmline"><span><i class="sw" style="background:#3A2A78"></i>إناث <b>'+fmtNum(f)+'</b></span><span><i class="sw" style="background:#0E7C7B"></i>ذكور <b>'+fmtNum(m)+'</b></span></div>';
+  }
+
+  // ---------- explorer (drill-down sheet) ----------
+  var sheet=$('sheet'), overlay=$('overlay'), sheetOpen=false;
+  var EX={stack:[], q:'', limit:200, rows:[], title:'', sub:''};
+  var exBody=$('sheetBody'), exSearch=$('exSearch'), exqWrap=$('exq'), exBackBtn=$('exBack');
+
+  function levelHash(L){ return '#x='+encodeURIComponent(L.t+(L.k!==undefined&&L.k!==null?'~'+L.k:'')); }
+  function parseLevel(h){
+    if (h.indexOf('#x=')===0){
+      var v=decodeURIComponent(h.slice(3)), i=v.indexOf('~');
+      return i<0 ? {t:v} : {t:v.slice(0,i), k:v.slice(i+1)};
+    }
+    if (h.indexOf('#r=')===0) return {t:'reg', k:decodeURIComponent(h.slice(3))};
+    return null;
+  }
+  function exPush(L, hi){
+    if (hi!==undefined) L.hi=hi;
+    EX.stack.push(L); EX.q=''; EX.limit=200; EX.pushes=(EX.pushes||0)+1;
+    history.pushState({ex:EX.stack.slice()},'',levelHash(L));
+    exShow();
+  }
+  function exOpenFresh(L){ EX.stack=[]; EX.pushes=0; exPush(L); }
+  function exReplace(stack){ EX.stack=stack.slice(); EX.q=''; EX.limit=200; exShow(); }
+  function exBack(){ history.back(); }
+
+  function exShow(){
+    var L=EX.stack[EX.stack.length-1]; if(!L) return;
+    render_level(L);
+    exBackBtn.hidden = EX.stack.length<2;
+    sheet.classList.add('open'); overlay.classList.add('open'); document.body.classList.add('sheet-open'); sheetOpen=true;
+  }
+  function closeSheet(viaHistory){
+    if(!sheetOpen) return;
+    var pushes=EX.pushes||0;
+    sheet.classList.remove('open'); overlay.classList.remove('open'); document.body.classList.remove('sheet-open'); sheetOpen=false;
+    EX.stack=[]; EX.pushes=0;
+    if (!viaHistory){
+      if (pushes>0) history.go(-pushes);                       // unwind the levels we pushed
+      else history.replaceState(null,'',hashFromState());      // opened straight from a link
+    }
+    qInput.focus({preventScroll:true});
+  }
+  // back-compat: a register opens as a one-level explorer
+  function openSheet(key, hiIdx, viaHistory){
+    if(!GROUPS[key]) return;
+    if (viaHistory){ EX.stack=[{t:'reg',k:key,hi:hiIdx}]; EX.q=''; EX.pushes=0; exShow(); }
+    else { EX.stack=[]; EX.pushes=0; exPush({t:'reg',k:key}, hiIdx); }
+  }
+
+  function setHead(title, sub, stamp){
+    EX.title=title; EX.sub=sub;
+    $('sheetTitle').textContent=title;
+    $('sheetSub').textContent=sub;
+    var st=$('sheetStamp');
+    if (stamp){ st.innerHTML='<b>'+stamp.b+'</b><small>'+stamp.s+'</small>'; st.hidden=false; } else st.hidden=true;
+  }
+  function exSearchOn(placeholder){
+    exqWrap.hidden=false; exSearch.placeholder=placeholder; if(exSearch.value!==EX.q) exSearch.value=EX.q;
+  }
+  function matchQ(text){ if(!EX.q) return true; var n=norm(EX.q); return norm(text).indexOf(n)>=0 || norm(text).split(' ').some(function(t){return stripAl(t).indexOf(stripAl(n))===0;}); }
+
+  function rowsHTML(rows){
+    if(!rows.length) return '<div class="exempty">ما في نتيجة مطابقة.</div>';
+    var shown=rows.slice(0,EX.limit);
+    var html='<div class="exlist">'+shown.map(function(r){return r.html;}).join('')+'</div>';
+    if (rows.length>shown.length) html+='<button type="button" class="more" data-exmore="1">عرض المزيد ('+fmtNum(rows.length-shown.length)+' باقي)</button>';
+    return html;
+  }
+
+  function famRow(k, rank){
+    var o=FAM[k];
+    return {key:k, name:o.label, n:o.n||o.count, tsv:[o.label, o.count, o.f, o.m, o.regList.length],
+      html:'<button type="button" class="exrow" data-fam="'+esc(k)+'">'+
+        (rank?'<span class="rank">'+toArabic(rank)+'</span>':'<span class="rank" style="background:transparent;color:#B0ACC6">•</span>')+
+        '<span class="main"><span class="t">'+esc(o.label)+'</span><span class="s">'+fmtNum(o.regList.length)+' '+(o.regList.length===1?'سجل':'سجلات')+'</span></span>'+
+        '<span class="cnt"><b>'+fmtNum(o.count)+'</b><small>ناخب</small></span><span class="chev"></span>'+
+        '<span class="bars">'+fmSplit(o.f,o.m)+'</span></button>'};
+  }
+  function regRow(k, sub, own){
+    var o=REGS[k], big=(own===undefined?o.n:own);
+    return {key:k, name:'سجل '+SECTS[o.sect]+' رقم '+toArabic(o.reg), n:big, tsv:(own===undefined?[o.reg, SECTS[o.sect], o.n, o.f, o.m]:[o.reg, SECTS[o.sect], own, o.n]),
+      html:'<button type="button" class="exrow" data-reg="'+esc(k)+'">'+
+        '<span class="stamp'+(isDup(o.reg)?' dup':'')+'"><b>'+regDisplay(o.reg)+'</b><small>رقم القيد</small></span>'+
+        '<span class="main"><span class="t">سجل '+esc(SECTS[o.sect])+'</span><span class="s">'+esc(sub||(fmtNum(o.n)+' أفراد'))+'</span></span>'+
+        '<span class="cnt"><b>'+fmtNum(big)+'</b><small>صوت</small></span><span class="chev"></span>'+
+        '<span class="bars">'+fmSplit(o.f,o.m)+'</span></button>'};
+  }
+  function personRow(i){
+    var r=DATA[i];
+    return {key:i, name:r[F_NAME], n:1, tsv:[r[F_NAME],r[F_FATHER],r[F_MOTHER],r[F_DOB],SECTS[r[F_SECT]],r[F_REG],SECTS[r[F_SECTION]],r[F_NOTES].replace(/^[\s\[\]{}]+|[\s\[\]{}]+$/g,'')],
+      html:'<button type="button" class="exrow person" data-person="'+i+'">'+
+        '<span class="main"><span class="t">'+esc(r[F_NAME])+'</span><span class="s">الأب '+esc(r[F_FATHER]||'—')+' — الأم '+esc(r[F_MOTHER]||'—')+' — مواليد '+dobText(r[F_DOB])+(r[F_NOTES]?' — '+esc(r[F_NOTES].replace(/^[\s\[\]{}]+|[\s\[\]{}]+$/g,'')):'')+'</span></span>'+
+        '<span class="stamp"><b>'+regDisplay(r[F_REG])+'</b><small>سجل '+esc(SECTS[r[F_SECTION]])+'</small></span><span class="chev"></span></button>'};
+  }
+
+  var EX_HEAD={fams:['الاسم','العدد','إناث','ذكور','عدد السجلات'],
+               regs:['رقم القيد','السجل','العدد','إناث','ذكور'],
+               famregs:['رقم القيد','السجل','أصوات العائلة','إجمالي السجل'],
+               sects:['المذهب','العدد','إناث','ذكور','عدد العائلات'],
+               ages:['الفئة','العدد','إناث','ذكور'],
+               people:['الاسم والشهرة','إسم الأب','إسم الأم وشهرتها','تاريخ الولادة','المذهب','رقم القيد','السجل','ملاحظات']};
+  var exHead=EX_HEAD.people;
+
+  function render_level(L){
+    exqWrap.hidden=true; exBody.scrollTop=0;
+    if (L.t==='fams'){
+      exHead=EX_HEAD.fams; exSearchOn('فتّش عن شهرة…');
+      var keys=FAM_TOP.filter(function(k){ return matchQ(FAM[k].label); });
+      EX.rows=keys.map(function(k,i){ return famRow(k, EX.q?0:i+1); });
+      setHead('عائلات '+(META.town||''), fmtNum(FAM_ALPHA.length)+' عائلة — مرتّبة من الأكبر عدداً؛ اضغط على عائلة لتشوف سجلاتها');
+      exBody.innerHTML=rowsHTML(EX.rows);
+    }
+    else if (L.t==='fam'){
+      if (!FAM[L.k] && FAM[famKey(L.k)]) L.k=famKey(L.k);          // a link written with the display name still works
+      var o=FAM[L.k];
+      if(!o){ setHead('العائلة غير موجودة','جرّب من كارت العائلات'); exBody.innerHTML='<div class="exempty">ما لقينا هالعائلة بالقائمة.</div>'; return; }
+      exHead=EX_HEAD.famregs;
+      setHead('عائلة '+o.label, fmtNum(o.count)+' ناخب وناخبة — '+fmtNum(o.f)+' إناث و'+fmtNum(o.m)+' ذكور — '+fmtNum(o.regList.length)+' '+(o.regList.length===1?'سجل':'سجلات'));
+      EX.rows=o.regList.map(function(k){ return regRow(k, 'من أصل '+fmtNum(REGS[k].n)+' مسجّلين بهالسجل', o.regs[k]); });
+      exBody.innerHTML='<div class="exbtns"><button type="button" class="btn small" data-famall="'+esc(L.k)+'">كل أفراد العائلة ('+fmtNum(o.count)+')</button>'+
+        '<button type="button" class="btn small" data-filterfam="'+esc(L.k)+'">صفّي نتائج البحث</button></div>'+
+        '<div class="exmeta">أصوات العائلة موزّعة على السجلات التالية — اضغط على سجل لتشوف أسماء العائلة فيه:</div>'+rowsHTML(EX.rows);
+    }
+    else if (L.t==='famall'){
+      if (!FAM[L.k] && FAM[famKey(L.k)]) L.k=famKey(L.k);
+      var fo=FAM[L.k];
+      if(!fo){ setHead('العائلة غير موجودة',''); exBody.innerHTML='<div class="exempty">ما لقينا هالعائلة بالقائمة.</div>'; return; }
+      exHead=EX_HEAD.people; exSearchOn('فتّش باسم…');
+      var ms=fo.members.filter(function(i){ return matchQ(DATA[i][F_NAME]+' '+DATA[i][F_FATHER]+' '+DATA[i][F_MOTHER]); });
+      ms=ms.slice().sort(function(a,b){ var da=DATA[a][F_DOB]||'9999', db=DATA[b][F_DOB]||'9999'; return da<db?-1:da>db?1:a-b; });
+      EX.rows=ms.map(personRow);
+      setHead('كل أفراد عائلة '+fo.label, fmtNum(fo.count)+' ناخب وناخبة — مرتّبين حسب العمر');
+      exBody.innerHTML=rowsHTML(EX.rows);
+    }
+    else if (L.t==='regs'){
+      exHead=EX_HEAD.regs; exSearchOn('رقم السجل أو المذهب…');
+      var rk=REGS_TOP.filter(function(k){ return !EX.q || toWestern(EX.q).replace(/\D/g,'')===REGS[k].regn || matchQ(SECTS[REGS[k].sect]); });
+      EX.rows=rk.map(function(k){ return regRow(k); });
+      setHead('السجلات العائلية', fmtNum(REGS_TOP.length)+' سجل — مرتّبة من الأكبر عدداً؛ اضغط على سجل لتشوف أسماءه');
+      exBody.innerHTML=rowsHTML(EX.rows);
+    }
+    else if (L.t==='sects'){
+      exHead=EX_HEAD.sects;
+      var tot=DATA.length;
+      EX.rows=SECT_ORDER.map(function(sx,i){
+        var o=SECTG[sx], nm=SECTS[sx], nf=Object.keys(o.fams).length;
+        return {key:sx, name:nm, n:o.n, tsv:[nm,o.n,o.f,o.m,nf],
+          html:'<button type="button" class="exrow" data-sect="'+sx+'">'+
+            '<span class="rank" style="background:'+SECT_COLORS[i%SECT_COLORS.length]+';color:#fff">'+toArabic(i+1)+'</span>'+
+            '<span class="main"><span class="t">'+esc(nm)+'</span><span class="s">'+pct(o.n,tot)+'٪ من الناخبين — '+fmtNum(nf)+' عائلة — '+fmtNum(Object.keys(o.regs).length)+' سجل</span></span>'+
+            '<span class="cnt"><b>'+fmtNum(o.n)+'</b><small>ناخب</small></span><span class="chev"></span>'+
+            '<span class="bars">'+fmSplit(o.f,o.m)+'</span></button>'};
+      });
+      setHead('المذاهب', fmtNum(SECT_ORDER.length)+' مذهب في '+(META.town||'')+' — حسب سجل الأحوال الشخصية');
+      exBody.innerHTML=rowsHTML(EX.rows);
+    }
+    else if (L.t==='sect'){
+      var sx=+L.k, so=SECTG[sx]; if(!so) return;
+      exHead=EX_HEAD.fams; exSearchOn('فتّش عن شهرة…');
+      var fk=Object.keys(so.fams).sort(function(a,b){ return so.fams[b]-so.fams[a]; }).filter(function(k){ return matchQ(FAM[k].label); });
+      EX.rows=fk.map(function(k,i){ return famRow(k, EX.q?0:i+1); });
+      setHead('مذهب '+SECTS[sx], fmtNum(so.n)+' ناخب — '+fmtNum(so.f)+' إناث و'+fmtNum(so.m)+' ذكور — '+fmtNum(Object.keys(so.fams).length)+' عائلة');
+      exBody.innerHTML='<div class="exbtns"><button type="button" class="btn small" data-filtersect="'+sx+'">صفّي نتائج البحث على هالمذهب</button></div>'+
+        '<div class="exmeta">عائلات المذهب مرتّبة من الأكبر:</div>'+rowsHTML(EX.rows);
+    }
+    else if (L.t==='ages'){
+      exHead=EX_HEAD.ages;
+      var atot=DATA.length;
+      EX.rows=AGE.map(function(o,i){
+        return {key:i, name:ageLabel(o), n:o.n, tsv:[ageLabel(o),o.n,o.f,o.m],
+          html:'<button type="button" class="exrow" data-age="'+i+'">'+
+            '<span class="rank" style="background:transparent;color:var(--ink);font-size:11px;width:34px">'+pct(o.n,atot)+'٪</span>'+
+            '<span class="main"><span class="t">'+esc(ageLabel(o))+'</span><span class="s">'+esc(bornLabel(o))+'</span></span>'+
+            '<span class="cnt"><b>'+fmtNum(o.n)+'</b><small>ناخب</small></span><span class="chev"></span>'+
+            '<span class="bars">'+fmSplit(o.f,o.m)+'</span></button>'};
+      });
+      setHead('الأعمار', 'أعمار الناخبين في '+toArabic(YEAR)+(AGE_UNKNOWN?' — '+fmtNum(AGE_UNKNOWN)+' بدون تاريخ ولادة كامل':''));
+      exBody.innerHTML='<div class="exmeta">اضغط على أي فئة لتشوف أسماءها. العمر محسوب على سنة <b>'+toArabic(YEAR)+'</b> من تاريخ الولادة المسجّل.</div>'+rowsHTML(EX.rows);
+    }
+    else if (L.t==='age'){
+      var ao2=AGE[+L.k]; if(!ao2) return;
+      exHead=EX_HEAD.people; exSearchOn('فتّش باسم…');
+      var am=ao2.members.filter(function(i){ return matchQ(DATA[i][F_NAME]+' '+DATA[i][F_FATHER]+' '+DATA[i][F_MOTHER]); });
+      EX.rows=am.map(personRow);
+      setHead(ageLabel(ao2), fmtNum(ao2.n)+' ناخب وناخبة — '+fmtNum(ao2.f)+' إناث و'+fmtNum(ao2.m)+' ذكور — '+bornLabel(ao2));
+      exBody.innerHTML=rowsHTML(EX.rows);
+    }
+    else if (L.t==='note'){
+      exHead=EX_HEAD.people; exSearchOn('فتّش باسم…');
+      var kind=L.k, lbl={'new':'الناخبون الجدد (بلوغ السن)','abroad':'المسجّلون للاقتراع في الخارج','moved':'المنقولون من بلدة أخرى','other':'أُعيدوا أو أُضيفوا بقرار'}[kind]||'ملاحظات';
+      var nm2=[]; for (var ni=0; ni<DATA.length; ni++) if (noteKind(DATA[ni][F_NOTES])===kind && matchQ(DATA[ni][F_NAME]+' '+DATA[ni][F_FATHER])) nm2.push(ni);
+      EX.rows=nm2.map(personRow);
+      setHead(lbl, fmtNum(nm2.length)+' ناخب وناخبة حسب ملاحظات القائمة الرسمية');
+      exBody.innerHTML=rowsHTML(EX.rows);
+    }
+    else if (L.t==='reg'){
+      var o3=REGS[L.k];
+      if(!o3){ setHead('السجل غير موجود','جرّب من كارت السجلات'); exBody.innerHTML='<div class="exempty">ما لقينا هالسجل بالقائمة.</div>'; return; }
+      exHead=EX_HEAD.people;
+      setHead('سجل '+SECTS[o3.sect]+' رقم '+toArabic(o3.reg), fmtNum(o3.n)+' أفراد مسجّلين: '+fmtNum(o3.f)+' إناث و'+fmtNum(o3.m)+' ذكور',
+              {b:regDisplay(o3.reg), s:'رقم القيد'});
+      var sorted=o3.members.slice().sort(function(a,b){ var da=DATA[a][F_DOB]||'9999', db=DATA[b][F_DOB]||'9999'; return da<db?-1:da>db?1:a-b; });
+      EX.rows=sorted.map(personRow);
+      var pages={}; o3.members.forEach(function(i){ pages[DATA[i][F_PAGE]]=1; });
+      var html='<table><thead><tr><th>الاسم والشهرة</th><th>إسم الأب</th><th class="hide-sm">إسم الأم وشهرتها</th><th>تاريخ الولادة</th><th class="hide-sm">المذهب</th><th class="hide-sm">ملاحظات</th></tr></thead><tbody>';
+      sorted.forEach(function(i){
+        var r=DATA[i];
+        html+='<tr'+(i===L.hi?' class="hi"':'')+'><td class="nm">'+esc(r[F_NAME])+'<small>الأم: '+esc(r[F_MOTHER]||'—')+'</small>'+(r[F_NOTES]?noteTag(r[F_NOTES]):'')+'</td><td>'+esc(r[F_FATHER]||'—')+'</td><td class="hide-sm">'+esc(r[F_MOTHER]||'—')+'</td><td class="dob">'+dobText(r[F_DOB])+'</td><td class="hide-sm">'+esc(SECTS[r[F_SECT]])+'</td><td class="hide-sm">'+(r[F_NOTES]?noteTag(r[F_NOTES]):'')+'</td></tr>';
+      });
+      html+='</tbody></table><p class="sec-hint">القائمة الرسمية: '+(Object.keys(pages).length>1?'الصفحات ':'الصفحة ')+Object.keys(pages).map(function(pg){return toArabic(pg);}).join('، ')+' من ملف '+esc(META.town||'')+' الصادر عن المديرية العامة للأحوال الشخصية.</p>';
+      exBody.innerHTML=html;
+      var hi=sheet.querySelector('tr.hi'); if(hi && hi.scrollIntoView) setTimeout(function(){ hi.scrollIntoView({block:'center'}); },30);
+    }
+  }
+
+  // explorer events
+  exBackBtn.addEventListener('click',exBack);
+  $('closeSheet').addEventListener('click',function(){closeSheet(false);});
+  overlay.addEventListener('click',function(){closeSheet(false);});
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && sheetOpen) closeSheet(false); });
+  var exdeb;
+  exSearch.addEventListener('input',function(){ clearTimeout(exdeb); exdeb=setTimeout(function(){ EX.q=exSearch.value; EX.limit=200; render_level(EX.stack[EX.stack.length-1]); },140); });
+  exBody.addEventListener('click',function(e){
+    var el;
+    if ((el=e.target.closest('[data-exmore]'))){ EX.limit+=400; var L=EX.stack[EX.stack.length-1]; var sc=exBody.scrollTop; render_level(L); exBody.scrollTop=sc; return; }
+    if ((el=e.target.closest('[data-fam]'))) return exPush({t:'fam',k:el.getAttribute('data-fam')});
+    if ((el=e.target.closest('[data-famall]'))) return exPush({t:'famall',k:el.getAttribute('data-famall')});
+    if ((el=e.target.closest('[data-reg]'))) return exPush({t:'reg',k:el.getAttribute('data-reg')});
+    if ((el=e.target.closest('[data-sect]'))) return exPush({t:'sect',k:el.getAttribute('data-sect')});
+    if ((el=e.target.closest('[data-age]'))) return exPush({t:'age',k:el.getAttribute('data-age')});
+    if ((el=e.target.closest('[data-person]'))){ var pi=+el.getAttribute('data-person'); return exPush({t:'reg',k:groupKey(pi)}, pi); }
+    if ((el=e.target.closest('[data-filterfam]'))){ setFamily(FAM[el.getAttribute('data-filterfam')].label); closeSheet(false); scrollToResults(); return; }
+    if ((el=e.target.closest('[data-filtersect]'))){ sectSel.value=SECTS[+el.getAttribute('data-filtersect')]; state.sect=sectSel.value; state.limit=100; render(); markSects(); closeSheet(false); scrollToResults(); return; }
+  });
+
+  $('printSheet').addEventListener('click',function(){
+    var L=EX.stack[EX.stack.length-1], old=EX.limit;
+    if (L && EX.rows.length>EX.limit){ EX.limit=1e9; render_level(L); }      // print the whole list, not just the loaded part
+    window.print();
+    if (L && old!==EX.limit){ EX.limit=old; render_level(L); }
+  });
+  $('copySheet').addEventListener('click',function(){
+    if(!EX.rows.length) return;
+    var txt=EX.title+' — '+EX.sub+'\n'+exHead.join('\t')+'\n'+EX.rows.map(function(r){ return r.tsv.join('\t'); }).join('\n');
+    copyText(txt,function(ok){ toast(ok?'تم نسخ '+fmtNum(EX.rows.length)+' سطر — الصقها بـ Excel أو Word':'ما قدرت أنسخ'); });
+  });
+  $('csvSheet').addEventListener('click',function(){
+    if(!EX.rows.length) return;
+    downloadCSV(EX.title, exHead, EX.rows.map(function(r){ return r.tsv; }));
+  });
+  $('shareSheet').addEventListener('click',function(){
+    var L=EX.stack[EX.stack.length-1]; if(!L) return;
+    var url=location.origin+location.pathname+levelHash(L);
+    if (navigator.share){ navigator.share({title:EX.title+' – قوائم الناخبين '+(META.town||''),url:url}).catch(function(){}); }
+    else copyText(url,function(ok){ toast(ok?'تم نسخ الرابط':url); });
+  });
+
+  resultsEl.addEventListener('click',function(e){
+    var cp=e.target.closest('.copy');
+    if (cp){
+      e.stopPropagation();
+      var ci=+cp.getAttribute('data-copy');
+      copyText(voterText(ci), function(ok){
+        if (ok){ cp.classList.add('done'); toast('تم نسخ بيانات '+DATA[ci][F_NAME]); setTimeout(function(){cp.classList.remove('done');},1500); }
+        else toast('ما قدرت أنسخ — حدّد النص يدوياً');
+      });
+      return;
+    }
+    var row=e.target.closest('.row'); if(!row) return;
+    var idx=+row.getAttribute('data-i'); openSheet(groupKey(idx), idx, false);
+  });
+  resultsEl.addEventListener('keydown',function(e){
+    if (e.key!=='Enter' && e.key!==' ') return;
+    var row=e.target.closest('.row'); if(!row || e.target.closest('.copy')) return;
+    e.preventDefault(); var idx=+row.getAttribute('data-i'); openSheet(groupKey(idx), idx, false);
+  });
+
+  var toastT; function toast(msg){ var t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('show');},2200); }
+
+  // ---------- controls ----------
+  var deb;
+  qInput.addEventListener('input',function(){
+    clearTimeout(deb);
+    deb=setTimeout(function(){
+      state.q=qInput.value; state.limit=100; render();
+      history.replaceState(null,'',hashFromState());
+    },120);
+  });
+  clearBtn.addEventListener('click',function(){ qInput.value=''; state.q=''; state.limit=100; render(); history.replaceState(null,'',hashFromState()); qInput.focus(); });
+  document.querySelectorAll('.seg button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true'); state.sex=b.getAttribute('data-sex'); state.limit=100; render();
+    });
+  });
+  sectSel.addEventListener('change',function(){ state.sect=sectSel.value; state.limit=100; render(); markSects(); });
+
+  // ---------- overview ----------
+  var SECT_COLORS=['#3A2A78','#0E7C7B','#B5651D','#7A3E9D','#1D6B3A','#0F5C8C','#8A5A00','#B3423A','#4B3B9A','#2E7D6B','#6B4E9E','#9C6B15'];
+  function pct(n,t){
+    if(!t||!n) return '٠';
+    var v=n/t*100;
+    if (v<0.1) return 'أقل من ٠٫١';
+    return toArabic((Math.round(v*10)/10).toFixed(1)).replace('.','٫');
+  }
+
+  function buildTotals(){
+    var f=0,m=0; DATA.forEach(function(r){ if(r[F_LIST]===0) f++; else m++; });
+    var tot=DATA.length, R=54, C=2*Math.PI*R, fs=C*(f/tot);
+    $('totals').innerHTML=
+      '<div class="donut"><svg viewBox="0 0 128 128" aria-hidden="true">'+
+        '<circle cx="64" cy="64" r="'+R+'" fill="none" stroke="#E3E0EE" stroke-width="16"/>'+
+        '<circle cx="64" cy="64" r="'+R+'" fill="none" stroke="#3A2A78" stroke-width="16" stroke-linecap="round" stroke-dasharray="'+fs.toFixed(1)+' '+(C-fs).toFixed(1)+'"/>'+
+        '<circle cx="64" cy="64" r="'+R+'" fill="none" stroke="#0E7C7B" stroke-width="16" stroke-linecap="round" stroke-dasharray="'+(C-fs).toFixed(1)+' '+fs.toFixed(1)+'" stroke-dashoffset="'+(-fs).toFixed(1)+'"/>'+
+      '</svg><div class="c"><b>'+fmtNum(tot)+'</b><span>ناخب وناخبة</span></div></div>'+
+      '<div class="legend">'+
+        '<div><span class="dot" style="background:#3A2A78"></span> إناث <b>'+fmtNum(f)+'</b> <small>'+pct(f,tot)+'٪</small></div>'+
+        '<div><span class="dot" style="background:#0E7C7B"></span> ذكور <b>'+fmtNum(m)+'</b> <small>'+pct(m,tot)+'٪</small></div>'+
+        '<div class="meta"><span class="dot"></span> سجلات عائلية <b>'+fmtNum(Object.keys(GROUPS).length)+'</b></div>'+
+        '<div class="meta"><span class="dot"></span> شهرات (عائلات) <b>'+fmtNum(FAM_ALPHA.length)+'</b></div>'+
+      '</div>';
+    var ns={}, cls={'new':'','moved':' amber','abroad':' blue','other':' green'},
+        labels={'new':'بلوغ السن (ناخبون جدد)','moved':'نُقلوا من بلدة أخرى','abroad':'اختاروا الاقتراع في الخارج','other':'أُعيد / أُضيف بقرار'};
+    DATA.forEach(function(r){ var k=noteKind(r[F_NOTES]); if(!k) return; ns[k]=(ns[k]||0)+1; });
+    $('notesStats').innerHTML=['new','abroad','moved','other'].filter(function(k){return ns[k];})
+      .map(function(k){ return '<button type="button" class="chip'+cls[k]+'" data-note="'+k+'">'+esc(labels[k])+' <b>'+fmtNum(ns[k])+'</b></button>'; }).join('');
+  }
+
+  function miniRow(name, n, max, sub){
+    return '<div class="m"><span class="nm">'+esc(name)+(sub?' <small style="color:var(--muted);font-weight:400">'+esc(sub)+'</small>':'')+'</span><span class="n">'+fmtNum(n)+'</span>'+
+           '<span class="trk"><i style="width:'+Math.max(3,Math.round(n/max*100))+'%"></i></span></div>';
+  }
+  function buildFams(){
+    var top=FAM_TOP.slice(0,5), max=FAM[top[0]].count;
+    $('famPreview').innerHTML=top.map(function(k){ return miniRow(FAM[k].label, FAM[k].count, max, fmtNum(FAM[k].regList.length)+' سجلات'); }).join('');
+    $('famCount').textContent=fmtNum(FAM_ALPHA.length)+' عائلة';
+    $('famSub').textContent='أكبر '+toArabic(5)+' عائلات — والباقي جوّا';
+  }
+  function buildSects(){
+    var tot=DATA.length, top=SECT_ORDER.slice(0,4);
+    var stack='<div class="stack" aria-hidden="true">'+SECT_ORDER.map(function(sx,i){
+      return '<i style="width:'+(SECTG[sx].n/tot*100)+'%;background:'+SECT_COLORS[i%SECT_COLORS.length]+'"></i>'; }).join('')+'</div>';
+    var rows=top.map(function(sx,i){
+      return '<div class="srow"><span class="dot" style="background:'+SECT_COLORS[i%SECT_COLORS.length]+'"></span>'+
+        '<span class="nm">'+esc(SECTS[sx])+'</span><span class="pct">'+pct(SECTG[sx].n,tot)+'٪</span><span class="n">'+fmtNum(SECTG[sx].n)+'</span></div>'; }).join('');
+    $('sectPreview').innerHTML=stack+rows;
+    $('sectCount').textContent=fmtNum(SECT_ORDER.length)+' مذهب';
+  }
+  function buildAges(){
+    var top=AGE.slice().sort(function(a,b){return b.n-a.n;}).slice(0,4), max=top[0].n;
+    $('agePreview').innerHTML=top.map(function(o){ return miniRow(ageLabel(o), o.n, max); }).join('');
+    $('ageCount').textContent=fmtNum(AGE.length)+' فئات عمرية';
+    $('ageSub').textContent='محسوبة على سنة '+toArabic(YEAR);
+  }
+  function buildRegs(){
+    var top=REGS_TOP.slice(0,4), max=REGS[top[0]].n;
+    $('regPreview').innerHTML=top.map(function(k){ return miniRow('سجل رقم '+toArabic(REGS[k].reg), REGS[k].n, max, SECTS[REGS[k].sect]); }).join('');
+    $('regCount').textContent=fmtNum(REGS_TOP.length)+' سجل';
+  }
+  function markSects(){}
+  function scrollToResults(){
+    var el = famPanel.hidden ? resultsEl : famPanel;
+    var top=el.getBoundingClientRect().top+window.pageYOffset-70;
+    window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+  }
+  document.querySelectorAll('[data-open]').forEach(function(b){
+    b.addEventListener('click',function(){ exOpenFresh({t:b.getAttribute('data-open')}); });
+  });
+  $('notesStats').addEventListener('click',function(e){
+    var c=e.target.closest('[data-note]'); if(c) exOpenFresh({t:'note',k:c.getAttribute('data-note')});
+  });
+
+  function buildOverview(){ buildTotals(); buildSects(); buildFams(); buildRegs(); buildAges(); }
+
+  // ---------- hash / boot ----------
+  function applyHash(){
+    var h=location.hash||'';
+    var lvl=parseLevel(h);
+    if (lvl){
+      if (lvl.t==='reg' && !GROUPS[lvl.k]) lvl=null;
+      if (lvl){ if(!resultsEl.innerHTML) render(); EX.stack=[lvl]; EX.q=''; EX.limit=200; EX.pushes=0; exShow(); return; }
+    }
+    if (h.length>1){
+      var params={}; h.slice(1).split('&').forEach(function(kv){ var i=kv.indexOf('='); if(i>0) params[kv.slice(0,i)]=decodeURIComponent(kv.slice(i+1)); });
+      var q=params.q||''; qInput.value=q; state.q=q;
+      famInput.value=params.f||''; regInput.value=(params.g||'').replace(/\D/g,'') ? toArabic((params.g||'').replace(/\D/g,'')) : '';
+      applyKeyed(); return;
+    }
+    if (sheetOpen) closeSheet(true);
+    render();
+  }
+  window.addEventListener('popstate',function(e){
+    var st=e.state;
+    if (st && st.ex && st.ex.length){ EX.pushes=Math.max(0,(EX.pushes||0)-1); exReplace(st.ex); return; }
+    if (sheetOpen){ closeSheet(true); }
+    applyHash();
+  });
+
+  if (!DATA.length){
+    statusEl.innerHTML='<b style="color:#B3423A">ما انحمّل ملف البيانات data.js.</b> لازم يكون بنفس المجلد مع index.html — فكّ الـ zip كامل وافتح index.html من داخل المجلد، أو ارفع كل الملفات مع بعض على GitHub Pages.';
+    overviewEl.style.display='none'; qInput.disabled=true; return;
+  }
+  // header/footer text follows data.js so a regenerated list updates the page automatically
+  if (META.edition) $('edition').textContent=META.edition;
+  if (META.source) $('sourceLine').textContent='المصدر: '+META.source+'، '+(META.edition||'قائمة الناخبين')+' لناخبي '+(META.town||'')+(META.pages?' ('+fmtNum(META.pages)+' صفحة)':'')+'.';
+  buildOverview();
+  applyHash();
+  if (window.innerWidth>700 && !sheetOpen) qInput.focus();
+
+  if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)){
+    window.addEventListener('load',function(){ navigator.serviceWorker.register('./sw.js').catch(function(){}); });
+  }
+})();
+</script>
+</body>
+</html>
