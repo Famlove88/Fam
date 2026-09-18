@@ -10,6 +10,24 @@ window.VOTERS_TOWNS = [
   "primary": true
  },
  {
+  "id": "zhla-almalqh",
+  "name": "زحلة المعلقه",
+  "count": 7756,
+  "females": 3960,
+  "males": 3796,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-almalqh.js"
+ },
+ {
+  "id": "zhla-almalqh-alshmaly",
+  "name": "زحلة المعلقه الشمالي",
+  "count": 3981,
+  "females": 2080,
+  "males": 1901,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-almalqh-alshmaly.js"
+ },
+ {
   "id": "nyha",
   "name": "نيحا",
   "count": 1548,
