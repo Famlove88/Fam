@@ -79,7 +79,11 @@ def parse_pdf(pdf_path):
             cols = collections.defaultdict(list)
             for x0, x1, t in ws:
                 xm = (x0 + x1) / 2
-                cols[next(name for lim, name in COLS if xm < lim)].append((x0, x1, t))
+                col = next(name for lim, name in COLS if xm < lim)
+                # اسم أم طويل بيفيض على خانة تاريخ الولادة: التاريخ أرقام فقط، فأي كلمة عربية هون أصلها من اسم الأم
+                if col == 'dob' and ARLET.search(t):
+                    col = 'mother'
+                cols[col].append((x0, x1, t))
             rec = {k: join_rtl(v) for k, v in cols.items()}
             rec = {k: rec.get(k, '') for _, k in COLS}
             if 'الاسم والشهرة' in rec['name'] or 'ملاحظات' in rec['notes']: continue   # صف العناوين
