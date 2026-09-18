@@ -298,6 +298,7 @@
   .exfilter .seg2 button[aria-pressed="true"]{background:var(--ink);color:#fff}
   .exfilter select{font:inherit;font-weight:700;font-size:13.5px;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;max-width:190px}
   .exfilter .cnt2{margin-right:auto;font-size:13px;color:var(--muted);font-weight:600}
+  .exfilter.modes{border-bottom:0;padding-bottom:0}
   .exfilter .cnt2 b{color:var(--ink-deep)}
   .town{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 9px;border-radius:999px;background:var(--blue-tint);color:var(--blue);margin:0 6px;vertical-align:1px}
   .exlist{padding:4px 8px 0}
@@ -860,6 +861,7 @@
   for (var ti=0; ti<TOWNS.length; ti++) if (TOWNS[ti].primary) PRIMARY=TOWNS[ti];
   if (!PRIMARY) PRIMARY=TOWNS[0];
   var TD={}; TD[PRIMARY.id]={id:PRIMARY.id, name:PRIMARY.name||META.town, meta:META, rows:DATA, sects:SECTS};
+  TD[PRIMARY.id].groups=GROUPS;
   window.addTown=function(o){ if(o&&o.id&&o.rows) TD[o.id]={id:o.id,name:o.name,meta:o.meta,rows:o.rows,sects:(o.meta&&o.meta.sects)||[]}; };
   function townLoaded(t){ return !!TD[t.id]; }
   function loadTown(t, cb){
@@ -873,6 +875,80 @@
     var pend=TOWNS.filter(function(t){ return !TD[t.id] && t.file && !t.failed; });
     if (!pend.length) return cb();
     var n=pend.length; pend.forEach(function(t){ loadTown(t,function(){ if(--n===0) cb(); }); });
+  }
+  var MODE_PH={name:'اسم الناخب، أو الأب، أو الأم…', surname:'الشهرة، مثلاً الميس', reg:'رقم السجل، مثلاً ٢٢٣'};
+  function exModeBar(){
+    return '<div class="exfilter modes"><div class="seg2" role="group" aria-label="نوع البحث">'+
+      [['name','الاسم'],['surname','الشهرة'],['reg','رقم السجل']].map(function(m){ return '<button type="button" data-exmode="'+m[0]+'" aria-pressed="'+(EX.mode===m[0])+'">'+m[1]+'</button>'; }).join('')+
+      '</div></div>';
+  }
+  function townFamKey(tid,i){
+    var T=TD[tid]; if(!T.fk) T.fk=[];
+    var k=T.fk[i]; if(k===undefined){ k=famKey(surname(T.rows[i][F_NAME])); T.fk[i]=k; }
+    return k;
+  }
+  // returns [{tid,i}] for people or [{tid,key}] for registers
+  function searchTowns(ids, mode, q){
+    var out=[];
+    if (mode==='reg'){
+      var qn=toWestern(q).replace(/\D/g,''); if(!qn) return out;
+      ids.forEach(function(tid){ var G=townGroups(tid); Object.keys(G).forEach(function(k){ if (regKey(k.split('|').slice(1).join('|'))===qn) out.push({tid:tid,key:k}); }); });
+      return out;
+    }
+    if (mode==='surname'){
+      var fk=famKey(q); if(!fk) return out;
+      ids.forEach(function(tid){
+        var rows=TD[tid].rows, exact=[], pref=[];
+        for (var i=0;i<rows.length;i++){
+          var k=townFamKey(tid,i);
+          if (k===fk) exact.push(i);
+          else if (k.indexOf(fk)===0 || k.split(' ').some(function(t){ return t.indexOf(fk)===0; })) pref.push(i);
+        }
+        (exact.length?exact:pref).forEach(function(i){ out.push({tid:tid,i:i}); });
+      });
+      return out;
+    }
+    var qw=norm(q).split(' ').filter(Boolean); if(!qw.length) return out;
+    ids.forEach(function(tid){
+      var rows=TD[tid].rows;
+      for (var i=0;i<rows.length;i++){
+        var r=rows[i], toks=norm(r[F_NAME]+' '+r[F_FATHER]+' '+r[F_MOTHER]).split(' '), ok=true;
+        for (var w=0; w<qw.length && ok; w++){
+          var qq=qw[w], qa=stripAl(qq), found=false;
+          for (var tk=0; tk<toks.length; tk++){ if (toks[tk].indexOf(qq)===0 || stripAl(toks[tk]).indexOf(qa)===0){ found=true; break; } }
+          if (!found && !(qq.length>=4 && toks.join('').indexOf(qq)>=0)) ok=false;
+        }
+        if (ok) out.push({tid:tid,i:i});
+        if (out.length>3000) return;
+      }
+    });
+    return out;
+  }
+  function regRowIn(tid, key){
+    var T=TD[tid], ms=townGroups(tid)[key]||[], r0=T.rows[ms[0]]||[], SC=T.sects||[], f=0, m=0;
+    ms.forEach(function(i){ if(T.rows[i][F_LIST]===0) f++; else m++; });
+    return {key:tid+'~'+key, name:'سجل رقم '+toArabic(r0[F_REG]||''), n:ms.length, tsv:[r0[F_REG]||'', SC[r0[F_SECTION]]||'', ms.length, f, m, T.name],
+      html:'<button type="button" class="exrow" data-treg="'+esc(tid)+'~'+esc(key)+'">'+
+        '<span class="stamp"><b>'+regDisplay(r0[F_REG]||'')+'</b><small>رقم القيد</small></span>'+
+        '<span class="main"><span class="t">سجل '+esc(SC[r0[F_SECTION]]||'')+'<span class="town">'+esc(T.name)+'</span></span><span class="s">'+fmtNum(ms.length)+' أفراد مسجّلين</span></span>'+
+        '<span class="cnt"><b>'+fmtNum(ms.length)+'</b><small>صوت</small></span><span class="chev"></span>'+
+        '<span class="bars">'+fmSplit(f,m)+'</span></button>'};
+  }
+  function renderTownResults(ids, scopeLabel){
+    var hits=searchTowns(ids, EX.mode, EX.q);
+    if (EX.mode==='reg'){
+      exHead=['رقم القيد','السجل','العدد','إناث','ذكور','البلدة'];
+      EX.rows=hits.map(function(h){ return regRowIn(h.tid, h.key); });
+      setHead('سجل رقم '+toArabic(toWestern(EX.q).replace(/\D/g,'')), fmtNum(EX.rows.length)+' '+(EX.rows.length===1?'سجل':'سجلات')+' بهالرقم '+scopeLabel);
+      exBody.innerHTML=exModeBar()+rowsHTML(EX.rows);
+      return;
+    }
+    exHead=EX_HEAD.people.concat(['البلدة']);
+    var kept=hits.filter(function(h){ return pfKeepRow(TD[h.tid].rows[h.i]); });
+    EX.rows=kept.map(function(h){ return personRowIn(h.tid, h.i); });
+    var towns={}; kept.forEach(function(h){ towns[h.tid]=1; });
+    setHead((EX.mode==='surname'?'عائلة ':'بحث: ')+EX.q.trim(), fmtNum(EX.rows.length)+' نتيجة '+scopeLabel+(Object.keys(towns).length>1?' — موزّعين على '+fmtNum(Object.keys(towns).length)+' قرى':''));
+    exBody.innerHTML=exModeBar()+pfBar(hits.length, EX.rows.length)+rowsHTML(EX.rows);
   }
   function townGroups(id){
     var T=TD[id]; if(!T) return {};
@@ -929,7 +1005,7 @@
 
   // ---------- explorer (drill-down sheet) ----------
   var sheet=$('sheet'), overlay=$('overlay'), sheetOpen=false;
-  var EX={stack:[], q:'', limit:200, rows:[], title:'', sub:''};
+  var EX={stack:[], q:'', limit:200, rows:[], title:'', sub:'', mode:'name'};
   var exBody=$('sheetBody'), exSearch=$('exSearch'), exqWrap=$('exq'), exBackBtn=$('exBack');
 
   function levelHash(L){ return '#x='+encodeURIComponent(L.t+(L.k!==undefined&&L.k!==null?'~'+L.k:'')); }
@@ -947,7 +1023,7 @@
     history.pushState({ex:EX.stack.slice()},'',levelHash(L));
     exShow();
   }
-  function exOpenFresh(L){ EX.stack=[]; EX.pushes=0; pfReset(); exPush(L); }
+  function exOpenFresh(L){ EX.stack=[]; EX.pushes=0; pfReset(); EX.mode='name'; exPush(L); }
   function exReplace(stack){ EX.stack=stack.slice(); EX.q=''; EX.limit=200; exShow(); }
   function exBack(){ history.back(); }
 
@@ -1164,9 +1240,9 @@
     }
     else if (L.t==='towns'){
       exHead=['البلدة','عدد الناخبين','إناث','ذكور','القائمة'];
-      exSearchOn('اكتب اسم لتفتّش بكل القرى…');
+      exSearchOn(MODE_PH[EX.mode]);
       var tot=TOWNS.reduce(function(a,t){ return a+(t.count||0); },0);
-      if (!EX.q){
+      if (!EX.q.trim()){
         EX.rows=TOWNS.map(function(t,i){
           return {key:t.id, name:t.name, n:t.count||0, tsv:[t.name,t.count||0,t.females||'',t.males||'',t.edition||''],
             html:'<button type="button" class="exrow" data-town="'+esc(t.id)+'">'+
@@ -1176,50 +1252,36 @@
               '<span class="cnt"><b>'+fmtNum(t.count||0)+'</b><small>ناخب</small></span><span class="chev"></span>'+
               (t.females||t.males?'<span class="bars">'+fmSplit(t.females||0,t.males||0)+'</span>':'')+'</button>'};
         });
-        setHead('القرى', fmtNum(TOWNS.length)+' '+(TOWNS.length===1?'بلدة':'قرى')+' — مجموع '+fmtNum(tot)+' ناخب؛ اكتب اسم فوق لتفتّش فيهن كلّهن');
-        exBody.innerHTML=rowsHTML(EX.rows)+
+        setHead('القرى', fmtNum(TOWNS.length)+' '+(TOWNS.length===1?'بلدة':'قرى')+' — مجموع '+fmtNum(tot)+' ناخب؛ اختار نوع البحث واكتب فوق لتفتّش فيهن كلّهن');
+        exBody.innerHTML=exModeBar()+rowsHTML(EX.rows)+
           (TOWNS.length<2?'<div class="exmeta">لإضافة قرية: حطّ ملف الـ PDF الرسمي تبعها بمجلّد <b>source</b> على GitHub، والباقي بينعمل لحاله — بتطلع هون وبيشملها البحث.</div>':'');
         return;
       }
       var pend=TOWNS.filter(function(t){ return !TD[t.id] && t.file && !t.failed; });
       if (pend.length){
         setHead('بحث بكل القرى','عم نحمّل '+fmtNum(pend.length)+' قائمة…');
-        exBody.innerHTML='<div class="exempty">لحظة… عم نحمّل قوائم القرى.</div>';
+        exBody.innerHTML=exModeBar()+'<div class="exempty">لحظة… عم نحمّل قوائم القرى.</div>';
         loadAllTowns(function(){ render_level(L); });
         return;
       }
-      exHead=EX_HEAD.people.concat(['البلدة']);
-      var hits=[], qw=norm(EX.q).split(' ').filter(Boolean);
-      Object.keys(TD).forEach(function(tid){
-        var rows=TD[tid].rows;
-        for (var i=0;i<rows.length;i++){
-          var r=rows[i], toks=norm(r[F_NAME]+' '+r[F_FATHER]+' '+r[F_MOTHER]).split(' '), ok=true;
-          for (var w=0; w<qw.length && ok; w++){
-            var q=qw[w], qa=stripAl(q), found=false;
-            for (var tk=0; tk<toks.length; tk++){ if (toks[tk].indexOf(q)===0 || stripAl(toks[tk]).indexOf(qa)===0){ found=true; break; } }
-            if (!found && !(q.length>=4 && toks.join('').indexOf(q)>=0)) ok=false;
-          }
-          if (ok && pfKeepRow(r)) hits.push([tid,i]);
-          if (hits.length>3000) break;
-        }
-      });
-      EX.rows=hits.map(function(h){ return personRowIn(h[0],h[1]); });
       var bad=TOWNS.filter(function(t){ return t.failed; });
-      setHead('بحث بكل القرى', fmtNum(EX.rows.length)+' نتيجة لـ «'+EX.q.trim()+'» ضمن '+fmtNum(Object.keys(TD).length)+' '+(Object.keys(TD).length===1?'بلدة':'قرى')+
-              (bad.length?' — تعذّر تحميل: '+bad.map(function(t){return t.name;}).join('، '):''));
-      exBody.innerHTML=pfBar(EX.rows.length, EX.rows.length)+rowsHTML(EX.rows);
+      renderTownResults(Object.keys(TD), 'ضمن '+fmtNum(Object.keys(TD).length)+' '+(Object.keys(TD).length===1?'بلدة':'قرى')+(bad.length?' — تعذّر تحميل: '+bad.map(function(t){return t.name;}).join('، '):''));
     }
     else if (L.t==='town'){
       var T=TD[L.k];
       if (!T){
         var tt=TOWNS.filter(function(x){return x.id===L.k;})[0];
-        if (tt && tt.file){ setHead(tt.name,'عم نحمّل القائمة…'); exBody.innerHTML='<div class="exempty">لحظة…</div>'; loadTown(tt,function(){ render_level(L); }); return; }
-        setHead('غير متوفرة',''); exBody.innerHTML='<div class="exempty">قائمة هالبلدة مش محمّلة.</div>'; return;
+        if (tt && tt.file && !tt.failed){ setHead(tt.name,'عم نحمّل القائمة…'); exBody.innerHTML='<div class="exempty">لحظة…</div>'; loadTown(tt,function(){ render_level(L); }); return; }
+        setHead(tt?tt.name:'غير متوفرة', 'قائمة هالبلدة مش متوفرة على السيرفر');
+        exBody.innerHTML='<div class="exempty">ما قدرنا نحمّل ملف <b>'+esc(tt&&tt.file||'')+'</b>.<br>الملف مش موجود بالمسار هيدا على الموقع — لازم يكون مرفوع جوّا مجلد <b>towns</b>.'+
+          '<br><br><button type="button" class="btn small" data-retrytown="'+esc(L.k)+'">جرّب تحميلو مرة تانية</button></div>';
+        EX.rows=[]; return;
       }
       if (L.k===PRIMARY.id){ EX.stack[EX.stack.length-1]={t:'fams'}; return render_level({t:'fams'}); }
-      exHead=EX_HEAD.regs; exSearchOn('رقم السجل…');
+      exSearchOn(MODE_PH[EX.mode]);
+      if (EX.q.trim()){ renderTownResults([L.k], 'في '+T.name); return; }
+      exHead=EX_HEAD.regs;
       var G=townGroups(L.k), keys=Object.keys(G).sort(function(a,b){ return G[b].length-G[a].length; });
-      if (EX.q){ var qn=toWestern(EX.q).replace(/\D/g,''); keys=keys.filter(function(k){ return k.split('|')[1].replace(/\D/g,'')===qn; }); }
       EX.rows=keys.map(function(k){
         var ms=G[k], r0=T.rows[ms[0]], f=0,m=0; ms.forEach(function(i){ if(T.rows[i][F_LIST]===0) f++; else m++; });
         return {key:k, name:'سجل رقم '+toArabic(r0[F_REG]), n:ms.length, tsv:[r0[F_REG],(T.sects[r0[F_SECTION]]||''),ms.length,f,m],
@@ -1230,7 +1292,7 @@
             '<span class="bars">'+fmSplit(f,m)+'</span></button>'};
       });
       setHead(T.name, fmtNum(T.rows.length)+' ناخب — '+fmtNum(keys.length)+' سجل — '+esc(T.meta.edition||''));
-      exBody.innerHTML=rowsHTML(EX.rows);
+      exBody.innerHTML=exModeBar()+'<div class="exmeta">كل سجلات '+esc(T.name)+' مرتّبة من الأكبر — أو اختار نوع بحث واكتب فوق.</div>'+rowsHTML(EX.rows);
     }
     else if (L.t==='treg'){
       var sp=String(L.k).split('~'), T2=TD[sp[0]], gk=sp.slice(1).join('~');
@@ -1278,6 +1340,7 @@
   exSearch.addEventListener('input',function(){ clearTimeout(exdeb); exdeb=setTimeout(function(){ EX.q=exSearch.value; EX.limit=200; render_level(EX.stack[EX.stack.length-1]); },140); });
   exBody.addEventListener('click',function(e){
     var el;
+    if ((el=e.target.closest('[data-exmode]'))){ EX.mode=el.getAttribute('data-exmode'); EX.limit=200; render_level(EX.stack[EX.stack.length-1]); exSearch.focus(); return; }
     if ((el=e.target.closest('[data-pfsex]'))){ PF.sex=el.getAttribute('data-pfsex'); EX.limit=200; render_level(EX.stack[EX.stack.length-1]); return; }
     if ((el=e.target.closest('[data-exmore]'))){ EX.limit+=400; var L=EX.stack[EX.stack.length-1]; var sc=exBody.scrollTop; render_level(L); exBody.scrollTop=sc; return; }
     if ((el=e.target.closest('[data-fam]'))) return exPush({t:'fam',k:el.getAttribute('data-fam')});
@@ -1286,8 +1349,13 @@
     if ((el=e.target.closest('[data-sect]'))) return exPush({t:'sect',k:el.getAttribute('data-sect')});
     if ((el=e.target.closest('[data-age]'))) return exPush({t:'age',k:el.getAttribute('data-age')});
     if ((el=e.target.closest('[data-person]'))){ var pi=+el.getAttribute('data-person'); return exPush({t:'reg',k:groupKey(pi)}, pi); }
+    if ((el=e.target.closest('[data-retrytown]'))){ var rt=TOWNS.filter(function(x){return x.id===el.getAttribute('data-retrytown');})[0]; if(rt){ rt.failed=false; render_level(EX.stack[EX.stack.length-1]); } return; }
     if ((el=e.target.closest('[data-town]'))) return exPush({t:'town',k:el.getAttribute('data-town')});
-    if ((el=e.target.closest('[data-treg]'))) return exPush({t:'treg',k:el.getAttribute('data-treg')});
+    if ((el=e.target.closest('[data-treg]'))){
+      var tk=el.getAttribute('data-treg'), tsep=tk.indexOf('~');
+      if (tk.slice(0,tsep)===PRIMARY.id) return exPush({t:'reg',k:tk.slice(tsep+1)});
+      return exPush({t:'treg',k:tk});
+    }
     if ((el=e.target.closest('[data-tperson]'))){
       var sp2=el.getAttribute('data-tperson').split('~'), tid=sp2[0], idx=+sp2[1];
       if (tid===PRIMARY.id) return exPush({t:'reg',k:groupKey(idx)}, idx);
