@@ -1,8 +1,8 @@
 /* قوائم الناخبين – بر الياس – service worker
    cache prefix "famvote-" : on activate we delete ONLY our own old caches,
    never sibling apps' caches on the same GitHub Pages origin. */
-var VERSION = 'famvote-v2';
-var PRECACHE = ['./', './index.html', './data.js', './manifest.json', './icon-192.png', './icon-512.png'];
+var VERSION = 'famvote-v3';
+var PRECACHE = ['./', './index.html', './data.js', './towns.js', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(PRECACHE); }).then(function () { return self.skipWaiting(); }));
@@ -22,10 +22,13 @@ self.addEventListener('fetch', function (e) {
   var isFont = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
   if (url.origin !== self.location.origin && !isFont) return;
 
-  var isApp = url.origin === self.location.origin && /(\/|index\.html|data\.js|manifest\.json)$/.test(url.pathname);
+  // كل ملفات البيانات (data.js, towns.js, towns/*.js) والصفحة: من النت أولاً حتى تظهر القرى والقوائم الجديدة فوراً
+  var isApp = url.origin === self.location.origin &&
+              (/(\/|index\.html|data\.js|towns\.js|manifest\.json)$/.test(url.pathname) || url.pathname.indexOf('/towns/') >= 0);
   if (isApp) {
     // index.html / data.js: network first so a regenerated list shows right away; cache is the offline fallback
-    e.respondWith(fetch(req).then(function (res) {
+    // cache:'no-cache' = يسأل السيرفر إذا في نسخة أجدد بدل ما يرضى بنسخة المتصفح القديمة
+    e.respondWith(fetch(req, { cache: 'no-cache' }).then(function (res) {
       if (res && res.ok) { var copy = res.clone(); caches.open(VERSION).then(function (c) { c.put(req, copy); }); }
       return res;
     }).catch(function () { return caches.match(req, { ignoreSearch: true }); }));
