@@ -292,6 +292,14 @@
   .exq input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-weight:600;font-size:15px;color:var(--text);padding:4px 0}
   .exq input::-webkit-search-cancel-button{-webkit-appearance:none}
   .x.back svg{width:20px;height:20px}
+  .exfilter{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 16px 6px;border-bottom:1px solid var(--line)}
+  .exfilter .seg2{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .exfilter .seg2 button{border:0;background:transparent;padding:5px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:13.5px;color:var(--muted);font-family:inherit}
+  .exfilter .seg2 button[aria-pressed="true"]{background:var(--ink);color:#fff}
+  .exfilter select{font:inherit;font-weight:700;font-size:13.5px;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;max-width:190px}
+  .exfilter .cnt2{margin-right:auto;font-size:13px;color:var(--muted);font-weight:600}
+  .exfilter .cnt2 b{color:var(--ink-deep)}
+  .town{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 9px;border-radius:999px;background:var(--blue-tint);color:var(--blue);margin:0 6px;vertical-align:1px}
   .exlist{padding:4px 8px 0}
   .exrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px;align-items:center;width:100%;border:0;background:transparent;
          padding:11px 8px;border-radius:12px;cursor:pointer;text-align:right;font:inherit;border-bottom:1px solid var(--line)}
@@ -453,6 +461,15 @@
       <div class="foot"><span id="regCount"></span><span class="go">تصفّح الكل ←</span></div>
     </button>
 
+    <button type="button" class="card drill c6" data-open="towns">
+      <div class="card-h">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+        <div class="grow"><h2>القرى المجاورة</h2><p id="townSub">بحث عن أي اسم وبيطلعلك بأي بلدة مسجّل</p></div>
+      </div>
+      <div class="mini" id="townPreview"></div>
+      <div class="foot"><span id="townCount"></span><span class="go">فتّش بكل القرى ←</span></div>
+    </button>
+
     <div class="card guide">
       <div class="card-h">
         <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M12 16h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></div>
@@ -498,14 +515,15 @@
   <div class="body" id="sheetBody"></div>
   <div class="actions">
     <button type="button" class="btn primary" id="printSheet">طباعة</button>
-    <button type="button" class="btn" id="copySheet">نسخ كجدول</button>
-    <button type="button" class="btn" id="csvSheet">تنزيل CSV</button>
-    <button type="button" class="btn" id="shareSheet">نسخ الرابط</button>
+    <button type="button" class="btn" id="copySheet" title="نسخ كجدول">نسخ</button>
+    <button type="button" class="btn" id="csvSheet" title="تنزيل ملف CSV">CSV</button>
+    <button type="button" class="btn" id="shareSheet" title="نسخ رابط هالشاشة">رابط</button>
   </div>
 </section>
 <div class="toast" id="toast" role="status"></div>
 
 <script src="./data.js"></script>
+<script src="./towns.js"></script>
 <script>
 (function(){
   'use strict';
@@ -835,6 +853,34 @@
     var moreBtn=$('more'); if(moreBtn) moreBtn.addEventListener('click',function(){ state.limit+=200; render(); });
   }
 
+  // ---------- towns (بر الياس + أي قرية تنضاف لاحقاً) ----------
+  var TOWNS=(window.VOTERS_TOWNS && window.VOTERS_TOWNS.length) ? window.VOTERS_TOWNS.slice()
+            : [{id:'main', name:META.town||'', count:DATA.length, edition:META.edition, primary:true}];
+  var PRIMARY=null;
+  for (var ti=0; ti<TOWNS.length; ti++) if (TOWNS[ti].primary) PRIMARY=TOWNS[ti];
+  if (!PRIMARY) PRIMARY=TOWNS[0];
+  var TD={}; TD[PRIMARY.id]={id:PRIMARY.id, name:PRIMARY.name||META.town, meta:META, rows:DATA, sects:SECTS};
+  window.addTown=function(o){ if(o&&o.id&&o.rows) TD[o.id]={id:o.id,name:o.name,meta:o.meta,rows:o.rows,sects:(o.meta&&o.meta.sects)||[]}; };
+  function townLoaded(t){ return !!TD[t.id]; }
+  function loadTown(t, cb){
+    if (TD[t.id] || !t.file || t.failed) return cb(TD[t.id]?null:'skip');
+    var sc=document.createElement('script'); sc.src=t.file;
+    sc.onload=function(){ if(!TD[t.id]) t.failed=true; cb(TD[t.id]?null:'bad'); };
+    sc.onerror=function(){ t.failed=true; cb('err'); };
+    document.head.appendChild(sc);
+  }
+  function loadAllTowns(cb){
+    var pend=TOWNS.filter(function(t){ return !TD[t.id] && t.file && !t.failed; });
+    if (!pend.length) return cb();
+    var n=pend.length; pend.forEach(function(t){ loadTown(t,function(){ if(--n===0) cb(); }); });
+  }
+  function townGroups(id){
+    var T=TD[id]; if(!T) return {};
+    if (T.groups) return T.groups;
+    var g={}; T.rows.forEach(function(r,i){ var k=r[F_SECTION]+'|'+r[F_REG]; (g[k]||(g[k]=[])).push(i); });
+    T.groups=g; return g;
+  }
+
   // ---------- aggregates for the explorer ----------
   var REGS={};
   Object.keys(GROUPS).forEach(function(k){
@@ -901,7 +947,7 @@
     history.pushState({ex:EX.stack.slice()},'',levelHash(L));
     exShow();
   }
-  function exOpenFresh(L){ EX.stack=[]; EX.pushes=0; exPush(L); }
+  function exOpenFresh(L){ EX.stack=[]; EX.pushes=0; pfReset(); exPush(L); }
   function exReplace(stack){ EX.stack=stack.slice(); EX.q=''; EX.limit=200; exShow(); }
   function exBack(){ history.back(); }
 
@@ -967,6 +1013,14 @@
         '<span class="cnt"><b>'+fmtNum(big)+'</b><small>صوت</small></span><span class="chev"></span>'+
         '<span class="bars">'+fmSplit(o.f,o.m)+'</span></button>'};
   }
+  function personRowIn(tid, i){
+    var T=TD[tid], r=T.rows[i], SC=T.sects||[];
+    return {key:tid+'~'+i, name:r[F_NAME], n:1, tsv:[r[F_NAME],r[F_FATHER],r[F_MOTHER],r[F_DOB],SC[r[F_SECT]]||'',r[F_REG],SC[r[F_SECTION]]||'',T.name],
+      html:'<button type="button" class="exrow person" data-tperson="'+esc(tid)+'~'+i+'">'+
+        '<span class="main"><span class="t">'+esc(r[F_NAME])+'<span class="town">'+esc(T.name)+'</span></span>'+
+        '<span class="s">الأب '+esc(r[F_FATHER]||'—')+' — الأم '+esc(r[F_MOTHER]||'—')+' — مواليد '+dobText(r[F_DOB])+'</span></span>'+
+        '<span class="stamp"><b>'+regDisplay(r[F_REG])+'</b><small>سجل '+esc(SC[r[F_SECTION]]||'')+'</small></span><span class="chev"></span></button>'};
+  }
   function personRow(i){
     var r=DATA[i];
     return {key:i, name:r[F_NAME], n:1, tsv:[r[F_NAME],r[F_FATHER],r[F_MOTHER],r[F_DOB],SECTS[r[F_SECT]],r[F_REG],SECTS[r[F_SECTION]],r[F_NOTES].replace(/^[\s\[\]{}]+|[\s\[\]{}]+$/g,'')],
@@ -975,6 +1029,38 @@
         '<span class="stamp"><b>'+regDisplay(r[F_REG])+'</b><small>سجل '+esc(SECTS[r[F_SECTION]])+'</small></span><span class="chev"></span></button>'};
   }
 
+  var PF={sex:'all', age:'all'};
+  function pfReset(){ PF.sex='all'; PF.age='all'; }
+  function pfActive(){ return PF.sex!=='all' || PF.age!=='all'; }
+  function pfKeep(i){
+    if (PF.sex!=='all' && String(DATA[i][F_LIST])!==PF.sex) return false;
+    if (PF.age!=='all'){
+      var bd=AGE[+PF.age]; if(!bd) return true;
+      var y=parseInt(DATA[i][F_DOB].slice(0,4),10); if(!y) return false;
+      var a=YEAR-y; if (a<bd.a || a>bd.b) return false;
+    }
+    return true;
+  }
+  function pfApply(list){ return pfActive() ? list.filter(pfKeep) : list; }
+  function pfKeepRow(r){
+    if (PF.sex!=='all' && String(r[F_LIST])!==PF.sex) return false;
+    if (PF.age!=='all'){
+      var bd=AGE[+PF.age]; if(!bd) return true;
+      var y=parseInt(r[F_DOB].slice(0,4),10); if(!y) return false;
+      var a=YEAR-y; if (a<bd.a || a>bd.b) return false;
+    }
+    return true;
+  }
+  function pfBar(total, shown, withAge){
+    var opts='<option value="all">كل الأعمار</option>'+AGE.map(function(o,i){ return '<option value="'+i+'"'+(PF.age===String(i)?' selected':'')+'>'+esc(ageLabel(o))+'</option>'; }).join('');
+    return '<div class="exfilter">'+
+      '<div class="seg2" role="group" aria-label="الجنس">'+
+        ['all','0','1'].map(function(v,k){ return '<button type="button" data-pfsex="'+v+'" aria-pressed="'+(PF.sex===v)+'">'+['الكل','إناث','ذكور'][k]+'</button>'; }).join('')+
+      '</div>'+
+      (withAge===false?'':'<select data-pfage aria-label="الفئة العمرية">'+opts+'</select>')+
+      '<span class="cnt2">معروض <b>'+fmtNum(shown)+'</b> من '+fmtNum(total)+'</span>'+
+    '</div>';
+  }
   var EX_HEAD={fams:['الاسم','العدد','إناث','ذكور','عدد السجلات'],
                regs:['رقم القيد','السجل','العدد','إناث','ذكور'],
                famregs:['رقم القيد','السجل','أصوات العائلة','إجمالي السجل'],
@@ -1008,11 +1094,11 @@
       var fo=FAM[L.k];
       if(!fo){ setHead('العائلة غير موجودة',''); exBody.innerHTML='<div class="exempty">ما لقينا هالعائلة بالقائمة.</div>'; return; }
       exHead=EX_HEAD.people; exSearchOn('فتّش باسم…');
-      var ms=fo.members.filter(function(i){ return matchQ(DATA[i][F_NAME]+' '+DATA[i][F_FATHER]+' '+DATA[i][F_MOTHER]); });
+      var ms=pfApply(fo.members.filter(function(i){ return matchQ(DATA[i][F_NAME]+' '+DATA[i][F_FATHER]+' '+DATA[i][F_MOTHER]); }));
       ms=ms.slice().sort(function(a,b){ var da=DATA[a][F_DOB]||'9999', db=DATA[b][F_DOB]||'9999'; return da<db?-1:da>db?1:a-b; });
       EX.rows=ms.map(personRow);
-      setHead('كل أفراد عائلة '+fo.label, fmtNum(fo.count)+' ناخب وناخبة — مرتّبين حسب العمر');
-      exBody.innerHTML=rowsHTML(EX.rows);
+      setHead('كل أفراد عائلة '+fo.label, fmtNum(fo.count)+' ناخب وناخبة — مرتّبين من الأكبر سناً');
+      exBody.innerHTML=pfBar(fo.count, EX.rows.length)+rowsHTML(EX.rows);
     }
     else if (L.t==='regs'){
       exHead=EX_HEAD.regs; exSearchOn('رقم السجل أو المذهب…');
@@ -1062,18 +1148,101 @@
     else if (L.t==='age'){
       var ao2=AGE[+L.k]; if(!ao2) return;
       exHead=EX_HEAD.people; exSearchOn('فتّش باسم…');
-      var am=ao2.members.filter(function(i){ return matchQ(DATA[i][F_NAME]+' '+DATA[i][F_FATHER]+' '+DATA[i][F_MOTHER]); });
+      var am=pfApply(ao2.members.filter(function(i){ return matchQ(DATA[i][F_NAME]+' '+DATA[i][F_FATHER]+' '+DATA[i][F_MOTHER]); }));
       EX.rows=am.map(personRow);
       setHead(ageLabel(ao2), fmtNum(ao2.n)+' ناخب وناخبة — '+fmtNum(ao2.f)+' إناث و'+fmtNum(ao2.m)+' ذكور — '+bornLabel(ao2));
-      exBody.innerHTML=rowsHTML(EX.rows);
+      exBody.innerHTML=pfBar(ao2.n, EX.rows.length, false)+rowsHTML(EX.rows);
     }
     else if (L.t==='note'){
       exHead=EX_HEAD.people; exSearchOn('فتّش باسم…');
       var kind=L.k, lbl={'new':'الناخبون الجدد (بلوغ السن)','abroad':'المسجّلون للاقتراع في الخارج','moved':'المنقولون من بلدة أخرى','other':'أُعيدوا أو أُضيفوا بقرار'}[kind]||'ملاحظات';
-      var nm2=[]; for (var ni=0; ni<DATA.length; ni++) if (noteKind(DATA[ni][F_NOTES])===kind && matchQ(DATA[ni][F_NAME]+' '+DATA[ni][F_FATHER])) nm2.push(ni);
+      var nall=[], nm2=[];
+      for (var ni=0; ni<DATA.length; ni++) if (noteKind(DATA[ni][F_NOTES])===kind){ nall.push(ni); if (pfKeep(ni) && matchQ(DATA[ni][F_NAME]+' '+DATA[ni][F_FATHER])) nm2.push(ni); }
       EX.rows=nm2.map(personRow);
-      setHead(lbl, fmtNum(nm2.length)+' ناخب وناخبة حسب ملاحظات القائمة الرسمية');
+      setHead(lbl, fmtNum(nall.length)+' ناخب وناخبة حسب ملاحظات القائمة الرسمية');
+      exBody.innerHTML=pfBar(nall.length, EX.rows.length)+rowsHTML(EX.rows);
+    }
+    else if (L.t==='towns'){
+      exHead=['البلدة','عدد الناخبين','إناث','ذكور','القائمة'];
+      exSearchOn('اكتب اسم لتفتّش بكل القرى…');
+      var tot=TOWNS.reduce(function(a,t){ return a+(t.count||0); },0);
+      if (!EX.q){
+        EX.rows=TOWNS.map(function(t,i){
+          return {key:t.id, name:t.name, n:t.count||0, tsv:[t.name,t.count||0,t.females||'',t.males||'',t.edition||''],
+            html:'<button type="button" class="exrow" data-town="'+esc(t.id)+'">'+
+              '<span class="rank">'+toArabic(i+1)+'</span>'+
+              '<span class="main"><span class="t">'+esc(t.name)+(t.primary?'<span class="town">أساسية</span>':'')+'</span>'+
+              '<span class="s">'+esc(t.edition||'')+(townLoaded(t)?' — جاهزة':' — بتتحمّل عند البحث')+'</span></span>'+
+              '<span class="cnt"><b>'+fmtNum(t.count||0)+'</b><small>ناخب</small></span><span class="chev"></span>'+
+              (t.females||t.males?'<span class="bars">'+fmSplit(t.females||0,t.males||0)+'</span>':'')+'</button>'};
+        });
+        setHead('القرى', fmtNum(TOWNS.length)+' '+(TOWNS.length===1?'بلدة':'قرى')+' — مجموع '+fmtNum(tot)+' ناخب؛ اكتب اسم فوق لتفتّش فيهن كلّهن');
+        exBody.innerHTML=rowsHTML(EX.rows)+
+          (TOWNS.length<2?'<div class="exmeta">لإضافة قرية: حطّ ملف الـ PDF الرسمي تبعها بمجلّد <b>source</b> على GitHub، والباقي بينعمل لحاله — بتطلع هون وبيشملها البحث.</div>':'');
+        return;
+      }
+      var pend=TOWNS.filter(function(t){ return !TD[t.id] && t.file && !t.failed; });
+      if (pend.length){
+        setHead('بحث بكل القرى','عم نحمّل '+fmtNum(pend.length)+' قائمة…');
+        exBody.innerHTML='<div class="exempty">لحظة… عم نحمّل قوائم القرى.</div>';
+        loadAllTowns(function(){ render_level(L); });
+        return;
+      }
+      exHead=EX_HEAD.people.concat(['البلدة']);
+      var hits=[], qw=norm(EX.q).split(' ').filter(Boolean);
+      Object.keys(TD).forEach(function(tid){
+        var rows=TD[tid].rows;
+        for (var i=0;i<rows.length;i++){
+          var r=rows[i], toks=norm(r[F_NAME]+' '+r[F_FATHER]+' '+r[F_MOTHER]).split(' '), ok=true;
+          for (var w=0; w<qw.length && ok; w++){
+            var q=qw[w], qa=stripAl(q), found=false;
+            for (var tk=0; tk<toks.length; tk++){ if (toks[tk].indexOf(q)===0 || stripAl(toks[tk]).indexOf(qa)===0){ found=true; break; } }
+            if (!found && !(q.length>=4 && toks.join('').indexOf(q)>=0)) ok=false;
+          }
+          if (ok && pfKeepRow(r)) hits.push([tid,i]);
+          if (hits.length>3000) break;
+        }
+      });
+      EX.rows=hits.map(function(h){ return personRowIn(h[0],h[1]); });
+      var bad=TOWNS.filter(function(t){ return t.failed; });
+      setHead('بحث بكل القرى', fmtNum(EX.rows.length)+' نتيجة لـ «'+EX.q.trim()+'» ضمن '+fmtNum(Object.keys(TD).length)+' '+(Object.keys(TD).length===1?'بلدة':'قرى')+
+              (bad.length?' — تعذّر تحميل: '+bad.map(function(t){return t.name;}).join('، '):''));
+      exBody.innerHTML=pfBar(EX.rows.length, EX.rows.length)+rowsHTML(EX.rows);
+    }
+    else if (L.t==='town'){
+      var T=TD[L.k];
+      if (!T){
+        var tt=TOWNS.filter(function(x){return x.id===L.k;})[0];
+        if (tt && tt.file){ setHead(tt.name,'عم نحمّل القائمة…'); exBody.innerHTML='<div class="exempty">لحظة…</div>'; loadTown(tt,function(){ render_level(L); }); return; }
+        setHead('غير متوفرة',''); exBody.innerHTML='<div class="exempty">قائمة هالبلدة مش محمّلة.</div>'; return;
+      }
+      if (L.k===PRIMARY.id){ EX.stack[EX.stack.length-1]={t:'fams'}; return render_level({t:'fams'}); }
+      exHead=EX_HEAD.regs; exSearchOn('رقم السجل…');
+      var G=townGroups(L.k), keys=Object.keys(G).sort(function(a,b){ return G[b].length-G[a].length; });
+      if (EX.q){ var qn=toWestern(EX.q).replace(/\D/g,''); keys=keys.filter(function(k){ return k.split('|')[1].replace(/\D/g,'')===qn; }); }
+      EX.rows=keys.map(function(k){
+        var ms=G[k], r0=T.rows[ms[0]], f=0,m=0; ms.forEach(function(i){ if(T.rows[i][F_LIST]===0) f++; else m++; });
+        return {key:k, name:'سجل رقم '+toArabic(r0[F_REG]), n:ms.length, tsv:[r0[F_REG],(T.sects[r0[F_SECTION]]||''),ms.length,f,m],
+          html:'<button type="button" class="exrow" data-treg="'+esc(L.k)+'~'+esc(k)+'">'+
+            '<span class="stamp"><b>'+regDisplay(r0[F_REG])+'</b><small>رقم القيد</small></span>'+
+            '<span class="main"><span class="t">سجل '+esc(T.sects[r0[F_SECTION]]||'')+'</span><span class="s">'+esc(T.name)+'</span></span>'+
+            '<span class="cnt"><b>'+fmtNum(ms.length)+'</b><small>صوت</small></span><span class="chev"></span>'+
+            '<span class="bars">'+fmSplit(f,m)+'</span></button>'};
+      });
+      setHead(T.name, fmtNum(T.rows.length)+' ناخب — '+fmtNum(keys.length)+' سجل — '+esc(T.meta.edition||''));
       exBody.innerHTML=rowsHTML(EX.rows);
+    }
+    else if (L.t==='treg'){
+      var sp=String(L.k).split('~'), T2=TD[sp[0]], gk=sp.slice(1).join('~');
+      if (!T2){ setHead('غير متوفرة',''); exBody.innerHTML='<div class="exempty">قائمة هالبلدة مش محمّلة.</div>'; return; }
+      var ms2=townGroups(sp[0])[gk]||[], r02=T2.rows[ms2[0]]||[];
+      exHead=EX_HEAD.people.concat(['البلدة']);
+      var flt=ms2.filter(function(i){ return pfKeepRow(T2.rows[i]); })
+                 .sort(function(a,b){ var da=T2.rows[a][F_DOB]||'9999', db=T2.rows[b][F_DOB]||'9999'; return da<db?-1:da>db?1:a-b; });
+      EX.rows=flt.map(function(i){ return personRowIn(sp[0], i); });
+      setHead('سجل '+(T2.sects[r02[F_SECTION]]||'')+' رقم '+toArabic(r02[F_REG]||''), T2.name+' — '+fmtNum(ms2.length)+' أفراد مسجّلين',
+              {b:regDisplay(r02[F_REG]||''), s:'رقم القيد'});
+      exBody.innerHTML=pfBar(ms2.length, EX.rows.length)+rowsHTML(EX.rows);
     }
     else if (L.t==='reg'){
       var o3=REGS[L.k];
@@ -1081,10 +1250,11 @@
       exHead=EX_HEAD.people;
       setHead('سجل '+SECTS[o3.sect]+' رقم '+toArabic(o3.reg), fmtNum(o3.n)+' أفراد مسجّلين: '+fmtNum(o3.f)+' إناث و'+fmtNum(o3.m)+' ذكور',
               {b:regDisplay(o3.reg), s:'رقم القيد'});
-      var sorted=o3.members.slice().sort(function(a,b){ var da=DATA[a][F_DOB]||'9999', db=DATA[b][F_DOB]||'9999'; return da<db?-1:da>db?1:a-b; });
+      var sorted=pfApply(o3.members).slice().sort(function(a,b){ var da=DATA[a][F_DOB]||'9999', db=DATA[b][F_DOB]||'9999'; return da<db?-1:da>db?1:a-b; });
       EX.rows=sorted.map(personRow);
       var pages={}; o3.members.forEach(function(i){ pages[DATA[i][F_PAGE]]=1; });
-      var html='<table><thead><tr><th>الاسم والشهرة</th><th>إسم الأب</th><th class="hide-sm">إسم الأم وشهرتها</th><th>تاريخ الولادة</th><th class="hide-sm">المذهب</th><th class="hide-sm">ملاحظات</th></tr></thead><tbody>';
+      if (!sorted.length){ exBody.innerHTML=pfBar(o3.n,0)+'<div class="exempty">ما في أسماء مطابقة للفلتر.</div>'; return; }
+      var html=pfBar(o3.n, sorted.length)+'<table><thead><tr><th>الاسم والشهرة</th><th>إسم الأب</th><th class="hide-sm">إسم الأم وشهرتها</th><th>تاريخ الولادة</th><th class="hide-sm">المذهب</th><th class="hide-sm">ملاحظات</th></tr></thead><tbody>';
       sorted.forEach(function(i){
         var r=DATA[i];
         html+='<tr'+(i===L.hi?' class="hi"':'')+'><td class="nm">'+esc(r[F_NAME])+'<small>الأم: '+esc(r[F_MOTHER]||'—')+'</small>'+(r[F_NOTES]?noteTag(r[F_NOTES]):'')+'</td><td>'+esc(r[F_FATHER]||'—')+'</td><td class="hide-sm">'+esc(r[F_MOTHER]||'—')+'</td><td class="dob">'+dobText(r[F_DOB])+'</td><td class="hide-sm">'+esc(SECTS[r[F_SECT]])+'</td><td class="hide-sm">'+(r[F_NOTES]?noteTag(r[F_NOTES]):'')+'</td></tr>';
@@ -1100,10 +1270,15 @@
   $('closeSheet').addEventListener('click',function(){closeSheet(false);});
   overlay.addEventListener('click',function(){closeSheet(false);});
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && sheetOpen) closeSheet(false); });
+  exBody.addEventListener('change',function(e){
+    var sel=e.target.closest('[data-pfage]');
+    if (sel){ PF.age=sel.value; EX.limit=200; render_level(EX.stack[EX.stack.length-1]); }
+  });
   var exdeb;
   exSearch.addEventListener('input',function(){ clearTimeout(exdeb); exdeb=setTimeout(function(){ EX.q=exSearch.value; EX.limit=200; render_level(EX.stack[EX.stack.length-1]); },140); });
   exBody.addEventListener('click',function(e){
     var el;
+    if ((el=e.target.closest('[data-pfsex]'))){ PF.sex=el.getAttribute('data-pfsex'); EX.limit=200; render_level(EX.stack[EX.stack.length-1]); return; }
     if ((el=e.target.closest('[data-exmore]'))){ EX.limit+=400; var L=EX.stack[EX.stack.length-1]; var sc=exBody.scrollTop; render_level(L); exBody.scrollTop=sc; return; }
     if ((el=e.target.closest('[data-fam]'))) return exPush({t:'fam',k:el.getAttribute('data-fam')});
     if ((el=e.target.closest('[data-famall]'))) return exPush({t:'famall',k:el.getAttribute('data-famall')});
@@ -1111,6 +1286,14 @@
     if ((el=e.target.closest('[data-sect]'))) return exPush({t:'sect',k:el.getAttribute('data-sect')});
     if ((el=e.target.closest('[data-age]'))) return exPush({t:'age',k:el.getAttribute('data-age')});
     if ((el=e.target.closest('[data-person]'))){ var pi=+el.getAttribute('data-person'); return exPush({t:'reg',k:groupKey(pi)}, pi); }
+    if ((el=e.target.closest('[data-town]'))) return exPush({t:'town',k:el.getAttribute('data-town')});
+    if ((el=e.target.closest('[data-treg]'))) return exPush({t:'treg',k:el.getAttribute('data-treg')});
+    if ((el=e.target.closest('[data-tperson]'))){
+      var sp2=el.getAttribute('data-tperson').split('~'), tid=sp2[0], idx=+sp2[1];
+      if (tid===PRIMARY.id) return exPush({t:'reg',k:groupKey(idx)}, idx);
+      var rr=TD[tid].rows[idx];
+      return exPush({t:'treg',k:tid+'~'+rr[F_SECTION]+'|'+rr[F_REG]});
+    }
     if ((el=e.target.closest('[data-filterfam]'))){ setFamily(FAM[el.getAttribute('data-filterfam')].label); closeSheet(false); scrollToResults(); return; }
     if ((el=e.target.closest('[data-filtersect]'))){ sectSel.value=SECTS[+el.getAttribute('data-filtersect')]; state.sect=sectSel.value; state.limit=100; render(); markSects(); closeSheet(false); scrollToResults(); return; }
   });
@@ -1234,6 +1417,12 @@
     $('ageCount').textContent=fmtNum(AGE.length)+' فئات عمرية';
     $('ageSub').textContent='محسوبة على سنة '+toArabic(YEAR);
   }
+  function buildTowns(){
+    var tot=TOWNS.reduce(function(a,t){ return a+(t.count||0); },0), max=Math.max.apply(null,TOWNS.map(function(t){return t.count||0;}))||1;
+    $('townPreview').innerHTML=TOWNS.slice(0,4).map(function(t){ return miniRow(t.name, t.count||0, max, t.primary?'أساسية':''); }).join('')+
+      (TOWNS.length<2?'<div style="font-size:12.5px;color:var(--muted);margin-top:2px">جاهزين نضيف أي قرية: بس منحطّ ملف قائمتها.</div>':'');
+    $('townCount').textContent=fmtNum(TOWNS.length)+' '+(TOWNS.length===1?'بلدة':'قرى')+' — '+fmtNum(tot)+' ناخب';
+  }
   function buildRegs(){
     var top=REGS_TOP.slice(0,4), max=REGS[top[0]].n;
     $('regPreview').innerHTML=top.map(function(k){ return miniRow('سجل رقم '+toArabic(REGS[k].reg), REGS[k].n, max, SECTS[REGS[k].sect]); }).join('');
@@ -1252,7 +1441,7 @@
     var c=e.target.closest('[data-note]'); if(c) exOpenFresh({t:'note',k:c.getAttribute('data-note')});
   });
 
-  function buildOverview(){ buildTotals(); buildSects(); buildFams(); buildRegs(); buildAges(); }
+  function buildOverview(){ buildTotals(); buildSects(); buildFams(); buildRegs(); buildAges(); buildTowns(); }
 
   // ---------- hash / boot ----------
   function applyHash(){
@@ -1284,6 +1473,11 @@
   }
   // header/footer text follows data.js so a regenerated list updates the page automatically
   if (META.edition) $('edition').textContent=META.edition;
+  (function(){
+    var tn=META.town||''; if(!tn) return;
+    var t={fams:'عائلات '+tn, sects:'مذاهب '+tn, regs:'سجلات '+tn, ages:'أعمار ناخبي '+tn};
+    Object.keys(t).forEach(function(k){ var h=document.querySelector('[data-open="'+k+'"] h2'); if(h) h.textContent=t[k]; });
+  })();
   if (META.source) $('sourceLine').textContent='المصدر: '+META.source+'، '+(META.edition||'قائمة الناخبين')+' لناخبي '+(META.town||'')+(META.pages?' ('+fmtNum(META.pages)+' صفحة)':'')+'.';
   buildOverview();
   applyHash();

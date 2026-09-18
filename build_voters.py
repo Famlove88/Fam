@@ -51,6 +51,7 @@ def parse_pdf(pdf_path):
     html = open(tmp, encoding='utf-8').read(); os.unlink(tmp)
     pages = re.split(r'<page ', html)[1:]
     records, sex, section, list_kind, year = [], None, None, None, None
+    place = {}
     for pno, ph in enumerate(pages, start=1):
         words = re.findall(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">(.*?)</word>', ph)
         rows = collections.OrderedDict()
@@ -63,6 +64,11 @@ def parse_pdf(pdf_path):
             if 'قائمة الناخبين' in txt:
                 sex = 0 if ('الإناث' in txt or 'الاناث' in txt) else 1
                 list_kind = 'النهائية' if 'النهائية' in txt else 'الأولية'
+            for key, lbl in (('town', 'القرية أو الحي'), ('district', 'القضاء'), ('governorate', 'المحافظة')):
+                if key not in place and lbl in txt:
+                    v = txt.split(lbl, 1)[1].lstrip(' :').strip()
+                    v = re.split(r'\s{2,}|قائمة|المحافظة|القضاء', v)[0].strip()
+                    if v: place[key] = v
             if 'لغاية' in txt and year is None:
                 m = re.findall(r'\d{4}', txt.translate(AR2EN))
                 if m: year = m[-1]
@@ -81,9 +87,9 @@ def parse_pdf(pdf_path):
             rec.update(sex=sex, section=section, page=pno,
                        reg_n=rec['reg'].translate(AR2EN), dob_n=rec['dob'].translate(AR2EN))
             records.append(rec)
-    return records, list_kind or 'الأولية', year
+    return records, list_kind or 'الأولية', year, place
 
-def build(records, list_kind, year, town='بر الياس', pages=0):
+def build(records, list_kind, year, town='بر الياس', pages=0, place=None, town_id=None):
     sects = []
     def sidx(s):
         if s not in sects: sects.append(s)
@@ -91,8 +97,10 @@ def build(records, list_kind, year, town='بر الياس', pages=0):
     rows = [[r['name'], r['father'], r['mother'], r['dob_n'], sidx(r['sect']), r['reg_n'], r['notes'],
              r['sex'], sidx(r['section']), r['page']] for r in records]
     yr_ar = (year or '').translate(str.maketrans('0123456789', '٠١٢٣٤٥٦٧٨٩'))
+    place = place or {}
     meta = {
-        "town": town, "district": "زحلة", "governorate": "البقاع",
+        "id": town_id or '', "town": place.get('town') or town,
+        "district": place.get('district', 'زحلة'), "governorate": place.get('governorate', 'البقاع'),
         "edition": "القائمة " + list_kind + (" " + yr_ar if yr_ar else ""),
         "listKind": list_kind, "year": year, "pages": pages, "count": len(rows),
         "source": "وزارة الداخلية والبلديات – المديرية العامة للأحوال الشخصية",
@@ -109,12 +117,12 @@ if __name__ == '__main__':
     ap.add_argument('pdf'); ap.add_argument('-o', '--out', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data.js'))
     ap.add_argument('--town', default='بر الياس')
     a = ap.parse_args()
-    recs, kind, year = parse_pdf(a.pdf)
+    recs, kind, year, place = parse_pdf(a.pdf)
     try:
         pages = int(re.search(r'Pages:\s+(\d+)', subprocess.run(['pdfinfo', a.pdf], capture_output=True, text=True).stdout).group(1))
     except Exception:
         pages = 0
-    js = build(recs, kind, year, a.town, pages)
+    js = build(recs, kind, year, a.town, pages, place)
     open(a.out, 'w', encoding='utf-8').write(js)
     f = sum(1 for r in recs if r['sex'] == 0)
-    print(f"{len(recs)} ناخب ({f} إناث / {len(recs)-f} ذكور) — {kind} {year} — {pages} صفحة -> {a.out} ({os.path.getsize(a.out)//1024} KB)")
+    print(f"{place.get('town', a.town)}: {len(recs)} ناخب ({f} إناث / {len(recs)-f} ذكور) — {kind} {year} — {pages} صفحة -> {a.out} ({os.path.getsize(a.out)//1024} KB)")
