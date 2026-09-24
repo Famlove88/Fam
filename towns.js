@@ -19,6 +19,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/mjdl-anjr.js"
  },
  {
+  "id": "aly-alnhry",
+  "name": "علي النهري",
+  "count": 8336,
+  "females": 4287,
+  "males": 4049,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/aly-alnhry.js"
+ },
+ {
   "id": "qb-alyas-althta",
   "name": "قب الياس التحتا",
   "count": 7791,
@@ -55,6 +64,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/qb-alyas-alfwqa.js"
  },
  {
+  "id": "ablh",
+  "name": "ابلح",
+  "count": 2395,
+  "females": 1228,
+  "males": 1167,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/ablh.js"
+ },
+ {
   "id": "mksh",
   "name": "مكسه",
   "count": 1307,
@@ -82,6 +100,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/wady-aldlm.js"
  },
  {
+  "id": "alwqf",
+  "name": "الوقف",
+  "count": 396,
+  "females": 209,
+  "males": 187,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/alwqf.js"
+ },
+ {
   "id": "jlala",
   "name": "جلالا",
   "count": 393,
@@ -89,6 +116,15 @@ window.VOTERS_TOWNS = [
   "males": 190,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/jlala.js"
+ },
+ {
+  "id": "alkrma",
+  "name": "الكرمة",
+  "count": 380,
+  "females": 196,
+  "males": 184,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/alkrma.js"
  },
  {
   "id": "shtwrh",
