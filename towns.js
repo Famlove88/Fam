@@ -37,6 +37,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/sadnayl.js"
  },
  {
+  "id": "mksh",
+  "name": "مكسه",
+  "count": 1307,
+  "females": 664,
+  "males": 643,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/mksh.js"
+ },
+ {
   "id": "tanayl",
   "name": "تعنايل",
   "count": 993,
@@ -44,6 +53,15 @@ window.VOTERS_TOWNS = [
   "males": 491,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/tanayl.js"
+ },
+ {
+  "id": "jlala",
+  "name": "جلالا",
+  "count": 393,
+  "females": 203,
+  "males": 190,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/jlala.js"
  },
  {
   "id": "shtwrh",
