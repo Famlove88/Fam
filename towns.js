@@ -64,6 +64,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/qb-alyas-alfwqa.js"
  },
  {
+  "id": "ayn-kfrzbd",
+  "name": "عين كفرزبد",
+  "count": 2406,
+  "females": 1193,
+  "males": 1213,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/ayn-kfrzbd.js"
+ },
+ {
   "id": "ablh",
   "name": "ابلح",
   "count": 2395,
@@ -71,6 +80,15 @@ window.VOTERS_TOWNS = [
   "males": 1167,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/ablh.js"
+ },
+ {
+  "id": "bwarj",
+  "name": "بوارج",
+  "count": 1782,
+  "females": 902,
+  "males": 880,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/bwarj.js"
  },
  {
   "id": "mksh",
@@ -82,6 +100,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/mksh.js"
  },
  {
+  "id": "btyas",
+  "name": "بتياس",
+  "count": 1296,
+  "females": 673,
+  "males": 623,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/btyas.js"
+ },
+ {
   "id": "tanayl",
   "name": "تعنايل",
   "count": 993,
@@ -89,6 +116,15 @@ window.VOTERS_TOWNS = [
   "males": 491,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/tanayl.js"
+ },
+ {
+  "id": "dyr-alghzal",
+  "name": "دير الغزال",
+  "count": 959,
+  "females": 483,
+  "males": 476,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/dyr-alghzal.js"
  },
  {
   "id": "wady-aldlm",
