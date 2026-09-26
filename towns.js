@@ -64,6 +64,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/qb-alyas-alfwqa.js"
  },
  {
+  "id": "ryaq",
+  "name": "رياق",
+  "count": 3056,
+  "females": 1564,
+  "males": 1492,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/ryaq.js"
+ },
+ {
   "id": "ayn-kfrzbd",
   "name": "عين كفرزبد",
   "count": 2406,
@@ -91,6 +100,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/bwarj.js"
  },
  {
+  "id": "shhabya-alfaawr",
+  "name": "شهابية الفاعور",
+  "count": 1684,
+  "females": 798,
+  "males": 886,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/shhabya-alfaawr.js"
+ },
+ {
   "id": "mksh",
   "name": "مكسه",
   "count": 1307,
@@ -107,6 +125,15 @@ window.VOTERS_TOWNS = [
   "males": 623,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/btyas.js"
+ },
+ {
+  "id": "qwsaya",
+  "name": "قوسايا",
+  "count": 1140,
+  "females": 555,
+  "males": 585,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/qwsaya.js"
  },
  {
   "id": "tanayl",
