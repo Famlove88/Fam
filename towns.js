@@ -28,6 +28,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/aly-alnhry.js"
  },
  {
+  "id": "zhla-hwsh-alamra",
+  "name": "زحلة حوش الامراء",
+  "count": 8145,
+  "females": 4248,
+  "males": 3897,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-hwsh-alamra.js"
+ },
+ {
   "id": "qb-alyas-althta",
   "name": "قب الياس التحتا",
   "count": 7791,
@@ -100,6 +109,24 @@ window.VOTERS_TOWNS = [
   "file": "towns/zhla-mar-mkhayl.js"
  },
  {
+  "id": "zhla-hwsh-alzraanh",
+  "name": "زحلة حوش الزراعنه",
+  "count": 4521,
+  "females": 2297,
+  "males": 2224,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-hwsh-alzraanh.js"
+ },
+ {
+  "id": "zhla-alrasyh-alfwqa",
+  "name": "زحلة الراسيه الفوقا",
+  "count": 4291,
+  "females": 2255,
+  "males": 2036,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-alrasyh-alfwqa.js"
+ },
+ {
   "id": "zhla-albrbarh",
   "name": "زحلة البرباره",
   "count": 4115,
@@ -125,6 +152,15 @@ window.VOTERS_TOWNS = [
   "males": 1901,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/zhla-almalqh-alshmaly.js"
+ },
+ {
+  "id": "zhla-krk-nwh",
+  "name": "زحلة كرك نوح",
+  "count": 3586,
+  "females": 1872,
+  "males": 1714,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-krk-nwh.js"
  },
  {
   "id": "zhla-alrasyh-althta",
@@ -179,6 +215,15 @@ window.VOTERS_TOWNS = [
   "males": 880,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/bwarj.js"
+ },
+ {
+  "id": "zhla-hy-alsyda",
+  "name": "زحلة حي السيدة",
+  "count": 1748,
+  "females": 858,
+  "males": 890,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-hy-alsyda.js"
  },
  {
   "id": "shhabya-alfaawr",
