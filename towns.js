@@ -37,6 +37,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/qb-alyas-althta.js"
  },
  {
+  "id": "zhla-almalqh",
+  "name": "زحلة المعلقه",
+  "count": 7756,
+  "females": 3960,
+  "males": 3796,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-almalqh.js"
+ },
+ {
   "id": "talbaya",
   "name": "تعلبايا",
   "count": 7453,
@@ -55,6 +64,33 @@ window.VOTERS_TOWNS = [
   "file": "towns/sadnayl.js"
  },
  {
+  "id": "zhla-almydan-alshrqy",
+  "name": "زحلة الميدان الشرقي",
+  "count": 4988,
+  "females": 2611,
+  "males": 2377,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-almydan-alshrqy.js"
+ },
+ {
+  "id": "zhla-almydan-alghrby",
+  "name": "زحلة الميدان الغربي",
+  "count": 4830,
+  "females": 2529,
+  "males": 2301,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-almydan-alghrby.js"
+ },
+ {
+  "id": "zhla-albrbarh",
+  "name": "زحلة البرباره",
+  "count": 4115,
+  "females": 2118,
+  "males": 1997,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-albrbarh.js"
+ },
+ {
   "id": "qb-alyas-alfwqa",
   "name": "قب الياس الفوقا",
   "count": 4099,
@@ -62,6 +98,24 @@ window.VOTERS_TOWNS = [
   "males": 2003,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/qb-alyas-alfwqa.js"
+ },
+ {
+  "id": "zhla-almalqh-alshmaly",
+  "name": "زحلة المعلقه الشمالي",
+  "count": 3981,
+  "females": 2080,
+  "males": 1901,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-almalqh-alshmaly.js"
+ },
+ {
+  "id": "zhla-alrasyh-althta",
+  "name": "زحلة الراسيه التحتا",
+  "count": 3277,
+  "females": 1709,
+  "males": 1568,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-alrasyh-althta.js"
  },
  {
   "id": "ryaq",
