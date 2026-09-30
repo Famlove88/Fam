@@ -73,6 +73,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/zhla-almydan-alshrqy.js"
  },
  {
+  "id": "zhla-mar-alyas",
+  "name": "زحلة مار الياس",
+  "count": 4981,
+  "females": 2588,
+  "males": 2393,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-mar-alyas.js"
+ },
+ {
   "id": "zhla-almydan-alghrby",
   "name": "زحلة الميدان الغربي",
   "count": 4830,
@@ -80,6 +89,15 @@ window.VOTERS_TOWNS = [
   "males": 2301,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/zhla-almydan-alghrby.js"
+ },
+ {
+  "id": "zhla-mar-mkhayl",
+  "name": "زحلة مار مخايل",
+  "count": 4535,
+  "females": 2308,
+  "males": 2227,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-mar-mkhayl.js"
  },
  {
   "id": "zhla-albrbarh",
@@ -143,6 +161,15 @@ window.VOTERS_TOWNS = [
   "males": 1167,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/ablh.js"
+ },
+ {
+  "id": "zhla-mar-antwnyws",
+  "name": "زحلة مار انطونيوس",
+  "count": 1813,
+  "females": 951,
+  "males": 862,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-mar-antwnyws.js"
  },
  {
   "id": "bwarj",
