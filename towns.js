@@ -181,6 +181,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/ryaq.js"
  },
  {
+  "id": "alfrzl-althta",
+  "name": "الفرزل التحتا",
+  "count": 2590,
+  "females": 1324,
+  "males": 1266,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/alfrzl-althta.js"
+ },
+ {
   "id": "ayn-kfrzbd",
   "name": "عين كفرزبد",
   "count": 2406,
@@ -235,6 +244,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/shhabya-alfaawr.js"
  },
  {
+  "id": "alfrzl-alfwqa",
+  "name": "الفرزل الفوقا",
+  "count": 1607,
+  "females": 826,
+  "males": 781,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/alfrzl-alfwqa.js"
+ },
+ {
   "id": "mksh",
   "name": "مكسه",
   "count": 1307,
@@ -287,6 +305,15 @@ window.VOTERS_TOWNS = [
   "males": 411,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/wady-aldlm.js"
+ },
+ {
+  "id": "hajy-hbbly",
+  "name": "حاجي حببلي",
+  "count": 641,
+  "females": 326,
+  "males": 315,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/hajy-hbbly.js"
  },
  {
   "id": "alwqf",
