@@ -244,6 +244,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/ablh.js"
  },
  {
+  "id": "mryjat",
+  "name": "مريجات",
+  "count": 1966,
+  "females": 1016,
+  "males": 950,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/mryjat.js"
+ },
+ {
   "id": "qaa-alrym",
   "name": "قاع الريم",
   "count": 1943,
@@ -305,6 +314,15 @@ window.VOTERS_TOWNS = [
   "males": 834,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/hy-alfykany.js"
+ },
+ {
+  "id": "nby-ayla",
+  "name": "نبي ايلا",
+  "count": 1634,
+  "females": 829,
+  "males": 805,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/nby-ayla.js"
  },
  {
   "id": "alfrzl-alfwqa",
@@ -377,6 +395,15 @@ window.VOTERS_TOWNS = [
   "males": 362,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/kabwsya.js"
+ },
+ {
+  "id": "masa",
+  "name": "ماسا",
+  "count": 678,
+  "females": 346,
+  "males": 332,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/masa.js"
  },
  {
   "id": "hajy-hbbly",
