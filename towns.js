@@ -271,6 +271,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/qaa-alrym.js"
  },
  {
+  "id": "zhla-wady-alaraysh",
+  "name": "زحلة وادي العرايش",
+  "count": 1932,
+  "females": 980,
+  "males": 952,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/zhla-wady-alaraysh.js"
+ },
+ {
   "id": "khdr-bk",
   "name": "خضر بك",
   "count": 1825,
@@ -413,6 +422,15 @@ window.VOTERS_TOWNS = [
   "males": 476,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/dyr-alghzal.js"
+ },
+ {
+  "id": "ywghwn-awlwk",
+  "name": "يوغون اولوك",
+  "count": 884,
+  "females": 461,
+  "males": 423,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/ywghwn-awlwk.js"
  },
  {
   "id": "wady-aldlm",
