@@ -280,6 +280,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/zhla-mar-antwnyws.js"
  },
  {
+  "id": "rayt",
+  "name": "رعيت",
+  "count": 1806,
+  "females": 900,
+  "males": 906,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/rayt.js"
+ },
+ {
   "id": "bwarj",
   "name": "بوارج",
   "count": 1782,
@@ -334,6 +343,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/alfrzl-alfwqa.js"
  },
  {
+  "id": "nyha",
+  "name": "نيحا",
+  "count": 1548,
+  "females": 804,
+  "males": 744,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/nyha.js"
+ },
+ {
   "id": "mksh",
   "name": "مكسه",
   "count": 1307,
@@ -359,6 +377,15 @@ window.VOTERS_TOWNS = [
   "males": 585,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/qwsaya.js"
+ },
+ {
+  "id": "nasryh",
+  "name": "ناصريه",
+  "count": 1068,
+  "females": 556,
+  "males": 512,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/nasryh.js"
  },
  {
   "id": "tanayl",
