@@ -73,6 +73,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/sadnayl.js"
  },
  {
+  "id": "hwsh-hala",
+  "name": "حوش حالا",
+  "count": 5732,
+  "females": 2951,
+  "males": 2781,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/hwsh-hala.js"
+ },
+ {
   "id": "zhla-almydan-alshrqy",
   "name": "زحلة الميدان الشرقي",
   "count": 4988,
@@ -244,6 +253,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/shhabya-alfaawr.js"
  },
  {
+  "id": "hy-alfykany",
+  "name": "حي الفيكاني",
+  "count": 1674,
+  "females": 840,
+  "males": 834,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/hy-alfykany.js"
+ },
+ {
   "id": "alfrzl-alfwqa",
   "name": "الفرزل الفوقا",
   "count": 1607,
@@ -314,6 +332,15 @@ window.VOTERS_TOWNS = [
   "males": 315,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/hajy-hbbly.js"
+ },
+ {
+  "id": "hwsh-alghnm",
+  "name": "حوش الغنم",
+  "count": 407,
+  "females": 208,
+  "males": 199,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/hwsh-alghnm.js"
  },
  {
   "id": "alwqf",
