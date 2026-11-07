@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>إدارة الحسابات – قوائم الناخبين</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#3A2A78">
+<link rel="icon" href="./icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3A2A78; --ink-deep:#241A52; --ink-mid:#4B3B9A; --ink-tint:#ECE8F7; --ink-soft:#C9C2E6;
+    --paper:#FFFFFF; --bg:#F3F2F8; --line:#E3E0EE; --text:#1E1B2E; --muted:#67637F;
+    --amber:#8A5A00; --amber-tint:#FFF1D0; --green:#1D6B3A; --green-tint:#E1F3E7;
+    --red:#B3423A; --red-tint:#FDE8E6; --blue:#0F5C8C; --blue-tint:#DDEEF9;
+    --radius:18px; --shadow:0 12px 34px rgba(36,26,82,.08);
+    --font:'Cairo','Segoe UI',Tahoma,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.75}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+  [hidden]{display:none!important}
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px}
+  .band{background:linear-gradient(160deg,#211850 0%,#2E2270 55%,#3E2F8C 100%);color:#fff;padding:18px 0 60px;position:relative;overflow:hidden}
+  .band::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 260px at 12% 0%,rgba(255,255,255,.10),transparent 60%),radial-gradient(500px 220px at 100% 100%,rgba(255,255,255,.07),transparent 60%);pointer-events:none}
+  .band .wrap{position:relative}
+  .topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+  .brand svg{width:34px;height:34px;flex:none}
+  .brand span span{font-weight:600;color:rgba(255,255,255,.7);font-size:13px;display:block;line-height:1.2}
+  .who{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:3px 6px 3px 12px;border-radius:999px}
+  .who .mail{direction:ltr;font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .who button{border:0;background:rgba(255,255,255,.16);color:#fff;font-weight:800;font-size:12px;padding:3px 10px;border-radius:999px;cursor:pointer}
+  .who button:hover{background:#fff;color:var(--ink)}
+  h1{font-size:clamp(22px,4vw,30px);font-weight:800;margin:22px 0 2px;color:#fff}
+  .lead{margin:0;color:rgba(255,255,255,.72);font-size:15px}
+  .lead a{color:#FFD166}
+  main{margin-top:-34px;padding-bottom:50px}
+  .card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;margin-bottom:18px}
+  .card h2{margin:0 0 4px;font-size:19px;font-weight:800;color:var(--ink)}
+  .card .sub{margin:0 0 14px;color:var(--muted);font-size:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:700px){.grid2{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:700;color:var(--ink-mid);margin:0 4px 4px}
+  input[type=text],input[type=email],input[type=password]{width:100%;font:inherit;font-size:16px;font-weight:600;padding:11px 14px;border:2px solid var(--line);border-radius:14px;background:#FAFAFD;color:var(--text);outline:none}
+  input:focus{border-color:var(--ink);background:#fff}
+  input.ltr{direction:ltr;text-align:left}
+  .field{margin-bottom:12px}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .btn{font:inherit;font-weight:800;font-size:14px;padding:9px 16px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;white-space:nowrap}
+  .btn:hover{border-color:var(--ink-soft);background:var(--ink-tint)}
+  .btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+  .btn.primary:hover{background:var(--ink-mid)}
+  .btn.danger{color:var(--red)} .btn.danger:hover{background:var(--red-tint);border-color:#F3C2BE}
+  .btn.small{font-size:13px;padding:6px 12px;border-radius:10px}
+  .btn:disabled{opacity:.55;cursor:not-allowed}
+  .btn.armed{background:var(--red);border-color:var(--red);color:#fff}
+  .msg{display:none;margin:10px 0 0;padding:10px 14px;border-radius:12px;font-size:14px;font-weight:700;line-height:1.7}
+  .msg.show{display:block}
+  .msg.err{background:var(--red-tint);color:#8A2A24} .msg.ok{background:var(--green-tint);color:var(--green)} .msg.info{background:var(--blue-tint);color:var(--blue)}
+  .pill{display:inline-block;font-size:12px;font-weight:800;padding:1px 10px;border-radius:999px;background:var(--ink-tint);color:var(--ink)}
+  .pill.on{background:var(--green-tint);color:var(--green)} .pill.off{background:var(--red-tint);color:var(--red)} .pill.amber{background:var(--amber-tint);color:var(--amber)}
+  .users{display:flex;flex-direction:column;gap:10px}
+  .u{border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:start}
+  .u.off{background:#FBFAFD}
+  .u .name{font-weight:800;font-size:17px;color:var(--ink-deep)}
+  .u .mail{direction:ltr;text-align:right;font-size:14px;color:var(--muted);font-weight:600;unicode-bidi:plaintext}
+  .u .meta{grid-column:1/-1;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+  .u .meta b{color:var(--text);font-weight:700}
+  .u .acts{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+  .u .uid{font-size:11px;color:#9A96B4;direction:ltr;unicode-bidi:plaintext;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .empty{color:var(--muted);text-align:center;padding:24px 10px;font-weight:600}
+  .keybox{font-family:ui-monospace,Menlo,Consolas,monospace;direction:ltr;text-align:left;font-size:13px;background:#FAFAFD;border:1.5px dashed var(--ink-soft);border-radius:12px;padding:10px 12px;word-break:break-all;line-height:1.6}
+  .steps{margin:10px 0 0;padding:0 20px 0 0;font-size:14px;line-height:1.9}
+  .steps li{margin-bottom:2px} .steps code{background:var(--ink-tint);padding:0 6px;border-radius:6px;font-size:13px;direction:ltr;unicode-bidi:embed}
+  .share{background:var(--ink-tint);border-radius:14px;padding:12px 14px;margin-top:12px}
+  .share pre{margin:0 0 8px;white-space:pre-wrap;font:inherit;font-size:14px;line-height:1.8}
+  /* gate */
+  body.locked>:not(#gate){display:none!important}
+  #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px 16px;overflow:auto;background:linear-gradient(160deg,#211850 0%,#2E2270 55%,#3E2F8C 100%)}
+  .gcard{width:100%;max-width:420px;background:#fff;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.35);padding:30px 28px 24px;text-align:center}
+  .gcard h2{margin:0;font-size:22px;font-weight:800;color:var(--ink)}
+  .gcard .sub{margin:2px 0 18px;color:var(--muted);font-size:14px;font-weight:600}
+  .gcard .field{text-align:right}
+  .gcard .gbtn{width:100%;margin-top:6px;font:inherit;font-size:17px;font-weight:800;padding:13px;border:0;border-radius:14px;background:var(--ink);color:#fff;cursor:pointer}
+  .gcard .gbtn:disabled{opacity:.6}
+  .gcard .glink{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;color:var(--ink-mid);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .spin{width:34px;height:34px;margin:14px auto 6px;border-radius:50%;border:4px solid var(--ink-tint);border-top-color:var(--ink);animation:gspin .9s linear infinite}
+  @keyframes gspin{to{transform:rotate(360deg)}}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink-deep);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:300;max-width:92vw}
+  .toast.show{opacity:1;transform:translateX(-50%)}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle">
+  <div class="gcard">
+    <h2 id="gTitle">إدارة الحسابات</h2>
+    <p class="sub">قوائم الناخبين — دخول المختار</p>
+    <div id="gpWait"><div class="spin"></div><p id="gWaitMsg" style="font-weight:700">عم نتحقق من الدخول…</p></div>
+    <form id="gpLogin" hidden>
+      <p class="msg err" id="gErr" role="alert"></p>
+      <div class="field"><label for="gEmail">الإيميل</label><input id="gEmail" class="ltr" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="gPass">كلمة السر</label><input id="gPass" class="ltr" type="password" autocomplete="current-password" required></div>
+      <button type="submit" class="gbtn" id="gBtn">دخول</button>
+      <button type="button" class="glink" id="gForgot">نسيت كلمة السر؟</button>
+    </form>
+    <div id="gpBlock" hidden>
+      <p class="msg err show" id="gBlockMsg"></p>
+      <div id="gBlockExtra" style="text-align:right;font-size:14px;line-height:1.8"></div>
+      <button type="button" class="gbtn" id="gBlockBtn" style="margin-top:14px">تسجيل الدخول بحساب آخر</button>
+    </div>
+  </div>
+</div>
+
+<header class="band">
+  <div class="wrap">
+    <div class="topline">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="14" width="26" height="15" rx="3" fill="#fff" opacity=".95"/><rect x="8" y="12" width="16" height="3" rx="1" fill="#3A2A78"/><path d="M10 6h12l-1.5 8h-9z" fill="#FFD166" stroke="#fff" stroke-width="1.2"/><path d="M13 9.5l2 2 3.5-4" fill="none" stroke="#3A2A78" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>قوائم الناخبين<span>إدارة الحسابات</span></span>
+      </div>
+      <div class="who"><span class="mail" id="whoMail"></span><button type="button" id="logout">خروج</button></div>
+    </div>
+    <h1>الحسابات والأجهزة</h1>
+    <p class="lead">من هون بتضيف المستخدمين، بتفكّ الأجهزة، وبتدير مفتاح تشفير البيانات. <a id="appLink" href="./">فتح البرنامج ←</a></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card" aria-labelledby="hAdd">
+    <h2 id="hAdd">إضافة مستخدم</h2>
+    <p class="sub">بتعمل الحساب هون وبتبعت الإيميل وكلمة السر للشخص. أول جهاز بيفوت منو بينربط فيه، وما بيفتح على غيرو.</p>
+    <form id="addForm" autocomplete="off">
+      <div class="grid2">
+        <div class="field"><label for="aName">الاسم (للتعريف بس)</label><input id="aName" type="text" placeholder="مثلاً: أحمد – مندوب الحي الغربي" required></div>
+        <div class="field"><label for="aEmail">الإيميل</label><input id="aEmail" class="ltr" type="email" placeholder="name@gmail.com" required autocapitalize="off"></div>
+      </div>
+      <div class="field"><label for="aPass">كلمة السر (٨ أحرف أو أكتر)</label>
+        <div class="row"><input id="aPass" class="ltr" type="text" style="flex:1;min-width:200px" minlength="8" required autocomplete="new-password"><button type="button" class="btn" id="genPass">توليد كلمة سر</button></div>
+      </div>
+      <div class="row"><button type="submit" class="btn primary" id="addBtn">إنشاء الحساب</button></div>
+      <p class="msg" id="addMsg"></p>
+      <div class="share" id="share" hidden>
+        <pre id="shareText"></pre>
+        <div class="row"><button type="button" class="btn small" id="copyShare">نسخ الرسالة لإرسالها</button><span style="font-size:13px;color:var(--muted)">ابعتها على واتساب للشخص. كلمة السر ما بتظهر مرة تانية.</span></div>
+      </div>
+    </form>
+  </section>
+
+  <section class="card" aria-labelledby="hUsers">
+    <div class="row" style="justify-content:space-between"><h2 id="hUsers">المستخدمين <span class="pill" id="uCount">٠</span></h2><input id="uFilter" type="text" placeholder="فتّش بالاسم أو الإيميل" style="max-width:260px;padding:7px 12px;font-size:14px"></div>
+    <p class="sub">«فكّ الجهاز» لما يبدّل الشخص تلفونو أو يمسح بيانات المتصفح — بعدها أول جهاز بيفوت منو بينربط من جديد. «توقيف» بيقفل الحساب فوراً حتى لو كان مفتوح.</p>
+    <div class="users" id="users"><div class="empty">عم نحمّل…</div></div>
+  </section>
+
+  <section class="card" aria-labelledby="hKey">
+    <h2 id="hKey">مفتاح تشفير البيانات</h2>
+    <p class="sub">ملفات الناخبين على الموقع مشفّرة بهالمفتاح. البرنامج بيقرأه من هون بعد الدخول، والـ Action على GitHub بيستعمل نفسو لتشفير الملفات.</p>
+    <div id="keyState" class="msg info show">عم نقرأ المفتاح…</div>
+    <div class="row" style="margin-top:10px">
+      <button type="button" class="btn" id="showKey" hidden>إظهار المفتاح</button>
+      <button type="button" class="btn" id="copyKey" hidden>نسخ المفتاح</button>
+      <button type="button" class="btn danger" id="genKey">توليد مفتاح جديد</button>
+    </div>
+    <div class="keybox" id="keyBox" hidden></div>
+    <p class="msg" id="keyMsg"></p>
+    <ol class="steps">
+      <li>انسخ المفتاح من هون.</li>
+      <li>على GitHub: <code>Settings</code> ← <code>Secrets and variables</code> ← <code>Actions</code> ← <code>New repository secret</code>، الاسم <code>VOTERS_KEY</code> والقيمة المفتاح.</li>
+      <li>شغّل التحديث: <code>Actions</code> ← <code>build voters data</code> ← <code>Run workflow</code> (أو ارفع أي PDF جديد بمجلد <code>source</code>).</li>
+    </ol>
+    <p class="sub" style="margin:10px 0 0">تبديل المفتاح بيعطّل الملفات الموجودة لحدّ ما يخلص التحديث بالمفتاح الجديد (دقيقة–دقيقتين). المستخدمين ما بيحتاجوا يعملوا شي.</p>
+  </section>
+
+  <section class="card" aria-labelledby="hAdm">
+    <h2 id="hAdm">الإدارة</h2>
+    <p class="sub">حسابك: <b id="myMail" style="direction:ltr;unicode-bidi:plaintext"></b> — UID: <code id="myUid" style="direction:ltr;unicode-bidi:plaintext;font-size:12px"></code> <button type="button" class="btn small" id="copyUid">نسخ</button></p>
+    <p class="sub" style="margin:0">لإضافة admin تاني: اعملو حساب من فوق، وبعدين من Firebase Console ← Firestore ← مجموعة <code>admins</code> ← Add document بالـ UID تبعو (موجود تحت كل مستخدم بالقائمة). الـ admin بيفتح البرنامج من أي جهاز.</p>
+  </section>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+  'use strict';
+  var FB_CONFIG={
+    apiKey:"AIzaSyBwruzh2_P5L2TpJDIdZI30DT6n-5JZ9HI",
+    authDomain:"entikbat.firebaseapp.com",
+    projectId:"entikbat",
+    storageBucket:"entikbat.firebasestorage.app",
+    messagingSenderId:"573101582427",
+    appId:"1:573101582427:web:f2860c6860c9c3ef1af77e"
+  };
+  var $=function(id){return document.getElementById(id);};
+  var AD='٠١٢٣٤٥٦٧٨٩';
+  function toArabic(s){ return String(s).replace(/[0-9]/g,function(d){return AD.charAt(+d);}); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];}); }
+  var toastT; function toast(m){ var t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('show');},2400); }
+  function msg(el, text, kind){ el.textContent=text||''; el.className='msg'+(text?' show '+(kind||'info'):''); }
+  function copyText(text, cb){
+    function legacy(){ var ta=document.createElement('textarea'); ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.top='-999px'; document.body.appendChild(ta); ta.select(); var ok=false; try{ ok=document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); cb(ok); }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(function(){cb(true);}, legacy); else legacy();
+  }
+  function appURL(){ return location.href.replace(/admin\.html.*$/,'').replace(/[?#].*$/,''); }
+  $('appLink').href=appURL();
+
+  // ---- gate ----
+  var panes={wait:$('gpWait'),login:$('gpLogin'),block:$('gpBlock')}, blockHandler=null, blocking=false;
+  function pane(n){ Object.keys(panes).forEach(function(k){ panes[k].hidden=(k!==n); }); }
+  function wait(t){ blocking=false; $('gWaitMsg').textContent=t; pane('wait'); }
+  function login(t){ blocking=false; msg($('gErr'), t||'', 'err'); $('gBtn').disabled=false; pane('login'); }
+  function block(t, extraHTML, btn, handler){ $('gBlockMsg').textContent=t; $('gBlockExtra').innerHTML=extraHTML||''; $('gBlockBtn').textContent=btn||'تسجيل الدخول بحساب آخر'; blockHandler=handler||signOutToLogin; blocking=true; pane('block'); }
+  $('gBlockBtn').addEventListener('click', function(){ if (blockHandler) blockHandler(); });
+
+  if (!window.firebase || !firebase.initializeApp){ block('ما قدرنا نحمّل مكوّنات الدخول','تأكّد من الإنترنت وأعد تحميل الصفحة.','أعد التحميل',function(){location.reload();}); return; }
+  firebase.initializeApp(FB_CONFIG);
+  var auth=firebase.auth(), db=firebase.firestore(), FV=firebase.firestore.FieldValue;
+  var me=null, unsubUsers=null, keyHex='';
+
+  function signOutToLogin(){ stopWatch(); auth.signOut().catch(function(){}).then(function(){ me=null; login(); }); }
+  function stopWatch(){ if (unsubUsers){ unsubUsers(); unsubUsers=null; } }
+  function authMsg(err){
+    var c=(err&&err.code)||'';
+    if (/invalid-credential|wrong-password|user-not-found|invalid-login-credentials/.test(c)) return 'الإيميل أو كلمة السر غلط.';
+    if (/invalid-email/.test(c)) return 'صيغة الإيميل غلط.';
+    if (/too-many-requests/.test(c)) return 'محاولات كتير — انطر شوي وجرّب مرة تانية.';
+    if (/network-request-failed/.test(c)) return 'ما في إنترنت.';
+    if (/email-already-in-use/.test(c)) return 'هالإيميل عندو حساب من قبل.';
+    if (/weak-password/.test(c)) return 'كلمة السر ضعيفة — ٨ أحرف أو أكتر.';
+    if (/operation-not-allowed/.test(c)) return 'الدخول بالإيميل مش مفعّل: Firebase Console ← Authentication ← Sign-in method ← Email/Password.';
+    if (/permission-denied/.test(c)) return 'ما عندك صلاحية (تأكّد من الـ rules ومن وثيقة admins).';
+    if (/configuration-not-found|invalid-api-key|app-not-authorized/.test(c)) return 'الـ Authentication مش مفعّل بمشروع Firebase (Authentication → Get started).';
+    if (/unauthorized-domain/.test(c)) return 'هالموقع مش مسموح بالمشروع: Authentication → Settings → Authorized domains → أضيف '+location.hostname+'.';
+    if (/not-found|failed-precondition/.test(c) && !/auth\//.test(c)) return 'قاعدة Firestore مش موجودة بعد — أنشئها من Firebase Console → Firestore Database → Create database.';
+    return (err&&err.message)||c||'صار خطأ';
+  }
+
+  auth.onAuthStateChanged(function(u){
+    if (!u){ stopWatch(); me=null; if (!blocking) login(); return; }
+    me=u; wait('عم نتحقق من الحساب…');
+    db.collection('admins').doc(u.uid).get().then(function(s){
+      if (!s.exists){
+        block('هالحساب مش admin',
+          '<p>لتصير admin، من <b>Firebase Console</b> ← <b>Firestore Database</b> ← Start collection باسم <code>admins</code> ← Document ID = الـ UID تبعك:</p>'+
+          '<div class="keybox" id="uidBox">'+esc(u.uid)+'</div><p style="margin:8px 0 0">وأضيف أي حقل (مثلاً <code>name</code>). بعدها أعد تحميل الصفحة.</p>'+
+          '<p style="margin:4px 0 0;color:var(--muted)">الحساب: '+esc(u.email||'')+'</p>', 'أعد التحميل', function(){ location.reload(); });
+        return;
+      }
+      document.body.classList.remove('locked'); $('gate').hidden=true;
+      $('whoMail').textContent=u.email||''; $('myMail').textContent=u.email||''; $('myUid').textContent=u.uid;
+      watchUsers(); loadKey();
+    }, function(e){
+      var m=(e&&e.code)||'';
+      if (/unavailable|network/.test(m)) block('ما في إنترنت','<p>صفحة الإدارة بتحتاج إنترنت.</p>','أعد المحاولة',function(){ location.reload(); });
+      else if (/permission-denied/.test(m)) block('ما عندك صلاحية','<p>القواعد (rules) ما بتسمح بقراءة <code>admins</code>. تأكّد إنك نسخت ملف <code>firestore.rules</code> كامل.</p><p style="color:var(--muted)">'+esc(u.email||'')+'</p>','تسجيل الدخول بحساب آخر',signOutToLogin);
+      else block('ما قدرنا نتحقق','<p>'+esc(m||e)+'</p>','أعد المحاولة',function(){ location.reload(); });
+    });
+  });
+  $('gpLogin').addEventListener('submit', function(e){
+    e.preventDefault(); var em=$('gEmail').value.trim(), pw=$('gPass').value;
+    if (!em||!pw) return login('اكتب الإيميل وكلمة السر.');
+    $('gBtn').disabled=true; msg($('gErr'),'');
+    auth.signInWithEmailAndPassword(em,pw).then(null,function(err){ $('gBtn').disabled=false; msg($('gErr'), authMsg(err), 'err'); });
+  });
+  $('gForgot').addEventListener('click', function(){
+    var em=$('gEmail').value.trim(); if(!em) return msg($('gErr'),'اكتب إيميلك أولاً.','err');
+    auth.sendPasswordResetEmail(em).then(function(){ msg($('gErr'),'بعتنا رابط تغيير كلمة السر على '+em,'ok'); }, function(err){ msg($('gErr'),authMsg(err),'err'); });
+  });
+  $('logout').addEventListener('click', function(){ stopWatch(); auth.signOut().catch(function(){}).then(function(){ location.reload(); }); });
+  $('copyUid').addEventListener('click', function(){ copyText(me?me.uid:'', function(ok){ toast(ok?'نسخنا الـ UID':'ما قدرنا ننسخ'); }); });
+
+  // ---- users ----
+  var USERS=[], filter='';
+  function fmtWhen(ts){
+    if (!ts || !ts.toDate) return '—';
+    var d=ts.toDate(), now=new Date(), diff=(now-d)/864e5;
+    var hm=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+    if (d.toDateString()===now.toDateString()) return 'اليوم '+toArabic(hm);
+    if (diff<2 && new Date(now-864e5).toDateString()===d.toDateString()) return 'أمس '+toArabic(hm);
+    if (diff<7) return 'منذ '+toArabic(Math.floor(diff))+' أيام';
+    return toArabic(d.getFullYear()+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+('0'+d.getDate()).slice(-2));
+  }
+  function watchUsers(){
+    stopWatch();
+    unsubUsers=db.collection('users').onSnapshot(function(q){
+      USERS=[]; q.forEach(function(d){ var o=d.data()||{}; o.uid=d.id; USERS.push(o); });
+      USERS.sort(function(a,b){ return String(a.name||a.email||'').localeCompare(String(b.name||b.email||''),'ar'); });
+      renderUsers();
+    }, function(e){ $('users').innerHTML='<div class="empty" style="color:var(--red)">ما قدرنا نقرأ المستخدمين: '+esc(authMsg(e))+'</div>'; });
+  }
+  function renderUsers(){
+    var f=filter.trim().toLowerCase();
+    var list=USERS.filter(function(u){ return !f || String(u.name||'').toLowerCase().indexOf(f)>=0 || String(u.email||'').toLowerCase().indexOf(f)>=0; });
+    $('uCount').textContent=toArabic(USERS.length);
+    if (!list.length){ $('users').innerHTML='<div class="empty">'+(USERS.length?'ما في نتائج.':'ما في مستخدمين بعد — أضيف أول واحد من فوق.')+'</div>'; return; }
+    $('users').innerHTML=list.map(function(u){
+      var off=u.active===false, bound=!!u.deviceId;
+      return '<div class="u'+(off?' off':'')+'" data-uid="'+esc(u.uid)+'">'+
+        '<div><div class="name">'+esc(u.name||'—')+' <span class="pill '+(off?'off':'on')+'">'+(off?'موقوف':'فعّال')+'</span></div><div class="mail">'+esc(u.email||'')+'</div></div>'+
+        '<div><span class="pill '+(bound?'':'amber')+'">'+(bound?'الجهاز مربوط':'ما انربط بعد')+'</span></div>'+
+        '<div class="meta">'+(bound?'<span>الجهاز: <b>'+esc(u.deviceInfo||'—')+'</b></span><span>ربط: <b>'+fmtWhen(u.boundAt)+'</b></span>':'<span>بينربط على أول جهاز بيفوت منو</span>')+
+          '<span>آخر دخول: <b>'+fmtWhen(u.lastSeen)+'</b></span><span class="uid">'+esc(u.uid)+'</span></div>'+
+        '<div class="acts">'+
+          (bound?'<button type="button" class="btn small" data-act="reset">فكّ الجهاز</button>':'')+
+          '<button type="button" class="btn small'+(off?'':' danger')+'" data-act="toggle">'+(off?'تفعيل':'توقيف')+'</button>'+
+          '<button type="button" class="btn small" data-act="pw">رابط تغيير كلمة السر</button>'+
+          '<button type="button" class="btn small danger" data-act="del">حذف</button>'+
+        '</div></div>';
+    }).join('');
+  }
+  $('uFilter').addEventListener('input', function(){ filter=this.value; renderUsers(); });
+  // two-step confirmation for destructive actions
+  function armed(btn, label){
+    if (btn.classList.contains('armed')) { btn.classList.remove('armed'); return true; }
+    var orig=btn.textContent; btn.textContent=label||'متأكد؟ اضغط مرة تانية'; btn.classList.add('armed');
+    setTimeout(function(){ if (btn.classList.contains('armed')){ btn.classList.remove('armed'); btn.textContent=orig; } }, 4000);
+    return false;
+  }
+  $('users').addEventListener('click', function(e){
+    var b=e.target.closest('[data-act]'); if(!b) return;
+    var card=b.closest('.u'), uid=card.getAttribute('data-uid'), u=USERS.filter(function(x){return x.uid===uid;})[0]; if(!u) return;
+    var ref=db.collection('users').doc(uid), act=b.getAttribute('data-act');
+    if (act==='reset'){
+      if (!armed(b,'فكّ الجهاز؟')) return;
+      ref.update({deviceId:'', deviceInfo:FV.delete(), boundAt:FV.delete()}).then(function(){ toast('انفكّ الجهاز — أول جهاز بيفوت منو بينربط'); }, function(err){ toast(authMsg(err)); });
+    } else if (act==='toggle'){
+      var off=u.active===false;
+      if (!off && !armed(b,'توقيف الحساب؟')) return;
+      ref.update({active:off}).then(function(){ toast(off?'رجع الحساب فعّال':'توقّف الحساب فوراً'); }, function(err){ toast(authMsg(err)); });
+    } else if (act==='pw'){
+      if (!u.email) return toast('ما في إيميل');
+      auth.sendPasswordResetEmail(u.email).then(function(){ toast('بعتنا رابط تغيير كلمة السر على '+u.email); }, function(err){ toast(authMsg(err)); });
+    } else if (act==='del'){
+      if (!armed(b,'حذف نهائي؟')) return;
+      ref.delete().then(function(){ toast('انحذف — ما بقى يقدر يفوت'); }, function(err){ toast(authMsg(err)); });
+    }
+  });
+
+  // ---- add user (secondary app so the admin session stays signed in) ----
+  function genPass(){
+    var chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789', a=new Uint8Array(10); crypto.getRandomValues(a);
+    return Array.prototype.map.call(a,function(b){ return chars[b%chars.length]; }).join('');
+  }
+  $('genPass').addEventListener('click', function(){ $('aPass').value=genPass(); });
+  var helper=null;
+  function helperAuth(){ if (!helper) helper=firebase.initializeApp(FB_CONFIG,'helper'); return helper.auth(); }
+  $('addForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name=$('aName').value.trim(), email=$('aEmail').value.trim().toLowerCase(), pw=$('aPass').value;
+    if (!name||!email||pw.length<8){ msg($('addMsg'),'عبّي الاسم والإيميل وكلمة سر من ٨ أحرف أو أكتر.','err'); return; }
+    $('addBtn').disabled=true; msg($('addMsg'),'عم نعمل الحساب…','info'); $('share').hidden=true;
+    var h=helperAuth(), uid=null;
+    h.createUserWithEmailAndPassword(email,pw)
+      .then(function(cred){ uid=cred.user.uid; return h.signOut(); })
+      .then(function(){ return db.collection('users').doc(uid).set({email:email, name:name, active:true, deviceId:'', createdAt:FV.serverTimestamp(), createdBy:(me&&me.email)||''}); })
+      .then(function(){
+        msg($('addMsg'),'انعمل الحساب لـ '+name+'. ابعتلو المعلومات من تحت.','ok');
+        $('shareText').textContent='برنامج قوائم الناخبين – مكتب مختار بر الياس\nالرابط: '+appURL()+'\nالإيميل: '+email+'\nكلمة السر: '+pw+'\n\nملاحظة: الحساب بيفتح على جهاز واحد بس (أول جهاز بتفوت منو). إذا بدّلت جهازك خبّرني لفكّ القديم.';
+        $('share').hidden=false; $('aName').value=''; $('aEmail').value=''; $('aPass').value='';
+      })
+      .then(null, function(err){
+        var t=authMsg(err);
+        if (uid) t='انعمل حساب الدخول بس ما قدرنا نسجّلو بالمستخدمين ('+t+'). جرّب تضيفو من Firestore يدوياً أو أعد المحاولة.';
+        msg($('addMsg'), t, 'err');
+      })
+      .then(function(){ $('addBtn').disabled=false; });
+  });
+  $('copyShare').addEventListener('click', function(){ copyText($('shareText').textContent, function(ok){ toast(ok?'نسخنا الرسالة — ابعتها على واتساب':'ما قدرنا ننسخ'); }); });
+
+  // ---- key ----
+  var keyShown=false;
+  function hexKey(){ var a=new Uint8Array(32); crypto.getRandomValues(a); return Array.prototype.map.call(a,function(b){ return ('0'+b.toString(16)).slice(-2); }).join(''); }
+  function renderKey(){
+    var has=/^[0-9a-f]{64}$/i.test(keyHex);
+    $('showKey').hidden=!has; $('copyKey').hidden=!has; $('keyBox').hidden=!(has&&keyShown);
+    $('keyBox').textContent=keyShown?keyHex:'';
+    $('showKey').textContent=keyShown?'إخفاء المفتاح':'إظهار المفتاح';
+    if (has) msg($('keyState'), 'في مفتاح محفوظ ('+keyHex.slice(0,6)+'…). إذا الـ Action على GitHub اشتغل بنفسو، البرنامج شغّال.', 'ok');
+    else msg($('keyState'), 'ما في مفتاح بعد — ولّد واحد، انسخو على GitHub (VOTERS_KEY) وشغّل التحديث.', 'err');
+  }
+  function loadKey(){
+    db.collection('config').doc('key').get().then(function(s){ keyHex=s.exists?String((s.data()||{}).k||''):''; renderKey(); }, function(e){ msg($('keyState'),'ما قدرنا نقرأ المفتاح: '+authMsg(e),'err'); });
+  }
+  $('showKey').addEventListener('click', function(){ keyShown=!keyShown; renderKey(); });
+  $('copyKey').addEventListener('click', function(){ copyText(keyHex, function(ok){ toast(ok?'نسخنا المفتاح — حطّو بـ GitHub Secrets باسم VOTERS_KEY':'ما قدرنا ننسخ'); }); });
+  $('genKey').addEventListener('click', function(){
+    var b=this;
+    if (keyHex && !armed(b,'بتعطّل الملفات لحدّ ما يخلص التحديث — متأكد؟')) return;
+    var k=hexKey();
+    db.collection('config').doc('key').set({k:k, updatedAt:FV.serverTimestamp(), updatedBy:(me&&me.email)||''}).then(function(){
+      keyHex=k; keyShown=true; renderKey(); b.textContent='توليد مفتاح جديد';
+      msg($('keyMsg'),'تولّد مفتاح جديد وانحفظ. هلق انسخو وحطّو بـ GitHub باسم VOTERS_KEY وشغّل التحديث.','ok');
+    }, function(err){ msg($('keyMsg'), authMsg(err), 'err'); });
+  });
+})();
+</script>
+</body>
+</html>

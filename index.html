@@ -6,6 +6,7 @@
 <title>قوائم الناخبين – بر الياس</title>
 <meta name="description" content="ابحث عن اسمك في القائمة الانتخابية الأولية لبلدة بر الياس – قضاء زحلة – محافظة البقاع.">
 <meta name="theme-color" content="#3A2A78">
+<meta name="robots" content="noindex,nofollow">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon-192.png">
 <link rel="apple-touch-icon" href="./icon-192.png">
@@ -69,6 +70,44 @@
   .topctl{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .sel.townpick select{font-weight:800;padding-right:34px;max-width:260px}
   .sel.townpick::before{content:"";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:#FFD166;pointer-events:none}
+  .who{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:3px 6px 3px 12px;border-radius:999px;max-width:100%}
+  .who svg{width:16px;height:16px;flex:none;opacity:.85}
+  .who .mail{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:ltr;font-weight:600}
+  .who .adm{background:#FFD166;color:#241A52;font-size:11px;font-weight:800;padding:0 8px;border-radius:999px;line-height:1.7}
+  .who button{border:0;background:rgba(255,255,255,.16);color:#fff;font-weight:800;font-size:12px;padding:3px 10px;border-radius:999px;cursor:pointer}
+  .who button:hover{background:#fff;color:var(--ink)}
+
+  /* ===== login gate (الدخول) ===== */
+  body.locked>:not(#gate){display:none!important}
+  #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px 16px;overflow:auto;
+        background:linear-gradient(160deg,#211850 0%,#2E2270 55%,#3E2F8C 100%);color:var(--text)}
+  #gate::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(700px 320px at 10% 0%,rgba(255,255,255,.10),transparent 60%),
+     radial-gradient(600px 300px at 100% 100%,rgba(255,209,102,.10),transparent 60%);pointer-events:none}
+  #gate[hidden]{display:none}
+  .gcard{position:relative;width:100%;max-width:420px;background:#fff;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.35);padding:30px 28px 24px;text-align:center}
+  .gcard .logo{width:66px;height:66px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:var(--ink-tint)}
+  .gcard .logo svg{width:40px;height:40px}
+  .gcard h2{margin:0;font-size:24px;font-weight:800;color:var(--ink)}
+  .gcard .sub{margin:2px 0 20px;color:var(--muted);font-size:14px;font-weight:600}
+  .gcard .field{text-align:right;margin-bottom:12px}
+  .gcard label{display:block;font-size:13px;font-weight:700;color:var(--ink-mid);margin:0 4px 4px}
+  .gcard input{width:100%;font:inherit;font-size:16px;font-weight:600;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:#FAFAFD;color:var(--text);outline:none;direction:ltr;text-align:left}
+  .gcard input:focus{border-color:var(--ink);background:#fff}
+  .gcard .gbtn{width:100%;margin-top:6px;font:inherit;font-size:17px;font-weight:800;padding:13px;border:0;border-radius:14px;background:var(--ink);color:#fff;cursor:pointer;box-shadow:0 10px 26px rgba(58,42,120,.3)}
+  .gcard .gbtn:hover{background:var(--ink-mid)} .gcard .gbtn:disabled{opacity:.6;cursor:wait}
+  .gcard .glink{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;color:var(--ink-mid);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .gcard .gerr{display:none;margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#FDE8E6;color:#8A2A24;font-size:14px;font-weight:700;text-align:right;line-height:1.6}
+  .gcard .gerr.show{display:block}
+  .gcard .gerr.ok{background:var(--green-tint);color:var(--green)}
+  .gcard .gmsg{font-size:15px;font-weight:700;color:var(--text);margin:8px 0 0;line-height:1.8}
+  .gcard .gmsg.bad{color:#8A2A24}
+  .gcard .gnote{font-size:13px;color:var(--muted);margin:10px 0 0;line-height:1.7}
+  .gcard .spin{width:34px;height:34px;margin:14px auto 6px;border-radius:50%;border:4px solid var(--ink-tint);border-top-color:var(--ink);animation:gspin .9s linear infinite}
+  @keyframes gspin{to{transform:rotate(360deg)}}
+  .gcard .gfoot{margin:22px 0 0;font-size:12px;color:var(--muted);line-height:1.7}
+  .gcard .gfoot b{color:var(--ink);font-weight:800}
+  .gpane[hidden]{display:none}
   .status{font-size:14px;color:rgba(255,255,255,.78);min-height:26px;margin:12px 2px 0}
   .status b{color:#FFD166;font-weight:800}
 
@@ -370,7 +409,36 @@
   }
 </style>
 </head>
-<body>
+<body class="locked">
+
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gcard">
+    <div class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="14" width="26" height="15" rx="3" fill="#3A2A78" opacity=".95"/><rect x="8" y="12" width="16" height="3" rx="1" fill="#fff"/><path d="M10 6h12l-1.5 8h-9z" fill="#FFD166" stroke="#3A2A78" stroke-width="1.2"/><path d="M13 9.5l2 2 3.5-4" fill="none" stroke="#3A2A78" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2 id="gateTitle">قوائم الناخبين</h2>
+    <p class="sub">الدخول للمستخدمين المخوّلين فقط</p>
+
+    <div class="gpane" id="gpWait">
+      <div class="spin" aria-hidden="true"></div>
+      <p class="gmsg" id="gWaitMsg">عم نتحقق من الدخول…</p>
+    </div>
+
+    <form class="gpane" id="gpLogin" hidden autocomplete="on">
+      <p class="gerr" id="gErr" role="alert"></p>
+      <div class="field"><label for="gEmail">الإيميل</label><input id="gEmail" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" required placeholder="name@example.com"></div>
+      <div class="field"><label for="gPass">كلمة السر</label><input id="gPass" type="password" autocomplete="current-password" required placeholder="••••••••"></div>
+      <button type="submit" class="gbtn" id="gBtn">دخول</button>
+      <button type="button" class="glink" id="gForgot">نسيت كلمة السر؟</button>
+    </form>
+
+    <div class="gpane" id="gpBlock" hidden>
+      <p class="gmsg bad" id="gBlockMsg"></p>
+      <p class="gnote" id="gBlockNote"></p>
+      <button type="button" class="gbtn" id="gBlockBtn" style="margin-top:16px">تسجيل الدخول بحساب آخر</button>
+    </div>
+
+    <p class="gfoot">البرنامج مخصّص لمكتب <b>مختار بر الياس</b>. ما عندك حساب أو انقفل جهازك؟ راجع المختار.</p>
+  </div>
+</div>
 
 <header class="band">
   <div class="wrap">
@@ -385,6 +453,12 @@
           <select id="townSel"></select>
         </div>
         <div class="edition" id="edition">القائمة الأولية</div>
+        <div class="who" id="who" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="mail" id="whoMail"></span>
+          <span class="adm" id="whoAdm" hidden>admin</span>
+          <button type="button" id="logout" title="تسجيل الخروج من هالجهاز">خروج</button>
+        </div>
       </div>
     </div>
     <h1 id="h1">دوّر على اسمك بالقائمة الانتخابية</h1>
@@ -554,10 +628,10 @@
 </section>
 <div class="toast" id="toast" role="status"></div>
 
-<script src="./data.js"></script>
-<script src="./towns.js"></script>
 <script>
-(function(){
+/* التطبيق نفسه. ما بيشتغل لحالو: الطبقة اللي تحت (الدخول) بتفكّ تشفير البيانات وبتناديه
+   startApp({towns:[...], primary:{id,name,meta,rows}, loadTown:function(t,cb){...}}) */
+window.startApp=function(BOOT){
   'use strict';
   var F_NAME=0,F_FATHER=1,F_MOTHER=2,F_DOB=3,F_SECT=4,F_REG=5,F_NOTES=6,F_LIST=7,F_SECTION=8,F_PAGE=9;
   var $=function(id){return document.getElementById(id);};
@@ -648,24 +722,30 @@
     else legacy();
   }
 
-  // ---------- towns registry (بر الياس + كل القرى) ----------
-  var BASE_META=window.VOTERS_META||{}, BASE_DATA=window.VOTERS||[];
-  var TOWNS=(window.VOTERS_TOWNS && window.VOTERS_TOWNS.length) ? window.VOTERS_TOWNS.slice()
-            : [{id:BASE_META.id||'main', name:BASE_META.town||'', count:BASE_DATA.length, edition:BASE_META.edition, primary:true}];
+  // ---------- towns registry (بر الياس + كل القرى) — البيانات جايي مفكوكة التشفير من BOOT ----------
+  var PRIM=(BOOT&&BOOT.primary)||{};
+  var BASE_META=PRIM.meta||{}, BASE_DATA=PRIM.rows||[];
+  var TOWNS=(BOOT&&BOOT.towns&&BOOT.towns.length) ? BOOT.towns.slice()
+            : [{id:PRIM.id||BASE_META.id||'main', name:PRIM.name||BASE_META.town||'', count:BASE_DATA.length, edition:BASE_META.edition, primary:true}];
   var PRIMARY=null;
   for (var ti=0; ti<TOWNS.length; ti++) if (TOWNS[ti].primary) PRIMARY=TOWNS[ti];
   if (!PRIMARY) PRIMARY=TOWNS[0];
   var TD={};
   TD[PRIMARY.id]={id:PRIMARY.id, name:PRIMARY.name||BASE_META.town||'', meta:BASE_META, rows:BASE_DATA, sects:BASE_META.sects||[]};
-  window.addTown=function(o){ if(o&&o.id&&o.rows) TD[o.id]={id:o.id,name:o.name,meta:o.meta||{},rows:o.rows,sects:(o.meta&&o.meta.sects)||[]}; };
+  function addTown(o){ if(o&&o.id&&o.rows) TD[o.id]={id:o.id,name:o.name,meta:o.meta||{},rows:o.rows,sects:(o.meta&&o.meta.sects)||[]}; }
   function townById(id){ for (var i=0;i<TOWNS.length;i++) if(TOWNS[i].id===id) return TOWNS[i]; return null; }
   function townLoaded(t){ return !!TD[t.id]; }
+  var loading={};
   function loadTown(t, cb){
     if (TD[t.id] || !t.file || t.failed) return cb(TD[t.id]?null:'skip');
-    var sc=document.createElement('script'); sc.src=t.file;
-    sc.onload=function(){ if(!TD[t.id]) t.failed=true; cb(TD[t.id]?null:'bad'); };
-    sc.onerror=function(){ t.failed=true; cb('err'); };
-    document.head.appendChild(sc);
+    (loading[t.id]||(loading[t.id]=[])).push(cb);
+    if (loading[t.id].length>1) return;                 // نفس القرية عم تتحمّل — انطر النتيجة نفسها
+    BOOT.loadTown(t, function(err, data){
+      if (!err && data && data.rows){ if(!data.id) data.id=t.id; if(!data.name) data.name=t.name; addTown(data); }
+      if (!TD[t.id]) t.failed=true;
+      var cbs=loading[t.id]; delete loading[t.id];
+      cbs.forEach(function(f){ f(TD[t.id]?null:(err||'bad')); });
+    });
   }
   function loadAllTowns(cb){
     var pend=TOWNS.filter(function(t){ return !TD[t.id] && t.file && !t.failed; });
@@ -1602,7 +1682,7 @@
   });
 
   if (!BASE_DATA.length){
-    statusEl.innerHTML='<b style="color:#B3423A">ما انحمّل ملف البيانات data.js.</b> لازم يكون بنفس المجلد مع index.html — فكّ الـ zip كامل وافتح index.html من داخل المجلد، أو ارفع كل الملفات مع بعض على GitHub Pages.';
+    statusEl.innerHTML='<b style="color:#B3423A">ملف البيانات فاضي أو ما انحمّل.</b> تأكّد إن الـ Action على GitHub اشتغل وولّد data.enc وtowns.enc.';
     overviewEl.style.display='none'; qInput.disabled=true; return;
   }
   buildTownSelect();
@@ -1612,10 +1692,233 @@
   if (t0!==PRIMARY.id && townById(t0)) switchTown(t0,{noHistory:true,noScroll:true,then:function(){ applyParams(p0); }});
   else applyParams(p0);
   if (window.innerWidth>700 && !sheetOpen) qInput.focus();
+};
+</script>
 
-  if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)){
-    window.addEventListener('load',function(){ navigator.serviceWorker.register('./sw.js').catch(function(){}); });
+<!-- ===== الدخول والحماية: Firebase Auth + Firestore + فكّ تشفير البيانات ===== -->
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+  'use strict';
+  var FB_CONFIG={
+    apiKey:"AIzaSyBwruzh2_P5L2TpJDIdZI30DT6n-5JZ9HI",
+    authDomain:"entikbat.firebaseapp.com",
+    projectId:"entikbat",
+    storageBucket:"entikbat.firebasestorage.app",
+    messagingSenderId:"573101582427",
+    appId:"1:573101582427:web:f2860c6860c9c3ef1af77e"
+  };
+  var DEVICE_KEY='famvote_device';
+  var $=function(id){return document.getElementById(id);};
+  var gate=$('gate'), panes={wait:$('gpWait'),login:$('gpLogin'),block:$('gpBlock')};
+  var blockHandler=null, blocking=false;
+
+  function pane(name){ Object.keys(panes).forEach(function(k){ panes[k].hidden=(k!==name); }); }
+  function wait(msg){ blocking=false; $('gWaitMsg').textContent=msg; pane('wait'); }
+  function note(msg, ok){ var e=$('gErr'); e.textContent=msg||''; e.classList.toggle('show',!!msg); e.classList.toggle('ok',!!ok); }
+  function login(msg){ blocking=false; note(msg||''); $('gBtn').disabled=false; pane('login'); setTimeout(function(){ try{ ($('gEmail').value?$('gPass'):$('gEmail')).focus(); }catch(e){} },60); }
+  function block(msg, extra, btn, handler){
+    $('gBlockMsg').textContent=msg; $('gBlockNote').textContent=extra||'';
+    $('gBlockBtn').textContent=btn||'تسجيل الدخول بحساب آخر'; blockHandler=handler||signOutToLogin;
+    blocking=true; pane('block');
   }
+  function lock(){ document.body.classList.add('locked'); gate.hidden=false; $('who').hidden=true; }
+  $('gBlockBtn').addEventListener('click', function(){ if (blockHandler) blockHandler(); });
+
+  // الـ service worker بيتسجّل قبل الدخول: الهيكل بيتخزّن، والبيانات المشفّرة بتتخزّن بعد أول تحميل ناجح
+  if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('./sw.js').catch(function(){}); });
+  }
+
+  if (!window.firebase || !firebase.initializeApp || !firebase.auth || !firebase.firestore){
+    block('ما قدرنا نحمّل مكوّنات الدخول', 'تأكّد من الإنترنت وأعد تحميل الصفحة.', 'أعد التحميل', function(){ location.reload(); });
+    return;
+  }
+  if (!(window.crypto && crypto.subtle && crypto.subtle.importKey) || typeof DecompressionStream==='undefined' || typeof TextDecoder==='undefined'){
+    block('المتصفح قديم', 'البرنامج بيحتاج متصفح حديث (Chrome أو Safari محدّث) لفكّ تشفير البيانات.', 'أعد التحميل', function(){ location.reload(); });
+    return;
+  }
+  function storageOK(){ try{ localStorage.setItem('__t','1'); localStorage.removeItem('__t'); return true; }catch(e){ return false; } }
+  if (!storageOK()){
+    block('المتصفح ما بيسمح بالتخزين', 'افتح البرنامج من متصفح عادي (مش نافذة خاصة/incognito) ليقدر يربط جهازك.', 'أعد التحميل', function(){ location.reload(); });
+    return;
+  }
+
+  firebase.initializeApp(FB_CONFIG);
+  var auth=firebase.auth(), db=firebase.firestore(), FV=firebase.firestore.FieldValue;
+  try{ db.enablePersistence({synchronizeTabs:true}).catch(function(){}); }catch(e){}
+
+  function randId(){
+    var a=new Uint8Array(16); crypto.getRandomValues(a);
+    return Array.prototype.map.call(a,function(b){ return ('0'+b.toString(16)).slice(-2); }).join('');
+  }
+  function deviceId(){
+    var d=localStorage.getItem(DEVICE_KEY);
+    if (!d || d.length<16){ d=randId(); localStorage.setItem(DEVICE_KEY,d); }
+    return d;
+  }
+  function deviceInfo(){
+    var ua=navigator.userAgent||'', os='جهاز', br='متصفح';
+    if (/iPhone/.test(ua)) os='iPhone'; else if (/iPad|Macintosh.*Mobile/.test(ua)) os='iPad'; else if (/Android/.test(ua)) os='Android';
+    else if (/Windows/.test(ua)) os='Windows'; else if (/Mac OS X/.test(ua)) os='Mac'; else if (/Linux/.test(ua)) os='Linux';
+    if (/EdgA?\//.test(ua)) br='Edge'; else if (/SamsungBrowser/.test(ua)) br='Samsung'; else if (/OPR\//.test(ua)) br='Opera';
+    else if (/Firefox|FxiOS/.test(ua)) br='Firefox'; else if (/CriOS|Chrome\//.test(ua)) br='Chrome'; else if (/Safari\//.test(ua)) br='Safari';
+    else if (/AppleWebKit/.test(ua) && (os==='iPhone'||os==='iPad')) br='Safari';
+    var standalone=(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone===true;
+    return os+' · '+br+(standalone?' · تطبيق':'')+' · '+(screen.width||'?')+'×'+(screen.height||'?');
+  }
+
+  var user=null, isAdmin=false, cryptoKey=null, unsub=null, started=false, DEV=deviceId();
+
+  function signOutToLogin(){ if (unsub){ unsub(); unsub=null; } auth.signOut().catch(function(){}).then(function(){ user=null; isAdmin=false; cryptoKey=null; login(); }); }
+  function fsErr(e){ return (e && (e.code||e.message)) ? String(e.code||e.message) : ''; }
+
+  // 1) التحقق من الحساب والجهاز
+  function verify(u){
+    return db.collection('admins').doc(u.uid).get().then(function(a){
+      if (a.exists){ isAdmin=true; return {ok:true}; }
+      var ref=db.collection('users').doc(u.uid);
+      return ref.get().then(function(s){
+        if (!s.exists) return {ok:false, msg:'الحساب غير مفعّل بعد', extra:'الإيميل موجود بس ما انضاف لقائمة المستخدمين. راجع المختار.'};
+        var d=s.data()||{};
+        if (d.active===false) return {ok:false, msg:'هالحساب موقوف', extra:'راجع المختار لإعادة تفعيله.'};
+        if (!d.deviceId){
+          return ref.update({deviceId:DEV, deviceInfo:deviceInfo(), boundAt:FV.serverTimestamp(), lastSeen:FV.serverTimestamp()})
+            .then(function(){ return {ok:true}; });
+        }
+        if (d.deviceId!==DEV) return {ok:false, msg:'هالحساب مربوط بجهاز آخر', extra:'كل حساب بيفتح على جهاز واحد ومتصفح واحد. إذا غيّرت جهازك أو مسحت بيانات المتصفح، راجع المختار ليفكّ الجهاز القديم.'};
+        ref.update({lastSeen:FV.serverTimestamp()}).catch(function(){});
+        return {ok:true};
+      });
+    });
+  }
+
+  // 2) مراقبة الحساب وهو مفتوح: إذا المختار وقّفو أو فكّ الجهاز، البرنامج بيقفل فوراً
+  function watchUser(u){
+    if (isAdmin || unsub) return;
+    unsub=db.collection('users').doc(u.uid).onSnapshot(function(s){
+      if (s.metadata && s.metadata.hasPendingWrites) return;
+      var d=s.exists ? (s.data()||{}) : null;
+      if (!d) return kick('انحذف هالحساب', 'راجع المختار.');
+      if (d.active===false) return kick('هالحساب موقوف', 'راجع المختار لإعادة تفعيله.');
+      if (d.deviceId!==DEV) return kick('انفكّ هالجهاز عن الحساب', 'سجّل دخول من جديد على الجهاز اللي بدك تستعملو.', 'تسجيل الدخول');
+    }, function(){});
+  }
+  function kick(msg, extra, btn){
+    if (unsub){ unsub(); unsub=null; }
+    lock(); block(msg, extra, btn||'تسجيل الدخول بحساب آخر', function(){ location.reload(); });
+    auth.signOut().catch(function(){}); user=null;
+  }
+
+  // 3) المفتاح وفكّ التشفير
+  function hexToBytes(h){ h=String(h||'').trim(); var a=new Uint8Array(h.length>>1); for (var i=0;i<a.length;i++) a[i]=parseInt(h.substr(i*2,2),16); return a; }
+  function loadKey(){
+    return db.collection('config').doc('key').get().then(function(s){
+      var k=s.exists ? String((s.data()||{}).k||'').trim() : '';
+      if (!/^[0-9a-fA-F]{64}$/.test(k)) throw {code:'nokey'};
+      return crypto.subtle.importKey('raw', hexToBytes(k), {name:'AES-GCM'}, false, ['decrypt']);
+    });
+  }
+  function decrypt(buf){
+    var u=new Uint8Array(buf);
+    if (u.length<33 || u[0]!==0x46 || u[1]!==0x41 || u[2]!==0x4D || u[3]!==0x56 || u[4]!==1) return Promise.reject({code:'format'});
+    return crypto.subtle.decrypt({name:'AES-GCM', iv:u.subarray(5,17)}, cryptoKey, u.subarray(17))
+      .then(null, function(){ throw {code:'badkey'}; })
+      .then(function(plain){ return new Response(new Response(plain).body.pipeThrough(new DecompressionStream('gzip'))).text(); })
+      .then(function(txt){ return JSON.parse(txt); });
+  }
+  function fetchEnc(path){
+    return fetch(path, {cache:'no-cache'}).then(null, function(){ throw {code:'offline'}; })
+      .then(function(r){ if (!r.ok) throw {code:'http', status:r.status, path:path}; return r.arrayBuffer(); })
+      .then(decrypt);
+  }
+
+  // 4) فتح البرنامج
+  function showWho(){
+    $('whoMail').textContent=(user&&user.email)||''; $('whoAdm').hidden=!isAdmin; $('who').hidden=false;
+  }
+  function start(){
+    wait('عم نفتح القوائم…');
+    return loadKey().then(function(k){ cryptoKey=k; return Promise.all([fetchEnc('./towns.enc'), fetchEnc('./data.enc')]); })
+      .then(function(res){
+        var idx=res[0]||{}, prim=res[1]||{};
+        if (!prim.rows) throw {code:'format'};
+        var towns=(idx.towns||[]).slice();
+        if (!towns.length) towns=[{id:prim.id||'main', name:prim.name||(prim.meta&&prim.meta.town)||'', count:prim.rows.length, edition:prim.meta&&prim.meta.edition, primary:true}];
+        started=true;
+        document.body.classList.remove('locked'); gate.hidden=true;
+        showWho();
+        window.startApp({
+          towns:towns, primary:prim,
+          loadTown:function(t, cb){ fetchEnc('./'+t.file).then(function(d){ cb(null,d); }, function(e){ cb((e&&e.code)||'err'); }); }
+        });
+        watchUser(user);
+      })
+      .then(null, function(e){
+        var c=(e&&e.code)||'';
+        if (c==='nokey') block('مفتاح البيانات مش موجود', 'المختار لازم يولّد المفتاح من صفحة الإدارة (admin.html) ويشغّل التحديث على GitHub.', 'أعد المحاولة', start);
+        else if (c==='badkey') block('المفتاح ما بيفتح الملفات', 'المفتاح المحفوظ مش نفس المفتاح اللي تشفّرت فيه الملفات. المختار لازم يعيد تشغيل التحديث على GitHub بالمفتاح الحالي.', 'أعد المحاولة', start);
+        else if (c==='http') block('ملفات البيانات مش موجودة على الموقع', 'تأكّد إن التحديث على GitHub اشتغل وولّد data.enc وtowns.enc ('+(e.status||'')+').', 'أعد المحاولة', start);
+        else if (c==='format') block('ملف البيانات مش مفهوم', 'الملف على الموقع مش بالصيغة المتوقّعة — أعد بناء الملفات من GitHub.', 'أعد المحاولة', start);
+        else if (c==='offline' || /unavailable|network/i.test(fsErr(e))) block('ما في إنترنت', 'أول دخول بيحتاج إنترنت. بعد أول مرة البرنامج بيفتح من دون نت.', 'أعد المحاولة', start);
+        else if (/permission-denied/i.test(fsErr(e))) block('ما عندك صلاحية لفتح البيانات', 'راجع المختار. ('+(user&&user.email||'')+')', 'تسجيل الدخول بحساب آخر', signOutToLogin);
+        else block('ما قدرنا نفتح البيانات', fsErr(e)||String(e), 'أعد المحاولة', start);
+      });
+  }
+
+  auth.onAuthStateChanged(function(u){
+    if (!u){
+      if (started){ lock(); started=false; }
+      if (unsub){ unsub(); unsub=null; }
+      user=null; isAdmin=false; cryptoKey=null;
+      if (!blocking) login();                      // إذا في رسالة حجب معروضة، خلّيها ولا تفتح نموذج الدخول فوقها
+      return;
+    }
+    user=u; wait('عم نتحقق من الحساب…');
+    verify(u).then(function(r){
+      if (r.ok) return start();
+      block(r.msg, (r.extra||'')+' ('+(u.email||'')+')', 'تسجيل الدخول بحساب آخر', signOutToLogin);
+      auth.signOut().catch(function(){});
+    }, function(e){
+      var m=fsErr(e);
+      if (/unavailable|network|offline/i.test(m)) block('ما في إنترنت', 'أول دخول بيحتاج إنترنت. بعد أول مرة البرنامج بيفتح من دون نت.', 'أعد المحاولة', function(){ wait('عم نتحقق من الحساب…'); auth.currentUser ? verify(auth.currentUser).then(function(r){ r.ok?start():block(r.msg,r.extra,'تسجيل الدخول بحساب آخر',signOutToLogin); }, function(){ block('ما في إنترنت','جرّب لما يرجع الاتصال.','أعد المحاولة',function(){ location.reload(); }); }) : login(); });
+      else if (/permission-denied/i.test(m)) block('ما عندك صلاحية', 'الحساب موجود بس القواعد ما بتسمح لو. راجع المختار. ('+(u.email||'')+')', 'تسجيل الدخول بحساب آخر', signOutToLogin);
+      else block('ما قدرنا نتحقق من الحساب', m||String(e), 'أعد المحاولة', function(){ location.reload(); });
+    });
+  });
+
+  // نموذج الدخول
+  $('gpLogin').addEventListener('submit', function(e){
+    e.preventDefault();
+    var em=$('gEmail').value.trim(), pw=$('gPass').value;
+    if (!em || !pw){ note('اكتب الإيميل وكلمة السر.'); return; }
+    $('gBtn').disabled=true; note('');
+    auth.signInWithEmailAndPassword(em, pw).then(null, function(err){ $('gBtn').disabled=false; note(authMsg(err)); });
+  });
+  function authMsg(err){
+    var c=(err&&err.code)||'';
+    if (/invalid-credential|wrong-password|user-not-found|invalid-login-credentials/.test(c)) return 'الإيميل أو كلمة السر غلط.';
+    if (/invalid-email|missing-email/.test(c)) return 'صيغة الإيميل غلط.';
+    if (/missing-password/.test(c)) return 'اكتب كلمة السر.';
+    if (/too-many-requests/.test(c)) return 'محاولات كتير — انطر شوي وجرّب مرة تانية، أو اضغط "نسيت كلمة السر".';
+    if (/user-disabled/.test(c)) return 'هالحساب موقوف من الإدارة.';
+    if (/network-request-failed/.test(c)) return 'ما في إنترنت — جرّب لما يرجع الاتصال.';
+    if (/operation-not-allowed/.test(c)) return 'الدخول بالإيميل مش مفعّل بالمشروع (Firebase → Authentication → Sign-in method → Email/Password).';
+    if (/configuration-not-found|invalid-api-key|app-not-authorized/.test(c)) return 'الـ Authentication مش مفعّل بمشروع Firebase (Authentication → Get started).';
+    if (/unauthorized-domain/.test(c)) return 'هالموقع مش مسموح بالمشروع: Firebase → Authentication → Settings → Authorized domains → أضيف '+location.hostname+'.';
+    return 'ما مشي الدخول ('+c.replace('auth/','')+').';
+  }
+  $('gForgot').addEventListener('click', function(){
+    var em=$('gEmail').value.trim();
+    if (!em){ note('اكتب إيميلك أولاً وبعدين اضغط "نسيت كلمة السر".'); $('gEmail').focus(); return; }
+    auth.sendPasswordResetEmail(em).then(function(){ note('بعتنا رابط تغيير كلمة السر على '+em+' — فتّش بالـ spam إذا ما وصل.', true); }, function(err){ note(authMsg(err)); });
+  });
+  $('logout').addEventListener('click', function(){
+    if (unsub){ unsub(); unsub=null; }
+    auth.signOut().catch(function(){}).then(function(){ location.reload(); });
+  });
 })();
 </script>
 </body>
