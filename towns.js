@@ -217,6 +217,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/ryaq.js"
  },
  {
+  "id": "trbl",
+  "name": "تربل",
+  "count": 2670,
+  "females": 1323,
+  "males": 1347,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/trbl.js"
+ },
+ {
   "id": "alfrzl-althta",
   "name": "الفرزل التحتا",
   "count": 2590,
@@ -494,5 +503,23 @@ window.VOTERS_TOWNS = [
   "males": 190,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/shtwrh.js"
+ },
+ {
+  "id": "twyth",
+  "name": "تويته",
+  "count": 191,
+  "females": 84,
+  "males": 107,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/twyth.js"
+ },
+ {
+  "id": "tl-alakhdr",
+  "name": "تل الاخضر",
+  "count": 107,
+  "females": 62,
+  "males": 45,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/tl-alakhdr.js"
  }
 ];
