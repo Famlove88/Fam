@@ -1,5 +1,11 @@
-# Builds data.js + towns/*.js + towns.js from every PDF in source/
+# Builds the ENCRYPTED voter data (data.enc + towns.enc + towns/*.enc) from every PDF in source/
 # Upload a new PDF into source/ and this runs by itself.
+#
+# Required secret (Settings -> Secrets and variables -> Actions):
+#   VOTERS_KEY    the 64-hex AES key generated in admin.html (same key the app reads from Firestore config/key)
+# Optional secrets, only if the PDFs live in a PRIVATE repo and the site is served from ANOTHER (public) repo:
+#   DEPLOY_REPO   e.g. famlove88/Fam
+#   DEPLOY_TOKEN  a fine-grained personal access token with "Contents: read and write" on DEPLOY_REPO
 name: build voters data
 
 on:
@@ -8,6 +14,7 @@ on:
       - "source/**"
       - "build_voters.py"
       - "build_towns.py"
+      - ".github/workflows/build-voters.yml"
   workflow_dispatch:
 
 permissions:
@@ -19,20 +26,46 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install poppler (pdftotext)
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
-
-      - name: Build every town in source/
-        run: python3 build_towns.py source/ --primary "بر الياس"
-
-      - name: Commit generated data
+      - name: Install poppler (pdftotext) and cryptography
         run: |
-          git config user.name "voters-bot"
-          git config user.email "voters-bot@users.noreply.github.com"
-          git add data.js towns.js towns/ 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo "no changes"
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          python3 -m pip install --quiet cryptography
+
+      - name: Build encrypted data for every town in source/
+        env:
+          VOTERS_KEY: ${{ secrets.VOTERS_KEY }}
+        run: |
+          if [ -z "$VOTERS_KEY" ]; then
+            echo "::error::Secret VOTERS_KEY is missing. Generate the key in admin.html, then add it: Settings -> Secrets and variables -> Actions -> New repository secret (name VOTERS_KEY)."
+            exit 1
+          fi
+          python3 build_towns.py source/ --primary "بر الياس" --key "$VOTERS_KEY"
+          ls -la data.enc towns.enc towns/*.enc
+
+      - name: Publish (commit here, or push to DEPLOY_REPO when configured)
+        env:
+          DEPLOY_REPO: ${{ secrets.DEPLOY_REPO }}
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: |
+          set -e
+          if [ -n "$DEPLOY_REPO" ] && [ -n "$DEPLOY_TOKEN" ]; then
+            echo "Pushing encrypted files to $DEPLOY_REPO"
+            git clone --depth 1 "https://x-access-token:${DEPLOY_TOKEN}@github.com/${DEPLOY_REPO}.git" _site
+            mkdir -p _site/towns
+            rm -f _site/data.js _site/towns.js _site/data.enc _site/towns.enc _site/towns/*.js _site/towns/*.enc
+            cp data.enc towns.enc _site/
+            cp towns/*.enc _site/towns/ 2>/dev/null || true
+            cd _site
+            git config user.name "voters-bot"
+            git config user.email "voters-bot@users.noreply.github.com"
+            git add -A
+            if git diff --cached --quiet; then echo "no changes"; else git commit -m "update voter lists" && git push; fi
           else
-            git commit -m "update voter lists"
-            git push
+            git config user.name "voters-bot"
+            git config user.email "voters-bot@users.noreply.github.com"
+            # plain (unencrypted) files must never stay on the site
+            git rm -q --ignore-unmatch data.js towns.js towns/*.js || true
+            rm -f data.js towns.js towns/*.js
+            git add data.enc towns.enc && git add -A towns/
+            if git diff --cached --quiet; then echo "no changes"; else git commit -m "update voter lists" && git push; fi
           fi
