@@ -109,6 +109,15 @@ window.VOTERS_TOWNS = [
   "file": "towns/zhla-almydan-alghrby.js"
  },
  {
+  "id": "kfrzbd",
+  "name": "كفرزبد",
+  "count": 4614,
+  "females": 2332,
+  "males": 2282,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/kfrzbd.js"
+ },
+ {
   "id": "zhla-mar-mkhayl",
   "name": "زحلة مار مخايل",
   "count": 4535,
@@ -235,6 +244,24 @@ window.VOTERS_TOWNS = [
   "file": "towns/ablh.js"
  },
  {
+  "id": "qaa-alrym",
+  "name": "قاع الريم",
+  "count": 1943,
+  "females": 977,
+  "males": 966,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/qaa-alrym.js"
+ },
+ {
+  "id": "khdr-bk",
+  "name": "خضر بك",
+  "count": 1825,
+  "females": 944,
+  "males": 881,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/khdr-bk.js"
+ },
+ {
   "id": "zhla-mar-antwnyws",
   "name": "زحلة مار انطونيوس",
   "count": 1813,
@@ -341,6 +368,15 @@ window.VOTERS_TOWNS = [
   "males": 411,
   "edition": "القائمة الأولية ٢٠٢٦",
   "file": "towns/wady-aldlm.js"
+ },
+ {
+  "id": "kabwsya",
+  "name": "كابوسية",
+  "count": 735,
+  "females": 373,
+  "males": 362,
+  "edition": "القائمة الأولية ٢٠٢٦",
+  "file": "towns/kabwsya.js"
  },
  {
   "id": "hajy-hbbly",
